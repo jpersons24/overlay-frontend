@@ -40,7 +40,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
-
+<!-- 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
@@ -67,4 +67,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
+
+
+SportsCenter is being built using a Ruby on Rails backend and a React-Redux front end. The aim of the app is to give users access to the most up to date and upcoming live sports news, score and betting odds. Additionally, SportsCenter gives users a place to share any information they may have, thoughts on games or opinions on given odds!
+
+Users can also find the latest in sports headlines. Plus you can save stories for another time if your busy, by adding them to your favorites list.
+
+As of right now, SportsCenter is being built with static info but is currently being developed to handle live data.
+
+Running the App:
+
+1. Start by opening 'sports-center-frontend' and running 'npm-install'. Then running 'npm start' to open the app in your broswer
+2. Open 'sports-center'. After running 'bundle install' to install any Gems. You can run 'rails s -p 4000' to start the database in your browser at 'localhost:4000'

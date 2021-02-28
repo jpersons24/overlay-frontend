@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 // router
 // import BroswerRouter from react as Router
+import { BrowserRouter as Router } from 'react-router-dom'
 // Wrap App component in BrowserRouter tags
   // <BrowserRouter>...</BrowserRouter>
   // make sure to import Route into App file as well, to define routes
@@ -20,7 +21,9 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
