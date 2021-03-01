@@ -6,6 +6,7 @@ import FavoriteCard from './FavoriteCard'
 function FavoriteStories() {
 
    const favsToDisplay = useSelector((state) => state.favorite.displayedFavorites)
+   const currentUser = useSelector((state) => state.user.currentUser)
 
    const dispatch = useDispatch()
 
@@ -19,15 +20,25 @@ function FavoriteStories() {
    }, [dispatch])
 
    const display = favsToDisplay.map((fav) => {
-      // console.log(fav)
-      return (
-         <FavoriteCard key={fav.id} fav={fav} />
-      )
-   })
+      console.log(fav.user.id)
+      if (currentUser && currentUser.id === fav.user.id) {
+         return (
+            <FavoriteCard key={fav.id} fav={fav} />
+         )
+      } else {
+         return (
+            null
+         )
+      }
+      })
 
    return (
       <div>
-         <h2>This is the favorites page</h2>
+         {currentUser ? 
+         <h2>These are your favorited stories, {currentUser.username}</h2>
+         :
+         <h2>Your favorited stories will be listed here!</h2>
+         }
          {display}
       </div>
    )

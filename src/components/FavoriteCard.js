@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 function FavoriteCard({ fav }) {
 
-   console.log(fav)
-
    return (
       <Wrapper>
          <h1>{fav.story.title}</h1>
