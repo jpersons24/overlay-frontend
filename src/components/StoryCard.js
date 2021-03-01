@@ -2,18 +2,25 @@ import styled from 'styled-components'
 
 function StoryCard ({ story }) {
 
-   console.log(story)
-   
+   // console.log(story)
+
+   function handleClick(event) {
+      console.log(event.target)
+      // let favStory = story.id
+      console.log(story.id)
+   }
 
    return (
       <Wrapper>
          <h1>{story.title}</h1>
          <StoryImage src={story.url_to_image} alt={story.description} />
+         <p>{story.content}</p>
          <h4>{story.description}</h4>
-         <p>Story Content needs to render here.</p>
          <p><strong>Author:</strong> {story.author}</p>
          <p><strong>Source:</strong> {story.source}</p>
          <a href={story.url}>Full story here!</a>
+         <br></br>
+         <button onClick={handleClick}>Add to Favorites</button>
       </Wrapper>
    )
 };

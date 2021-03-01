@@ -1,13 +1,39 @@
 import '../App.css';
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 // component imports
 import Home from './Home'
 import NavBar from './NavBar'
 import Stories from './Stories'
 
+// import reducer function from userSlice
+import { newCurrentUser } from '../redux/userSlice'
+
 function App() {
+
+  // useSelector to set const variable to whatever state it at that time
+  const currentUser = useSelector((state) => state.user.currentUser)
+  console.log(currentUser)
+
+  // set dispatch to useDispatch function for later use
+  const dispatch = useDispatch()
+
+  // get all users
+  useEffect(() => {
+    fetch("http://localhost:4000/users")
+    .then(res => res.json())
+    .then(data => {
+      // what needs to happen with the user data now? Set currentUser = User with ID 1
+      const action = newCurrentUser
+      console.log(action)
+      console.log(data)
+      
+    })
+  }, [dispatch])
+
   return (
     <div className="App">
       <h3>This is SportsCenter</h3>

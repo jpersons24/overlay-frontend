@@ -9,7 +9,6 @@ const storySlice = createSlice({
       displayStories(state, action) {
          // how do I replace array values with entire new values every single time
          state.displayedStories = action.payload
-         // state.displayedStories.splice(0, action.payload)
       }
    }
 });
