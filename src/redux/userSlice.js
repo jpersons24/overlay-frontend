@@ -7,14 +7,14 @@ const userSlice = createSlice({
       currentUser: [],
    },
    reducers: {
-      newCurrentUser(state, action) {
-         state.currentUser = action.payload
+      currUser(state, action) {
+         // what should happen when currentUser needs to be updated
       }
    }
 })
 
-export const { newCurrentUser } = storySlice.actions;
-export default userSlice.reducer
+
+export default userSlice.reducer;
 
 
 // creating a slice function:

@@ -10,29 +10,25 @@ import NavBar from './NavBar'
 import Stories from './Stories'
 
 // import reducer function from userSlice
-import { newCurrentUser } from '../redux/userSlice'
+// import { newCurrentUser } from '../redux/userSlice'
 
 function App() {
 
   // useSelector to set const variable to whatever state it at that time
-  const currentUser = useSelector((state) => state.user.currentUser)
-  console.log(currentUser)
+  
 
   // set dispatch to useDispatch function for later use
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+
 
   // get all users
   useEffect(() => {
     fetch("http://localhost:4000/users")
     .then(res => res.json())
     .then(data => {
-      // what needs to happen with the user data now? Set currentUser = User with ID 1
-      const action = newCurrentUser
-      console.log(action)
-      console.log(data)
-      
+      console.log(data)  
     })
-  }, [dispatch])
+  }, [])
 
   return (
     <div className="App">
