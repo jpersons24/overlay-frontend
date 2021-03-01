@@ -1,23 +1,40 @@
-import { displayStories } from '../redux/storySlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import styled from 'styled-components'
+import { displayStories } from '../redux/storySlice'
+import { displayGames } from '../redux/gameSlice'
 
 
 
 function Home () {
 
+   // useSelectors
    const homeStories = useSelector((state) => state.story.displayedStories)
+   const homeGames = useSelector((state) => state.game.displayedGames)
+
    const dispatch = useDispatch()
 
-
+   // stories
    useEffect(() => {
       fetch("http://localhost:4000/stories")
       .then(res => res.json())
       .then(data => {
          const action = displayStories(data)
          dispatch(action)
-         console.log('Setting homeStories!')
+         console.log('Setting stories!')
+      })
+   }, [dispatch])
+
+   // games
+   useEffect(() => {
+      fetch("http://localhost:4000/games")
+      .then(res => res.json())
+      .then(data => {
+         // console.log(data)
+         const action = displayGames(data)
+         // console.log(action)
+         dispatch(action)
+         console.log("getting games!")
       })
    }, [dispatch])
 
@@ -32,6 +49,18 @@ function Home () {
       )
    })
 
+   const displayGamePreview = homeGames.map((game) => {
+      return (
+         <GameContainer>
+            <h4>{game.sport_nice}</h4>
+            <p>{game.home_team}(h)</p>
+            <p>{game.away_team}(a)</p>
+            <p>Game time: {game.commence_time}</p>
+            <p>Button here to go to game odds</p>
+         </GameContainer>
+      )
+   })
+
 
 
    return (
@@ -39,6 +68,9 @@ function Home () {
          <h2>This is the home page!!!</h2>
          <Wrapper>
             {displayHomeStories}
+         </Wrapper>
+         <Wrapper>
+            {displayGamePreview}
          </Wrapper>
       </div>
    )
@@ -64,8 +96,22 @@ const Wrapper = styled.div`
 
 const StoryContainer = styled.div`
    margin: 30px 70px;
+   display: inline-block;
    border-style: solid;
    border-color: red;
+   border-radius: 15px;
+`
+
+const GameContainer = styled.div`
+   display: inline-block;
+   color: white;
+   background: black;
+   border-style: solid;
+   border-color: red;
+   border-radius: 15px;
+   margin: 25px;
+   height: 265px;
+   width: 200px;
 `
 
 const StoryImage = styled.img`

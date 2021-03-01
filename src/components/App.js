@@ -1,7 +1,7 @@
 import '../App.css';
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // component imports
@@ -9,6 +9,7 @@ import Home from './Home'
 import NavBar from './NavBar'
 import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
+import GamesContainer from './GamesContainer'
 
 // import reducer function from userSlice
 import { setCurrentUser } from '../redux/userSlice'
@@ -57,6 +58,9 @@ function App() {
         </Route>
         <Route exact path="/fav_stories">
           <FavoriteStories />
+        </Route>
+        <Route exact path="/games">
+          <GamesContainer />
         </Route>
       </Switch>
     </div>

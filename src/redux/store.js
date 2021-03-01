@@ -2,6 +2,7 @@ import {configureStore } from '@reduxjs/toolkit';
 import storyReducer from './storySlice'
 import userReducer from './userSlice'
 import favoriteReducer from './favoritesSlice'
+import gameReducer from './gameSlice'
 
 
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
       story: storyReducer,
       user: userReducer,
       favorite: favoriteReducer,
+      game: gameReducer,
    }
 });
 

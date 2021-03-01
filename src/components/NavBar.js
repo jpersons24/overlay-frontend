@@ -42,6 +42,16 @@ function NavBar() {
          >
             Favorite Stories
          </NavLink>
+         <NavLink
+            to="/games"
+            exact
+            style={linkStyles}
+            activeStyle={{
+               background: "black"
+            }}
+         >
+            Games
+         </NavLink>
       </div>
    )
 }
