@@ -8,7 +8,6 @@ import styled from 'styled-components'
 function Home () {
 
    const homeStories = useSelector((state) => state.story.displayedStories)
-   console.log(homeStories)
    const dispatch = useDispatch()
 
 
@@ -17,8 +16,8 @@ function Home () {
       .then(res => res.json())
       .then(data => {
          const action = displayStories(data)
-         console.log(action)
          dispatch(action)
+         console.log('Setting homeStories!')
       })
    }, [dispatch])
 

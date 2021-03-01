@@ -11,32 +11,44 @@ import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 
 // import reducer function from userSlice
-// import { newCurrentUser } from '../redux/userSlice'
+import { setCurrentUser } from '../redux/userSlice'
 
 function App() {
 
   // useSelector to set const variable to whatever state it at that time
-  
+  const currentUserBox = useSelector((state) => state.user.currentUser)
+  // console.log(currentUserBox)
 
   // set dispatch to useDispatch function for later use
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
+  function handleLogout(event) {
+    const action = setCurrentUser(null)
+    dispatch(action)
+    console.log("User logged out!")
+  }
 
-  // get all users
-  // useEffect(() => {
-  //   fetch("http://localhost:4000/users")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data)  
-  //   })
-  // }, [])
+  function handleLogin(event) {
+    fetch("http://localhost:4000/me")
+    .then(res => res.json())
+    .then(data => {
+      const action = setCurrentUser(data)
+      dispatch(action)
+      console.log("Logging in user!")
+    })
+  }
 
   return (
     <div className="App">
       <h3>This is SportsCenter</h3>
+      <button onClick={handleLogin}>Log in</button>
+      <button onClick={handleLogout}>Log out</button>
+      {currentUserBox ? <h5>Welcome, {currentUserBox.username}</h5> : null}
+      <br></br>
+      <br></br>
+      <br></br>
       <NavBar />
       <Switch>
-        {/* Route will live inside Switch */}
         <Route exact path="/home">
           <Home />
         </Route>
