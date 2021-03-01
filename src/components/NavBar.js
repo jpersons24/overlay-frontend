@@ -32,6 +32,16 @@ function NavBar() {
          >
             News
          </NavLink>
+         <NavLink
+            to="/fav_stories"
+            exact
+            style={linkStyles}
+            activeStyle={{
+               background: "black"
+            }}
+         >
+            Favorite Stories
+         </NavLink>
       </div>
    )
 }

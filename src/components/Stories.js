@@ -34,7 +34,10 @@ function Stories() {
    // then call function in return statement
    const storyCardComponents = storiesToDisplay.map(story => {
       return(
-         <StoryCard key={story.id} story={story} /> 
+         <StoryCard 
+            key={story.id} 
+            story={story}
+         /> 
       )
    })
 

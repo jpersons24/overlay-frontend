@@ -6,9 +6,27 @@ function StoryCard ({ story }) {
 
    function handleClick(event) {
       console.log(event.target)
-      // let favStory = story.id
-      console.log(story.id)
+      const favItem = {
+         story_id: story.id,
+         user_id: 1
+      }
+      // pass faveItem into helper function to post to database
+      addToFavoritesList(favItem)
    }
+
+   function addToFavoritesList(favItem) {
+      console.log(favItem)
+      fetch("http://localhost:4000/favorites_lists", {
+         method: 'POST',
+         headers: {'Content-Type': 'application/json'},
+         body: JSON.stringify(favItem)
+      })
+      .then(res => res.json())
+      .then(data => {
+         console.log(data)
+      })
+   }
+
 
    return (
       <Wrapper>
@@ -19,6 +37,7 @@ function StoryCard ({ story }) {
          <p><strong>Author:</strong> {story.author}</p>
          <p><strong>Source:</strong> {story.source}</p>
          <a href={story.url}>Full story here!</a>
+         <br></br>
          <br></br>
          <button onClick={handleClick}>Add to Favorites</button>
       </Wrapper>

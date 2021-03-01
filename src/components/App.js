@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Home from './Home'
 import NavBar from './NavBar'
 import Stories from './Stories'
+import FavoriteStories from './FavoriteStories'
 
 // import reducer function from userSlice
 // import { newCurrentUser } from '../redux/userSlice'
@@ -22,13 +23,13 @@ function App() {
 
 
   // get all users
-  useEffect(() => {
-    fetch("http://localhost:4000/users")
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)  
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/users")
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data)  
+  //   })
+  // }, [])
 
   return (
     <div className="App">
@@ -41,6 +42,9 @@ function App() {
         </Route>
         <Route exact path="/news">
           <Stories />
+        </Route>
+        <Route exact path="/fav_stories">
+          <FavoriteStories />
         </Route>
       </Switch>
     </div>
