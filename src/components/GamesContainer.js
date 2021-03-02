@@ -1,9 +1,19 @@
 import { useSelector } from 'react-redux'
+import GameCard from './GameCard'
 
 function GamesContainer() {
 
    const gamesToDisplay = useSelector((state) => state.game.displayedGames)
    console.log(gamesToDisplay)
+
+
+   const gameDisplay = gamesToDisplay.map((game) => {
+      console.log(game)
+      return (
+         <GameCard key={game.id} game={game} odds={game.sites}/>
+      )
+   })
+
    // gamestoDisplay --> should be mapped through to create each GameCard
       // GameCard will be complete with League, Team, Commence_date and 
       // <button> or <Link> to get to Game Show page -->
@@ -12,9 +22,10 @@ function GamesContainer() {
       // leave a post feature -->
          // --> will save game to database, will save Post instance to database
 
-   return(
+   return (
       <div>
          <h3>This is the games container</h3>
+         {gameDisplay}
       </div>
    )
 }

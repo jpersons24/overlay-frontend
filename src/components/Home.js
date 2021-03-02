@@ -49,9 +49,10 @@ function Home () {
       )
    })
 
+   // map through story objects to display
    const displayGamePreview = homeGames.map((game) => {
       return (
-         <GameContainer>
+         <GameContainer key={game.id}>
             <h4>{game.sport_nice}</h4>
             <p>{game.home_team}(h)</p>
             <p>{game.away_team}(a)</p>
@@ -60,7 +61,6 @@ function Home () {
          </GameContainer>
       )
    })
-
 
 
    return (
