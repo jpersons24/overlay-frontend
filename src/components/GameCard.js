@@ -18,16 +18,14 @@ function GameCard({ game, odds }) {
 
 
    return (
-      <Wrapper>
-         <h3>{game.sport_nice}</h3>
-         <p>{game.home_team} (h)</p>
-         <p>{game.away_team} (a)</p>
-         {/* <Link to="/game_show">
-            Odds
-         </Link> */}
-         {sites}
-         <p>Instead of a link, use button that then display odds information in div, with the scroll option</p>
-      </Wrapper>
+         <Wrapper>
+            <h3>{game.sport_nice}</h3>
+            <p>{game.home_team} (h)</p>
+            <p>{game.away_team} (a)</p>
+            <button>See odds</button>
+            <p>On click, show modal for that specific game!</p>
+            {/* {sites} */}
+         </Wrapper>
    )
 };
 
@@ -39,13 +37,13 @@ const Wrapper = styled.div`
    display: inline-block; 
    color: black;
    background-color: yellow;  
-   margin: auto;
-   width: 50%;
+   margin-right: 40px;
+   width: 200px;
+   height: 175px;
    margin-bottom: 75px;
    border-style: double;
    border-color: black;
    border-radius: 10px;
    padding: 5px;
-   height: 600px;
    overflow: auto;
 `

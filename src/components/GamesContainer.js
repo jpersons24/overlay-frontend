@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import GameCard from './GameCard'
+import styled from 'styled-components'
 
 function GamesContainer() {
 
@@ -23,11 +24,24 @@ function GamesContainer() {
          // --> will save game to database, will save Post instance to database
 
    return (
-      <div>
-         <h3>This is the games container</h3>
+      <Wrapper>
+         <h3>See all upcoming events here!</h3>
          {gameDisplay}
-      </div>
+      </Wrapper>
    )
 }
 
 export default GamesContainer
+
+
+const Wrapper = styled.div`
+   margin: auto;
+   width: 90%;
+   height: 600px;
+   background-color: ivory;
+   border-style: solid;
+   border-color: black;
+   border-radius: 20px;
+   margin-top: 50px;
+   overflow: auto;
+`
