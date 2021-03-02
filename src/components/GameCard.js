@@ -25,6 +25,15 @@ function GameCard({ game, odds }) {
             <button>See odds</button>
             <p>On click, show modal for that specific game!</p>
             {/* {sites} */}
+            <PostForm>
+               <form>
+                  <label>What's up? </label>
+                  <input type="text" name="post"/>
+                  <br></br>
+                  <br></br>
+                  <input type="submit" value="Post" />
+               </form>
+            </PostForm>
          </Wrapper>
    )
 };
@@ -38,7 +47,7 @@ const Wrapper = styled.div`
    color: black;
    background-color: yellow;  
    margin-right: 40px;
-   width: 200px;
+   width: 400px;
    height: 175px;
    margin-bottom: 75px;
    border-style: double;
@@ -46,4 +55,11 @@ const Wrapper = styled.div`
    border-radius: 10px;
    padding: 5px;
    overflow: auto;
+`
+
+const PostForm = styled.div`
+   border-style: solid;
+   border-color: black;
+   margin: 3px;
+   padding: 5px;
 `
