@@ -9,10 +9,6 @@ import StoryCard from './StoryCard'
 function Stories() {
    // useSelectors
    const storiesToDisplay = useSelector((state) => state.story.displayedStories)
-   console.log(storiesToDisplay)
-   // define dispatch
-   // const dispatch = useDispatch();
-
 
    // map through story objects to create StoryCard for each
    const storyCardComponents = storiesToDisplay.map(story => {

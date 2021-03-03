@@ -23,7 +23,7 @@ function App() {
   // useSelector to set const variable to whatever state it at that time
   const currentUserBox = useSelector((state) => state.user.currentUser)
   
-  const posts = useSelector((state) => state.post.displayedPosts)
+  // const posts = useSelector((state) => state.post.displayedPosts)
 
   // set dispatch to useDispatch function for later use
   const dispatch = useDispatch()
