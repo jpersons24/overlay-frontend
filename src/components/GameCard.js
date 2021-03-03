@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addNewPost } from '../redux/postSlice'
 // import GameShow from './GameShow'
 
 
@@ -8,10 +9,12 @@ function GameCard({ game, odds }) {
 
    const [postInput, setPostInput] = useState("")
 
+   const dispatch = useDispatch()
+
    // useSelector to get currentUser id
    const currentUser = useSelector((state) => state.user.currentUser)
    const posts = useSelector((state) => state.post.displayedPosts)
-   // console.log(posts)
+   console.log(posts)
 
    // console.log(odds)
    const sites = odds.map(site => {
@@ -42,7 +45,7 @@ function GameCard({ game, odds }) {
       console.log(post.content)
       console.log(post.user.username)
       return (
-         <p>{post.content} ({post.user.username})</p>
+         <PostWrapper>{post.content} ({post.user.username})</PostWrapper>
       )
    })
 
@@ -52,7 +55,6 @@ function GameCard({ game, odds }) {
    }
 
    function createNewPost(newPost) {
-      console.log(newPost)
       fetch("http://localhost:4000/posts", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
@@ -60,6 +62,9 @@ function GameCard({ game, odds }) {
       })
       .then(res => res.json())
       .then(data => {
+         const action = addNewPost(data)
+         console.log(action)
+         dispatch(action)
          console.log('Success:', data)
       })
    }
@@ -87,15 +92,15 @@ function GameCard({ game, odds }) {
             <h3>{game.sport_nice}</h3>
             <p>{game.home_team} (h)</p>
             <p>{game.away_team} (a)</p>
-            <button>See odds</button>
-            <p>On click, show modal for that specific game!</p>
-            {/* {sites} */}
             <PostForm>
+               <button>See odds</button>
+               <p>On click, show modal for that specific game!</p>
+               {/* {sites} */}
                <div>
                   <p>No word yet, but be the one to speak up!</p>
-                  <div>
+                  <PostContainerWrapper>
                      {postsToDisplay}
-                  </div>
+                  </PostContainerWrapper>
                </div>
                
                <form onSubmit={handleFormSubmit}>
@@ -133,4 +138,17 @@ const PostForm = styled.div`
    border-color: black;
    margin: 3px;
    padding: 5px;
+`
+
+const PostContainerWrapper = styled.div`
+   border-style: outset;
+   border-color: black;
+   margin-bottom: 5px;
+`
+
+const PostWrapper = styled.div`
+   border-style: dashed;
+   border-color: red;
+   margin: 5px;
+   padding: 3px;
 `
