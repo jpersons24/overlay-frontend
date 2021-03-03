@@ -11,7 +11,6 @@ import NavBar from './NavBar'
 import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 import GamesContainer from './GamesContainer'
-import GameShow from './GameShow'
 
 // import reducer function from userSlice
 import { setCurrentUser } from '../redux/userSlice'
@@ -102,9 +101,6 @@ function App() {
         </Route>
         <Route exact path="/games">
           <GamesContainer />
-        </Route>
-        <Route exact path="/game_show">
-          <GameShow />
         </Route>
       </Switch>
     </div>

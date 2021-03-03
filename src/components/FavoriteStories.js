@@ -20,7 +20,6 @@ function FavoriteStories() {
    }, [dispatch])
 
    const display = favsToDisplay.map((fav) => {
-      console.log(fav.user.id)
       if (currentUser && currentUser.id === fav.user.id) {
          return (
             <FavoriteCard key={fav.id} fav={fav} />

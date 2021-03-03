@@ -1,14 +1,15 @@
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 function StoryCard ({ story }) {
 
-   // console.log(story)
+   const currentUser = useSelector((state) => state.user.currentUser)
 
    function handleClick(event) {
       console.log(event.target)
       const favItem = {
          story_id: story.id,
-         user_id: 1
+         user_id: currentUser.id
       }
       // pass faveItem into helper function to post to database
       addToFavoritesList(favItem)

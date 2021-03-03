@@ -2,21 +2,20 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
-// import GameShow from './GameShow'
+import { Modal } from './modal/GameModal'
 
 
 function GameCard({ game, odds }) {
 
    const [postInput, setPostInput] = useState("")
+   const [show, setShow] = useState(false)
 
    const dispatch = useDispatch()
 
    // useSelector to get currentUser id
    const currentUser = useSelector((state) => state.user.currentUser)
    const posts = useSelector((state) => state.post.displayedPosts)
-   console.log(posts)
 
-   // console.log(odds)
    const sites = odds.map(site => {
       return (
          <div>
@@ -31,21 +30,16 @@ function GameCard({ game, odds }) {
    // posts to display on GameCard --> [{post}, {post}, {post}]
    // map through postsToDisplay to render content and username for each
    const filteredPosts = posts.filter((post) => {
-      if (post.user.id === currentUser.id && post.game.id == game.id) {
+      if (post.game.id === game.id) {
          return post
       } else {
          return null
       }
    })
 
-   console.log(filteredPosts)
-
    const postsToDisplay = filteredPosts.map((post) => {
-      // console.log(post)
-      console.log(post.content)
-      console.log(post.user.username)
       return (
-         <PostWrapper>{post.content} ({post.user.username})</PostWrapper>
+         <PostWrapper>{post.content} (<em>{post.user.username}</em>)</PostWrapper>
       )
    })
 
@@ -63,7 +57,6 @@ function GameCard({ game, odds }) {
       .then(res => res.json())
       .then(data => {
          const action = addNewPost(data)
-         console.log(action)
          dispatch(action)
          console.log('Success:', data)
       })
@@ -82,9 +75,13 @@ function GameCard({ game, odds }) {
       setPostInput("")
    }
 
+   function handleOddsClick(event) {
+      setShow(true)
+   }
 
-   // get all posts (in App), access them in here with useSelector -> filter through by matching gameID (leave user name with post)
-         // --> cannot fill posts state with post objects array retrieved from database
+   function close() {
+      setShow(false)
+   }
 
 
    return (
@@ -93,8 +90,8 @@ function GameCard({ game, odds }) {
             <p>{game.home_team} (h)</p>
             <p>{game.away_team} (a)</p>
             <PostForm>
-               <button>See odds</button>
-               <p>On click, show modal for that specific game!</p>
+               <button onClick={handleOddsClick}>See odds</button>
+               {show ? <Modal key={game.id} close={close} sites={sites}/> : null}
                {/* {sites} */}
                <div>
                   <p>No word yet, but be the one to speak up!</p>
