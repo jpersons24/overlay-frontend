@@ -1,9 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { displayStories } from '../redux/storySlice'
-import { displayGames } from '../redux/gameSlice'
-
 
 
 function Home () {
@@ -11,33 +7,6 @@ function Home () {
    // useSelectors
    const homeStories = useSelector((state) => state.story.displayedStories)
    const homeGames = useSelector((state) => state.game.displayedGames)
-
-   const dispatch = useDispatch()
-
-   // stories
-   useEffect(() => {
-      fetch("http://localhost:4000/stories")
-      .then(res => res.json())
-      .then(data => {
-         const action = displayStories(data)
-         dispatch(action)
-         console.log('Setting stories!')
-      })
-   }, [dispatch])
-
-   // games
-   useEffect(() => {
-      fetch("http://localhost:4000/games")
-      .then(res => res.json())
-      .then(data => {
-         // console.log(data)
-         const action = displayGames(data)
-         // console.log(action)
-         dispatch(action)
-         console.log("getting games!")
-      })
-   }, [dispatch])
-
 
    // map through story objects to display
    const displayHomeStories = homeStories.map((story) => {

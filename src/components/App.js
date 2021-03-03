@@ -3,6 +3,7 @@ import '../App.css';
 import { Switch, Route } from 'react-router-dom'
 // import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 // component imports
 import Home from './Home'
@@ -14,12 +15,17 @@ import GameShow from './GameShow'
 
 // import reducer function from userSlice
 import { setCurrentUser } from '../redux/userSlice'
+import { displayPosts } from '../redux/postSlice'
+import { displayStories } from '../redux/storySlice'
+import { displayGames } from '../redux/gameSlice'
 
 function App() {
 
   // useSelector to set const variable to whatever state it at that time
   const currentUserBox = useSelector((state) => state.user.currentUser)
-  // console.log(currentUserBox)
+  
+  const posts = useSelector((state) => state.post.displayedPosts)
+  console.log(posts)
 
   // set dispatch to useDispatch function for later use
   const dispatch = useDispatch()
@@ -39,6 +45,41 @@ function App() {
       console.log("Logging in user!")
     })
   }
+
+  // stories
+  useEffect(() => {
+    fetch("http://localhost:4000/stories")
+    .then(res => res.json())
+    .then(data => {
+       const action = displayStories(data)
+       dispatch(action)
+       console.log('Setting stories!')
+    })
+  }, [dispatch])
+
+  // games
+  useEffect(() => {
+    fetch("http://localhost:4000/games")
+    .then(res => res.json())
+    .then(data => {
+       // console.log(data)
+       const action = displayGames(data)
+       // console.log(action)
+       dispatch(action)
+       console.log("getting games!")
+    })
+  }, [dispatch])
+
+    useEffect(() => {
+      fetch("http://localhost:4000/posts")
+      .then(res => res.json())
+      .then(data => {
+        const action = displayPosts(data)
+        dispatch(action)
+        console.log("getting posts")
+      })
+    }, [dispatch])
+
 
   return (
     <div className="App">

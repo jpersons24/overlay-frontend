@@ -1,11 +1,19 @@
 import styled from 'styled-components'
-// import { Link } from 'react-router-dom'
-import GameShow from './GameShow'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+// import GameShow from './GameShow'
 
 
 function GameCard({ game, odds }) {
 
-   console.log(odds)
+   const [postInput, setPostInput] = useState("")
+
+   // useSelector to get currentUser id
+   const currentUser = useSelector((state) => state.user.currentUser)
+   const posts = useSelector((state) => state.post.displayedPosts)
+   console.log(posts)
+
+   // console.log(odds)
    const sites = odds.map(site => {
       return (
          <div>
@@ -14,7 +22,43 @@ function GameCard({ game, odds }) {
             <p>{site.odds}</p>
          </div>
       )
-   })
+   });
+
+   function getFormInput(event){
+      console.log(event.target.value)
+      setPostInput(event.target.value)
+   }
+
+   function createNewPost(newPost) {
+      console.log(newPost)
+      fetch("http://localhost:4000/posts", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(newPost)
+      })
+      .then(res => res.json())
+      .then(data => {
+         console.log('Success:', data)
+      })
+   }
+
+   function handleFormSubmit(event) {
+      event.preventDefault()
+      const newPost = {
+         user_id: currentUser.id,
+         game_id: game.id,
+         content: event.target.post.value,
+         likes: 0
+      }
+
+      // console.log(newPost)
+      createNewPost(newPost)
+      setPostInput("")
+   }
+
+
+   // get all posts (in App), access them in here with useSelector -> filter through by matching gameID (leave user name with post)
+         // --> cannot fill posts state with post objects array retrieved from database
 
 
    return (
@@ -26,12 +70,12 @@ function GameCard({ game, odds }) {
             <p>On click, show modal for that specific game!</p>
             {/* {sites} */}
             <PostForm>
-               <form>
-                  <label>What's up? </label>
-                  <input type="text" name="post"/>
+               <form onSubmit={handleFormSubmit}>
+                  <label htmlFor="post">What's up? </label>
+                  <input type="text" name="post" value={postInput} onChange={getFormInput} />
                   <br></br>
                   <br></br>
-                  <input type="submit" value="Post" />
+                  <input type="submit" value="Post"/>
                </form>
             </PostForm>
          </Wrapper>

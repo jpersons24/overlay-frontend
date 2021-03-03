@@ -3,6 +3,7 @@ import storyReducer from './storySlice'
 import userReducer from './userSlice'
 import favoriteReducer from './favoritesSlice'
 import gameReducer from './gameSlice'
+import postReducer from './postSlice'
 
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
       user: userReducer,
       favorite: favoriteReducer,
       game: gameReducer,
+      post: postReducer,
    }
 });
 

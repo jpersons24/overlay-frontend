@@ -7,7 +7,6 @@ const storySlice = createSlice({
    },
    reducers: {
       displayStories(state, action) {
-         // how do I replace array values with entire new values every single time
          state.displayedStories = action.payload
       }
    }
