@@ -11,7 +11,7 @@ function GameCard({ game, odds }) {
    // useSelector to get currentUser id
    const currentUser = useSelector((state) => state.user.currentUser)
    const posts = useSelector((state) => state.post.displayedPosts)
-   console.log(posts)
+   // console.log(posts)
 
    // console.log(odds)
    const sites = odds.map(site => {
@@ -23,6 +23,28 @@ function GameCard({ game, odds }) {
          </div>
       )
    });
+
+   // filter through original posts array to get posts with correct user_id and game_id
+   // posts to display on GameCard --> [{post}, {post}, {post}]
+   // map through postsToDisplay to render content and username for each
+   const filteredPosts = posts.filter((post) => {
+      if (post.user.id === currentUser.id && post.game.id == game.id) {
+         return post
+      } else {
+         return null
+      }
+   })
+
+   console.log(filteredPosts)
+
+   const postsToDisplay = filteredPosts.map((post) => {
+      // console.log(post)
+      console.log(post.content)
+      console.log(post.user.username)
+      return (
+         <p>{post.content} ({post.user.username})</p>
+      )
+   })
 
    function getFormInput(event){
       console.log(event.target.value)
@@ -51,7 +73,6 @@ function GameCard({ game, odds }) {
          likes: 0
       }
 
-      // console.log(newPost)
       createNewPost(newPost)
       setPostInput("")
    }
@@ -70,6 +91,13 @@ function GameCard({ game, odds }) {
             <p>On click, show modal for that specific game!</p>
             {/* {sites} */}
             <PostForm>
+               <div>
+                  <p>No word yet, but be the one to speak up!</p>
+                  <div>
+                     {postsToDisplay}
+                  </div>
+               </div>
+               
                <form onSubmit={handleFormSubmit}>
                   <label htmlFor="post">What's up? </label>
                   <input type="text" name="post" value={postInput} onChange={getFormInput} />
@@ -89,8 +117,7 @@ export default GameCard;
 const Wrapper = styled.div`
    display: inline-block; 
    color: black;
-   background-color: yellow;  
-   margin-right: 40px;
+   background-color: yellow; 
    width: 400px;
    height: 175px;
    margin-bottom: 75px;

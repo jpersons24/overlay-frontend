@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const postSlice = createSlice({
-   name: 'post',
+   name: "post",
    initialState: {
       displayedPosts: [],
    },
    reducers: {
-      displayPosts(action, state) {
+      displayPosts(state, action) {
          state.displayedPosts = action.payload
       }
    }

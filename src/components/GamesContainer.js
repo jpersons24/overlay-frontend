@@ -27,11 +27,12 @@ export default GamesContainer
 const Wrapper = styled.div`
    margin: auto;
    width: 90%;
-   height: 600px;
+   height: 550px;
    background-color: ivory;
    border-style: solid;
    border-color: black;
    border-radius: 20px;
-   margin-top: 50px;
+   margin-top: 55px;
+   margin-bottom: 30px;
    overflow: auto;
 `

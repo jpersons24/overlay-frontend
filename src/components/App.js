@@ -25,7 +25,6 @@ function App() {
   const currentUserBox = useSelector((state) => state.user.currentUser)
   
   const posts = useSelector((state) => state.post.displayedPosts)
-  console.log(posts)
 
   // set dispatch to useDispatch function for later use
   const dispatch = useDispatch()
