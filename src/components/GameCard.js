@@ -18,7 +18,7 @@ function GameCard({ game, odds }) {
 
    const sites = odds.map(site => {
       return (
-         <div>
+         <div key={site.id}>
             <h3>{site.site_nice}</h3>
             <h6>Head 2 Head(home, away)</h6>
             <p>{site.odds}</p>
