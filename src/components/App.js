@@ -1,7 +1,5 @@
-import '../App.css';
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
-// import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -12,7 +10,7 @@ import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 import GamesContainer from './GamesContainer'
 
-// import reducer function from userSlice
+// import reducer functions from slice's
 import { setCurrentUser } from '../redux/userSlice'
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'

@@ -26,9 +26,6 @@ function GameCard({ game, odds }) {
       )
    });
 
-   // filter through original posts array to get posts with correct user_id and game_id
-   // posts to display on GameCard --> [{post}, {post}, {post}]
-   // map through postsToDisplay to render content and username for each
    const filteredPosts = posts.filter((post) => {
       if (post.game.id === game.id) {
          return post
