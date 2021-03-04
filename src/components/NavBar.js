@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
 const linkStyles = {
    width: "100px",
@@ -11,7 +12,7 @@ const linkStyles = {
 
 function NavBar() {
    return(
-      <div>
+      <Wrapper>
          <NavLink
             to="/home"
             exact
@@ -52,8 +53,14 @@ function NavBar() {
          >
             Games
          </NavLink>
-      </div>
+      </Wrapper>
    )
 }
 
 export default NavBar
+
+
+
+const Wrapper = styled.div`
+   text-align: center;
+`

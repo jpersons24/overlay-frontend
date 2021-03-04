@@ -2,6 +2,7 @@
 import { Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import styled from 'styled-components'
 
 // component imports
 import Home from './Home'
@@ -20,18 +21,18 @@ function App() {
 
   // useSelector to set const variable to whatever state it at that time
   const currentUserBox = useSelector((state) => state.user.currentUser)
-  
-  // const posts = useSelector((state) => state.post.displayedPosts)
 
   // set dispatch to useDispatch function for later use
   const dispatch = useDispatch()
 
+  // andle user logout
   function handleLogout(event) {
     const action = setCurrentUser(null)
     dispatch(action)
     console.log("User logged out!")
   }
 
+  // handle user login
   function handleLogin(event) {
     fetch("http://localhost:4000/me")
     .then(res => res.json())
@@ -66,26 +67,27 @@ function App() {
     })
   }, [dispatch])
 
-    useEffect(() => {
-      fetch("http://localhost:4000/posts")
-      .then(res => res.json())
-      .then(data => {
-        const action = displayPosts(data)
-        dispatch(action)
-        console.log("getting posts")
-      })
-    }, [dispatch])
+  useEffect(() => {
+    fetch("http://localhost:4000/posts")
+    .then(res => res.json())
+    .then(data => {
+       const action = displayPosts(data)
+       dispatch(action)
+       console.log("getting posts")
+    })
+  }, [dispatch])
 
 
   return (
     <div className="App">
-      <h3>This is SportsCenter</h3>
-      <button onClick={handleLogin}>Log in</button>
-      <button onClick={handleLogout}>Log out</button>
-      {currentUserBox ? <h5>Welcome, {currentUserBox.username}</h5> : null}
-      <br></br>
-      <br></br>
-      <br></br>
+      <Header>
+        <HeaderName>This is SportsCenter</HeaderName>
+        <LoginContainer>
+          {currentUserBox ? <WelcomeMess>Welcome, {currentUserBox.username}</WelcomeMess> : null}
+          <button onClick={handleLogin}>Log in</button>
+          <button onClick={handleLogout}>Log out</button>
+        </LoginContainer>
+      </Header>
       <NavBar />
       <Switch>
         <Route exact path="/home">
@@ -106,3 +108,25 @@ function App() {
 }
 
 export default App;
+
+
+// ******** styled components ********
+
+const Header = styled.div`
+  display: inline;
+`
+
+const HeaderName = styled.h2`
+  display: inline-block;
+  padding-left: 5px;
+`
+
+const LoginContainer = styled.div`
+  display: inline-block;
+  float: right;
+`
+
+const WelcomeMess = styled.h5`
+  margin: 0px;
+  padding: 3px;
+`
