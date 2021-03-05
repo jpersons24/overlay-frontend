@@ -77,6 +77,7 @@ const SubWrapper = styled.div`
    background-color: #ED462F;
    padding: 20px;
    overflow: auto;
+   box-shadow: 5px 5px 5px #9C824A;
 `
 
 const SubHeaders = styled.div`
