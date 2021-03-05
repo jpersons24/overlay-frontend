@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux'
 
 function StoryCard ({ story }) {
 
+   // get current user
    const currentUser = useSelector((state) => state.user.currentUser)
 
+   // handle favorite click
    function handleClick(event) {
-      console.log(event.target)
       const favItem = {
          story_id: story.id,
          user_id: currentUser.id
@@ -28,7 +29,6 @@ function StoryCard ({ story }) {
       })
    }
 
-
    return (
       <Wrapper>
          <h1>{story.title}</h1>
@@ -47,8 +47,11 @@ function StoryCard ({ story }) {
 
 export default StoryCard
 
+// ****** styled components ******
+
 const Wrapper = styled.div`
-   background: gray;
+   background: #9C824A;
+   color: white;
    border-style: single;
    border-color: black;
    border-radius: 10px;

@@ -5,7 +5,7 @@ const linkStyles = {
    width: "100px",
    padding: "12px",
    margin: "0 6px 6px",
-   background: "red",
+   background: "#033474",
    textDecoration: "none",
    color: "white",
 }
@@ -18,7 +18,7 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "black"
+               background: "#9C824A"
             }}
          >
             Home
@@ -28,7 +28,7 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "black"
+               background: "#9C824A"
             }}
          >
             News
@@ -38,7 +38,7 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "black"
+               background: "#9C824A"
             }}
          >
             Favorite Stories
@@ -48,7 +48,7 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "black"
+               background: "#9C824A"
             }}
          >
             Games

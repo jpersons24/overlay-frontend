@@ -12,29 +12,40 @@ function Home () {
    const displayHomeStories = homeStories.map((story) => {
       return (
          <StoryContainer key={story.id}>
-            <h3>{story.title}</h3>
+            <StoryTitle>{story.title}</StoryTitle>
             <StoryImage src={story.url_to_image} alt={story.title}/>
          </StoryContainer>
       )
    })
 
-   // map through story objects to display
+   // handle click of game details button
+   function handleClick(event) {
+      console.log(event.target)
+   }
+
+   // map through game objects to display
    const displayGamePreview = homeGames.map((game) => {
+
+      // change date format from ISO -> milli -> standard
+      // const newDate = new Date(Date.parse(game.commence_time))
+      // console.log(newDate)
+
       return (
          <GameContainer key={game.id}>
             <h4>{game.sport_nice}</h4>
             <p>{game.home_team}(h)</p>
             <p>{game.away_team}(a)</p>
-            <p>Game time: {game.commence_time}</p>
-            <p>Button here to go to game odds</p>
+            <p>Game time: (show corrent format here)</p>
+            <DetailsButton onClick={handleClick}>Event Details</DetailsButton>
          </GameContainer>
+         
       )
    })
 
 
    return (
       <Wrapper>
-         <SubHeaders>Latest news headlines:</SubHeaders>
+         <SubHeaders>Top headlines:</SubHeaders>
          <SubWrapper>
             {displayHomeStories}
          </SubWrapper>
@@ -52,7 +63,7 @@ export default Home;
 // ****** styling components *******
 
 const Wrapper = styled.div`
-   margin-top: 30px;
+   margin-top: 50px;
 `
 
 const SubWrapper = styled.div`
@@ -61,9 +72,9 @@ const SubWrapper = styled.div`
    margin-bottom: 50px;
    width: 80%;
    height: 300px;
-   border-style: single;
-   border-color: black;
-   background-color: silver;
+   border-style: ridge;
+   border-color: #9C824A;
+   background-color: #ED462F;
    padding: 20px;
    overflow: auto;
 `
@@ -75,30 +86,38 @@ const SubHeaders = styled.div`
 const StoryContainer = styled.div`
    margin: 30px 70px;
    display: inline-block;
-   border-style: solid;
-   border-color: red;
+   background-color: #F1F2F3;
+   border-style: groove;
+   border-color: #9C824A;
    border-radius: 15px;
    padding: 20px;
 `
 
 const StoryTitle = styled.h3`
+   text-align: center;
 `
 
 const StoryImage = styled.img`
-display: block;   
-margin-right: auto;
-margin-left: auto;
-height: 200px;
-width: 50%;
+   display: block;   
+   margin-right: auto;
+   margin-left: auto;
+   height: 200px;
+   width: 50%;
 `
 const GameContainer = styled.div`
    display: inline-block;
-   color: white;
-   background: black;
+   color: black;
+   background: #F1F2F3;
+   text-align: center;
    border-style: solid;
-   border-color: red;
+   border-color: #9C824A;
    border-radius: 15px;
    margin: 25px;
    height: 265px;
    width: 200px;
+`
+
+const DetailsButton = styled.button`
+   color: white;
+   background: #033474;
 `

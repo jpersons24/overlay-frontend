@@ -79,9 +79,9 @@ function App() {
 
 
   return (
-    <div className="App">
+    <Wrapper>
       <Header>
-        <HeaderName>This is SportsCenter</HeaderName>
+        <HeaderName>The Degenerate</HeaderName>
         <LoginContainer>
           {currentUserBox ? <WelcomeMess>Welcome, {currentUserBox.username}</WelcomeMess> : null}
           <button onClick={handleLogin}>Log in</button>
@@ -106,7 +106,7 @@ function App() {
           <GamesContainer />
         </Route>
       </Switch>
-    </div>
+    </Wrapper>
   );
 }
 
@@ -114,6 +114,11 @@ export default App;
 
 
 // ******** styled components ********
+
+const Wrapper = styled.div`
+  background-color: #F1F2F3;
+  padding-bottom: 100px;
+`
 
 const Header = styled.div`
   display: inline;

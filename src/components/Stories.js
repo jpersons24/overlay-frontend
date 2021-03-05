@@ -1,8 +1,6 @@
-// import { useEffect } from 'react'
+import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-// import { displayStories } from '../redux/storySlice'
 import StoryCard from './StoryCard'
-
 
 
 
@@ -22,13 +20,25 @@ function Stories() {
 
 
    return (
-      <div>
-         <h2>This is where the stories go!</h2>
+      <Wrapper>
+         <Header>Today's top stories</Header>
          <div>
             {storyCardComponents}
          </div>
-      </div>
+      </Wrapper>
    )
 }
 
 export default Stories
+
+
+// ******* styled components ********
+
+
+const Wrapper = styled.div`
+   margin-top: 50px;
+`
+
+const Header = styled.div`
+   text-align: center;
+`
