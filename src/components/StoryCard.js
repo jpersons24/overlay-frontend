@@ -32,7 +32,7 @@ function StoryCard ({ story }) {
    return (
       <Wrapper>
          <h1>{story.title}</h1>
-         <img src={story.url_to_image} alt={story.description} />
+         <StoryImage src={story.url_to_image} alt={story.description} />
          <p>{story.content}</p>
          <h4>{story.description}</h4>
          <p><strong>Author:</strong> {story.author}</p>
@@ -52,7 +52,7 @@ export default StoryCard
 const Wrapper = styled.div`
    background: #9C824A;
    color: white;
-   border-style: single;
+   border-style: solid;
    border-color: black;
    border-radius: 10px;
    margin: auto;
@@ -60,4 +60,10 @@ const Wrapper = styled.div`
    padding: 15px;
    margin-bottom: 15px;
    margin-top: 15px;
+`
+
+const StoryImage = styled.img`
+   margin-right: auto;
+   margin-left: auto;
+   width: 50%;
 `

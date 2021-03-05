@@ -33,8 +33,8 @@ function Home () {
       return (
          <GameContainer key={game.id}>
             <h4>{game.sport_nice}</h4>
-            <p>{game.home_team}(h)</p>
-            <p>{game.away_team}(a)</p>
+            <p>{game.home_team} <em>(h)</em></p>
+            <p>{game.away_team} <em>(a)</em></p>
             <p>Game time: (show corrent format here)</p>
             <DetailsButton onClick={handleClick}>Event Details</DetailsButton>
          </GameContainer>
@@ -88,10 +88,11 @@ const StoryContainer = styled.div`
    margin: 30px 70px;
    display: inline-block;
    background-color: #F1F2F3;
-   border-style: groove;
+   border-style: solid;
    border-color: #9C824A;
    border-radius: 15px;
    padding: 20px;
+   box-shadow: 2px 2px 5px #9C824A;
 `
 
 const StoryTitle = styled.h3`
@@ -116,6 +117,7 @@ const GameContainer = styled.div`
    margin: 25px;
    height: 265px;
    width: 200px;
+   box-shadow: 2px 2px 5px #9C824A;
 `
 
 const DetailsButton = styled.button`
