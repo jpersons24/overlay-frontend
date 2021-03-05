@@ -33,15 +33,16 @@ function Home () {
 
 
    return (
-      <div>
-         <h2>This is the home page!!!</h2>
-         <Wrapper>
+      <Wrapper>
+         <SubHeaders>Latest news headlines:</SubHeaders>
+         <SubWrapper>
             {displayHomeStories}
-         </Wrapper>
-         <Wrapper>
+         </SubWrapper>
+         <SubHeaders>Today's events:</SubHeaders>
+         <SubWrapper>
             {displayGamePreview}
-         </Wrapper>
-      </div>
+         </SubWrapper>
+      </Wrapper>
    )
 }
 
@@ -51,6 +52,10 @@ export default Home;
 // ****** styling components *******
 
 const Wrapper = styled.div`
+   margin-top: 30px;
+`
+
+const SubWrapper = styled.div`
    margin: auto;
    margin-top: 25px;
    margin-bottom: 50px;
@@ -63,14 +68,29 @@ const Wrapper = styled.div`
    overflow: auto;
 `
 
+const SubHeaders = styled.div`
+   text-align: center;
+`
+
 const StoryContainer = styled.div`
    margin: 30px 70px;
    display: inline-block;
    border-style: solid;
    border-color: red;
    border-radius: 15px;
+   padding: 20px;
 `
 
+const StoryTitle = styled.h3`
+`
+
+const StoryImage = styled.img`
+display: block;   
+margin-right: auto;
+margin-left: auto;
+height: 200px;
+width: 50%;
+`
 const GameContainer = styled.div`
    display: inline-block;
    color: white;
@@ -81,9 +101,4 @@ const GameContainer = styled.div`
    margin: 25px;
    height: 265px;
    width: 200px;
-`
-
-const StoryImage = styled.img`
-   height: 100px;
-   width: 100px;
 `

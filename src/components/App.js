@@ -88,6 +88,9 @@ function App() {
           <button onClick={handleLogout}>Log out</button>
         </LoginContainer>
       </Header>
+      <br></br>
+      <br></br>
+      <br></br>
       <NavBar />
       <Switch>
         <Route exact path="/home">
@@ -119,11 +122,13 @@ const Header = styled.div`
 const HeaderName = styled.h2`
   display: inline-block;
   padding-left: 5px;
+  margin-top: 3px;
 `
 
 const LoginContainer = styled.div`
   display: inline-block;
   float: right;
+  margin-bottom: 20px;
 `
 
 const WelcomeMess = styled.h5`
