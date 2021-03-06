@@ -36,7 +36,7 @@ function GameCard({ game, odds }) {
 
    const postsToDisplay = filteredPosts.map((post) => {
       return (
-         <PostWrapper>{post.content} (<em>{post.user.username}</em>)</PostWrapper>
+         <PostWrapper key={post.id}>{post.content} (<em>{post.user.username}</em>)</PostWrapper>
       )
    })
 
@@ -61,15 +61,19 @@ function GameCard({ game, odds }) {
 
    function handleFormSubmit(event) {
       event.preventDefault()
-      const newPost = {
-         user_id: currentUser.id,
-         game_id: game.id,
-         content: event.target.post.value,
-         likes: 0
-      }
+      if(currentUser) {
+         const newPost = {
+            user_id: currentUser.id,
+            game_id: game.id,
+            content: event.target.post.value,
+            likes: 0
+         }
 
-      createNewPost(newPost)
-      setPostInput("")
+         createNewPost(newPost)
+         setPostInput("")
+      } else {
+         alert("You must be signed in to leave a post! Sign up feature coming soon!")
+      }
    }
 
    function handleOddsClick(event) {
@@ -83,28 +87,31 @@ function GameCard({ game, odds }) {
 
    return (
          <Wrapper>
-            <h3>{game.sport_nice}</h3>
-            <p>{game.home_team} (h)</p>
-            <p>{game.away_team} (a)</p>
-            <PostForm>
+            <WrapperHeader>
+               <League>{game.sport_nice}</League>
+               <TeamsContainer>
+                  <p>{game.home_team} (h)  VS  {game.away_team} (a)</p>
+               </TeamsContainer>
+            </WrapperHeader>
+            <div>
                <button onClick={handleOddsClick}>See odds</button>
-               {show ? <Modal key={game.id} close={close} sites={sites}/> : null}
-               {/* {sites} */}
-               <div>
-                  <p>No word yet, but be the one to speak up!</p>
-                  <PostContainerWrapper>
-                     {postsToDisplay}
-                  </PostContainerWrapper>
-               </div>
-               
-               <form onSubmit={handleFormSubmit}>
-                  <label htmlFor="post">What's up? </label>
-                  <input type="text" name="post" value={postInput} onChange={getFormInput} />
-                  <br></br>
-                  <br></br>
-                  <input type="submit" value="Post"/>
-               </form>
-            </PostForm>
+               <PostForm>
+                  <div>
+                     <PostContainerWrapper>
+                        {postsToDisplay}
+                        <form onSubmit={handleFormSubmit}>
+                           <label htmlFor="post">What's up? </label>
+                           <input type="text" name="post" value={postInput} onChange={getFormInput} />
+                           <br></br>
+                           <br></br>
+                           <input type="submit" value="Post"/>
+                        </form>
+                     </PostContainerWrapper>
+                     {show ? <Modal close={close} sites={sites} /> : null}
+                  
+                  </div>
+               </PostForm>
+            </div>
          </Wrapper>
    )
 };
@@ -114,11 +121,14 @@ export default GameCard;
 
 
 const Wrapper = styled.div`
-   display: inline-block; 
+   display: block; 
    color: black;
    background-color: yellow; 
-   width: 400px;
-   height: 175px;
+   margin: 35px 0px;
+   margin-right: auto;
+   margin-left: auto;
+   width: 65%;
+   height: 300px;
    margin-bottom: 75px;
    border-style: double;
    border-color: black;
@@ -127,17 +137,33 @@ const Wrapper = styled.div`
    overflow: auto;
 `
 
+const WrapperHeader = styled.div`
+   margin-bottom: 65px;
+`
+const League = styled.h3`
+   display: block;
+   float: left;
+`
+
+const TeamsContainer = styled.div`
+   display: block;
+   float: right;
+   margin-bottom: 20px;
+`
+
 const PostForm = styled.div`
-   border-style: solid;
-   border-color: black;
    margin: 3px;
    padding: 5px;
 `
 
 const PostContainerWrapper = styled.div`
    border-style: outset;
-   border-color: black;
+   border-color: red;
    margin-bottom: 5px;
+   margin-right: auto;
+   width: 45%;
+   display: block;
+   float: left;
 `
 
 const PostWrapper = styled.div`

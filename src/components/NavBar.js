@@ -8,6 +8,8 @@ const linkStyles = {
    background: "#033474",
    textDecoration: "none",
    color: "white",
+   borderStyle: "outset",
+   borderColor: "#9C824A",
 }
 
 function NavBar() {
@@ -18,7 +20,8 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "#9C824A"
+               background: "#9C824A",
+               borderStyle: "inset"
             }}
          >
             Home
@@ -28,7 +31,8 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "#9C824A"
+               background: "#9C824A",
+               borderStyle: "inset"
             }}
          >
             News
@@ -38,7 +42,8 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "#9C824A"
+               background: "#9C824A",
+               borderStyle: "inset"
             }}
          >
             Favorite Stories
@@ -48,7 +53,8 @@ function NavBar() {
             exact
             style={linkStyles}
             activeStyle={{
-               background: "#9C824A"
+               background: "#9C824A",
+               borderStyle: "inset"
             }}
          >
             Games

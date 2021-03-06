@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { displayFavorites } from '../redux/favoritesSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import FavoriteCard from './FavoriteCard'
+import styled from 'styled-components'
 
 function FavoriteStories() {
 
@@ -32,15 +33,28 @@ function FavoriteStories() {
       })
 
    return (
-      <div>
+      <Wrapper>
          {currentUser ? 
-         <h2>These are your favorited stories, {currentUser.username}</h2>
+         <Header>These are your favorited stories, {currentUser.username}</Header>
          :
-         <h2>Your favorited stories will be listed here!</h2>
+         <Header>Your favorited stories will be listed here!</Header>
          }
          {display}
-      </div>
+      </Wrapper>
    )
 }
 
 export default FavoriteStories
+
+
+
+// ****** styled components *******
+
+
+const Wrapper = styled.div`
+   margin-top: 50px;
+`
+
+const Header = styled.h2`
+   text-align: center
+`
