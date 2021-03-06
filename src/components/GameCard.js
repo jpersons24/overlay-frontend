@@ -5,7 +5,7 @@ import { addNewPost } from '../redux/postSlice'
 import { Modal } from './modal/GameModal'
 
 
-function GameCard({ game, odds }) {
+function GameCard({ game, time, odds }) {
 
    const [postInput, setPostInput] = useState("")
    const [show, setShow] = useState(false)
@@ -86,14 +86,16 @@ function GameCard({ game, odds }) {
 
 
    return (
-         <Wrapper>
+      <>
+         <PreviewWrapper>
             <WrapperHeader>
-               <League>{game.sport_nice}</League>
-               <TeamsContainer>
-                  <p>{game.home_team} (h)  VS  {game.away_team} (a)</p>
-               </TeamsContainer>
+               <h3>{game.sport_nice}</h3>
+               <p>{game.home_team} (h)</p>  
+               <p>VS</p>  
+               <p>{game.away_team} (a)</p>   
             </WrapperHeader>
-            <div>
+         </PreviewWrapper>
+            {/* <div>
                <button onClick={handleOddsClick}>See odds</button>
                <PostForm>
                   <div>
@@ -111,8 +113,8 @@ function GameCard({ game, odds }) {
                   
                   </div>
                </PostForm>
-            </div>
-         </Wrapper>
+            </div> */}
+      </>
    )
 };
 
@@ -120,15 +122,14 @@ function GameCard({ game, odds }) {
 export default GameCard;
 
 
-const Wrapper = styled.div`
-   display: block; 
-   color: black;
-   background-color: yellow; 
+const PreviewWrapper = styled.div`
+   display: block;
+   color: white;
+   background-color: #9C824A; 
    margin: 35px 0px;
-   margin-right: auto;
-   margin-left: auto;
-   width: 65%;
-   height: 300px;
+   margin: 5px 20px;
+   width: 240px;
+   height: 150px;
    margin-bottom: 75px;
    border-style: double;
    border-color: black;
@@ -158,7 +159,7 @@ const PostForm = styled.div`
 
 const PostContainerWrapper = styled.div`
    border-style: outset;
-   border-color: red;
+   border-color: #103474;
    margin-bottom: 5px;
    margin-right: auto;
    width: 45%;
@@ -167,8 +168,9 @@ const PostContainerWrapper = styled.div`
 `
 
 const PostWrapper = styled.div`
+   color: white;
    border-style: dashed;
-   border-color: red;
+   border-color: #103474;
    margin: 5px;
    padding: 3px;
 `

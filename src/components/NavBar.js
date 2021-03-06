@@ -27,6 +27,17 @@ function NavBar() {
             Home
          </NavLink>
          <NavLink
+            to="/games"
+            exact
+            style={linkStyles}
+            activeStyle={{
+               background: "#9C824A",
+               borderStyle: "inset"
+            }}
+         >
+            Games
+         </NavLink>
+         <NavLink
             to="/news"
             exact
             style={linkStyles}
@@ -47,17 +58,6 @@ function NavBar() {
             }}
          >
             Favorite Stories
-         </NavLink>
-         <NavLink
-            to="/games"
-            exact
-            style={linkStyles}
-            activeStyle={{
-               background: "#9C824A",
-               borderStyle: "inset"
-            }}
-         >
-            Games
          </NavLink>
       </Wrapper>
    )
