@@ -35,6 +35,7 @@ function StoryCard ({ story }) {
          <StoryImage src={story.url_to_image} alt={story.description} />
          <p>{story.content}</p>
          <h4>{story.description}</h4>
+         {/* { story.author !== null } */}
          <p><strong>Author:</strong> {story.author}</p>
          <p><strong>Source:</strong> {story.source}</p>
          <a href={story.url}>Full story here!</a>
@@ -65,5 +66,6 @@ const Wrapper = styled.div`
 const StoryImage = styled.img`
    margin-right: auto;
    margin-left: auto;
-   width: 50%;
+   width: 70%;
+   display: block;
 `

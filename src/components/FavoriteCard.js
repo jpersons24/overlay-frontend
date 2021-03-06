@@ -18,8 +18,9 @@ function FavoriteCard({ fav }) {
 export default FavoriteCard
 
 const Wrapper = styled.div`
-   background: gray;
-   border-style: single;
+   background: #9C824A;
+   color: white;
+   border-style: solid;
    border-color: black;
    border-radius: 10px;
    margin: auto;
@@ -30,6 +31,8 @@ const Wrapper = styled.div`
 `
 
 const StoryImage = styled.img`
-   height: 300px; 
-   margin: auto;
+margin-right: auto;
+margin-left: auto;
+width: 70%;
+display: block;
 `
