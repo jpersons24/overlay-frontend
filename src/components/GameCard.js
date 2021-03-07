@@ -3,16 +3,17 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
 import { Modal } from './modal/GameModal'
+import { findAllByTestId } from '@testing-library/react'
 
 
-function GameCard({ game, time, odds }) {
+function GameCard({ game, odds }) {
 
    const [postInput, setPostInput] = useState("")
    const [show, setShow] = useState(false)
+   const [showPosts, setShowPosts] = useState(false)
 
    const dispatch = useDispatch()
 
-   // useSelector to get currentUser id
    const currentUser = useSelector((state) => state.user.currentUser)
    const posts = useSelector((state) => state.post.displayedPosts)
 
@@ -84,6 +85,16 @@ function GameCard({ game, time, odds }) {
       setShow(false)
    }
 
+   function handlePostsClick(event) {
+      console.log(event.target)
+      setShowPosts(true)
+   }
+
+   function hidePosts() {
+      setShowPosts(false)
+      console.log(showPosts)
+   }
+
 
    return (
       <>
@@ -94,9 +105,15 @@ function GameCard({ game, time, odds }) {
                <p>VS</p>  
                <p>{game.away_team} (a)</p>   
             </WrapperHeader>
+            <button onClick={handleOddsClick}>See odds</button>
+            {showPosts === false ?
+               <button onClick={handlePostsClick}>See Posts</button>
+               :
+               <button onClick={hidePosts}>Hide Posts</button>
+            }
          </PreviewWrapper>
-            {/* <div>
-               <button onClick={handleOddsClick}>See odds</button>
+         {showPosts === true ? 
+            <div>
                <PostForm>
                   <div>
                      <PostContainerWrapper>
@@ -110,10 +127,12 @@ function GameCard({ game, time, odds }) {
                         </form>
                      </PostContainerWrapper>
                      {show ? <Modal close={close} sites={sites} /> : null}
-                  
                   </div>
                </PostForm>
-            </div> */}
+            </div>
+         :
+         null
+         }
       </>
    )
 };
@@ -123,7 +142,7 @@ export default GameCard;
 
 
 const PreviewWrapper = styled.div`
-   display: block;
+   display: inline-block;  
    color: white;
    background-color: #9C824A; 
    margin: 35px 0px;
@@ -135,7 +154,6 @@ const PreviewWrapper = styled.div`
    border-color: black;
    border-radius: 10px;
    padding: 5px;
-   overflow: auto;
 `
 
 const WrapperHeader = styled.div`
