@@ -9,7 +9,6 @@ function GameCard({ game, odds }) {
 
    const [postInput, setPostInput] = useState("")
    const [show, setShow] = useState(false)
-   const [showPosts, setShowPosts] = useState(false)
 
    const dispatch = useDispatch()
 
@@ -41,7 +40,6 @@ function GameCard({ game, odds }) {
    })
 
    function getFormInput(event){
-      console.log(event.target.value)
       setPostInput(event.target.value)
    }
 
@@ -78,41 +76,26 @@ function GameCard({ game, odds }) {
 
    function handleOddsClick(event) {
       setShow(true)
-      console.log(event.target)
    }
 
    function close() {
       setShow(false)
    }
 
-   function handlePostsClick(event) {
-      console.log(event.target)
-      setShowPosts(true)
-   }
-
-   function hidePosts() {
-      setShowPosts(false)
-      console.log(showPosts)
-   }
-
 
    return (
       <>
          <PreviewWrapper>
-            <WrapperHeader>
                <h3>{game.sport_nice}</h3>
                <p>{game.home_team} (h)</p>  
                <p>VS</p>  
                <p>{game.away_team} (a)</p>   
-            </WrapperHeader>
-            <button onClick={handleOddsClick}>See odds</button>
-            {show ? <Modal close={close} sites={sites} /> : null}
-            {showPosts === false ?
-               <button onClick={handlePostsClick}>See Posts</button>
-               :
-               <button onClick={hidePosts}>Hide Posts</button>
-            }
-            {showPosts === true ? 
+               <button onClick={handleOddsClick}>See odds</button>
+               {show ? 
+                  <Modal close={close} sites={sites}/> 
+                  : 
+                  null
+               }
                <PostForm>
                   <div>
                      <PostContainerWrapper>
@@ -126,10 +109,7 @@ function GameCard({ game, odds }) {
                         </form>
                      </PostContainerWrapper>
                   </div>
-               </PostForm>
-            :
-            null
-            }
+               </PostForm> 
          </PreviewWrapper>
       </>
    )
@@ -139,23 +119,18 @@ function GameCard({ game, odds }) {
 export default GameCard;
 
 
-const PreviewWrapper = styled.div`
-   display: inline-block;  
+const PreviewWrapper = styled.div` 
    color: white;
    background-color: #9C824A; 
-   margin: 35px 0px;
-   margin: 5px 20px;
-   width: 240px;
-   height: 150px;
+   margin: auto;
+   width: 900px;
+   height: 500px;
    margin-bottom: 75px;
    border-style: double;
    border-color: black;
    border-radius: 10px;
    padding: 5px;
-`
-
-const WrapperHeader = styled.div`
-   margin-bottom: 65px;
+   overflow: auto;
 `
 
 const PostForm = styled.div`
@@ -169,7 +144,7 @@ const PostContainerWrapper = styled.div`
    margin-bottom: 5px;
    margin-right: auto;
    width: 45%;
-   display: block;
+   display: inline-block;
    float: left;
 `
 

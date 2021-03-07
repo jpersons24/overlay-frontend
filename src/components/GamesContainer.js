@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import GameCard from './GameCard'
 import styled from 'styled-components'
-// import { Modal } from './modal/GameModal'
 
 function GamesContainer() {
 
@@ -29,8 +28,11 @@ export default GamesContainer
 
 
 const Wrapper1 = styled.div`
+   display: block;
    margin-top: 50px;
-   margin-left: 45px;
+   margin-left: auto;
+   margin-right: auto;
+   width: 80%;
    padding: 20px;
    overflow-x: auto;
 `

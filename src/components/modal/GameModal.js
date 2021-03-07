@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+// import { useState } from 'react'
 
 export const Modal = ({ close, sites }) => {
+
+   // const [postInput, setPostInput] = useState("")
+
    return (
       <PopUpWrapper>
          <div>
@@ -23,7 +27,7 @@ export const Modal = ({ close, sites }) => {
 const PopUpWrapper = styled.div`
    border-style: solid;
    border-color: black;
-   background-color: ivory;
+   background-color: blue;
 `
 
 const XBtn = styled.button`
