@@ -5,6 +5,7 @@ const gameSlice = createSlice({
    initialState: {
       displayedGames: [],
       displayedSingleGame: [],
+      nhlGames: [],
    },
    reducers: {
       displayGames(state, action) {
@@ -12,10 +13,13 @@ const gameSlice = createSlice({
       },
       singleGame(state, action) {
          state.displayedSingleGame = action.payload
+      },
+      displayNhlGames(state, action) {
+         state.nhlGames = action.payload
       }
    }
 });
 
 
-export const { displayGames, singleGame } = gameSlice.actions;
+export const { displayGames, singleGame, displayNhlGames } = gameSlice.actions;
 export default gameSlice.reducer;

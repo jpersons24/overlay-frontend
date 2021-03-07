@@ -8,6 +8,8 @@ function Home () {
    // useSelectors
    const homeStories = useSelector((state) => state.story.displayedStories)
    const homeGames = useSelector((state) => state.game.displayedGames)
+   const nhlGames = useSelector((state) => state.game.nhlGames)
+   console.log(nhlGames)
 
    // map through story objects to display
    const displayHomeStories = homeStories.map((story) => {

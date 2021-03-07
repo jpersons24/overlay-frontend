@@ -16,7 +16,7 @@ import GameShow from './GameShow'
 import { setCurrentUser } from '../redux/userSlice'
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'
-import { displayGames } from '../redux/gameSlice'
+import { displayGames, displayNhlGames } from '../redux/gameSlice'
 
 function App() {
 
@@ -43,6 +43,18 @@ function App() {
       console.log("Logging in user!")
     })
   }
+
+  // nhl games
+  useEffect(() => {
+    fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
+    .then(res => res.json())
+    .then(data => {
+      // console.log(data)
+      const action = displayNhlGames(data.data)
+      console.log(action)
+      dispatch(action)
+    })
+  }, [dispatch])
 
   // stories
   useEffect(() => {
