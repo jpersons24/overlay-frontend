@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 
 function Home () {
@@ -35,8 +36,10 @@ function Home () {
             <h4>{game.sport_nice}</h4>
             <p>{game.home_team} <em>(h)</em></p>
             <p>{game.away_team} <em>(a)</em></p>
-            <p>Game time: (show corrent format here)</p>
-            <DetailsButton onClick={handleClick}>Event Details</DetailsButton>
+            <p>Game time: </p>
+            <Link to={`/games/${game.id}`}>
+               <DetailsButton onClick={handleClick}>Game Details</DetailsButton>
+            </Link>
          </GameContainer>
          
       )

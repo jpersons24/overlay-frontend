@@ -4,14 +4,18 @@ const gameSlice = createSlice({
    name: "game",
    initialState: {
       displayedGames: [],
+      displayedSingleGame: [],
    },
    reducers: {
       displayGames(state, action) {
          state.displayedGames = action.payload
+      },
+      singleGame(state, action) {
+         state.displayedSingleGame = action.payload
       }
    }
 });
 
 
-export const { displayGames } = gameSlice.actions;
+export const { displayGames, singleGame } = gameSlice.actions;
 export default gameSlice.reducer;

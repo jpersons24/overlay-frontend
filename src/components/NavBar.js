@@ -35,7 +35,7 @@ function NavBar() {
                borderStyle: "inset"
             }}
          >
-            Games
+            All Games
          </NavLink>
          <NavLink
             to="/news"
