@@ -21,14 +21,9 @@ export const Modal = ({ close, sites }) => {
 
 
 const PopUpWrapper = styled.div`
-   z-index: 0;
    border-style: solid;
    border-color: black;
    background-color: ivory;
-   display: block;
-   float: right;
-   margin-left: auto;
-   width: 45%;
 `
 
 const XBtn = styled.button`

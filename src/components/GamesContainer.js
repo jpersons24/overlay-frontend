@@ -29,11 +29,6 @@ export default GamesContainer
 
 
 const Wrapper1 = styled.div`
-   border-style: ridge;
-   border-color: #103474;  
-   margin: auto;
-   width: 85%;
-   height: 300px;
    margin-top: 50px;
    margin-left: 45px;
    padding: 20px;

@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
 import { Modal } from './modal/GameModal'
-import { findAllByTestId } from '@testing-library/react'
 
 
 function GameCard({ game, odds }) {
@@ -79,6 +78,7 @@ function GameCard({ game, odds }) {
 
    function handleOddsClick(event) {
       setShow(true)
+      console.log(event.target)
    }
 
    function close() {
@@ -106,14 +106,13 @@ function GameCard({ game, odds }) {
                <p>{game.away_team} (a)</p>   
             </WrapperHeader>
             <button onClick={handleOddsClick}>See odds</button>
+            {show ? <Modal close={close} sites={sites} /> : null}
             {showPosts === false ?
                <button onClick={handlePostsClick}>See Posts</button>
                :
                <button onClick={hidePosts}>Hide Posts</button>
             }
-         </PreviewWrapper>
-         {showPosts === true ? 
-            <div>
+            {showPosts === true ? 
                <PostForm>
                   <div>
                      <PostContainerWrapper>
@@ -126,13 +125,12 @@ function GameCard({ game, odds }) {
                            <input type="submit" value="Post"/>
                         </form>
                      </PostContainerWrapper>
-                     {show ? <Modal close={close} sites={sites} /> : null}
                   </div>
                </PostForm>
-            </div>
-         :
-         null
-         }
+            :
+            null
+            }
+         </PreviewWrapper>
       </>
    )
 };
@@ -158,16 +156,6 @@ const PreviewWrapper = styled.div`
 
 const WrapperHeader = styled.div`
    margin-bottom: 65px;
-`
-const League = styled.h3`
-   display: block;
-   float: left;
-`
-
-const TeamsContainer = styled.div`
-   display: block;
-   float: right;
-   margin-bottom: 20px;
 `
 
 const PostForm = styled.div`
