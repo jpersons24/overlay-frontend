@@ -8,15 +8,16 @@ function Home () {
    // useSelectors
    const homeStories = useSelector((state) => state.story.displayedStories)
    const homeGames = useSelector((state) => state.game.displayedGames)
-   const nhlGames = useSelector((state) => state.game.nhlGames)
-   console.log(nhlGames)
+   // const nhlGames = useSelector((state) => state.game.nhlGames)
+   // console.log(nhlGames)
 
    // map through story objects to display
    const displayHomeStories = homeStories.map((story) => {
       return (
-         <StoryContainer key={story.id}>
+         <StoryContainer key={story.publishedAt}>
             <StoryTitle>{story.title}</StoryTitle>
-            <StoryImage src={story.url_to_image} alt={story.title}/>
+            <StoryImage src={story.urlToImage} alt="Could not display article image, sorry!"/>
+            <p>Add story url here</p>
          </StoryContainer>
       )
    })
@@ -76,13 +77,14 @@ const SubWrapper = styled.div`
    margin-top: 25px;
    margin-bottom: 50px;
    width: 80%;
-   height: 300px;
+   height: 375px;
    border-style: ridge;
    border-color: #9C824A;
-   background-color: #ED462F;
+   background-color: #474747;
    padding: 20px;
    overflow: auto;
    box-shadow: 5px 5px 5px #9C824A;
+   content-align: center
 `
 
 const SubHeaders = styled.div`
@@ -90,8 +92,11 @@ const SubHeaders = styled.div`
 `
 
 const StoryContainer = styled.div`
-   margin: 30px 70px;
-   display: inline-block;
+   display: block;
+   margin: 10px 0px;
+   margin-right: auto;
+   margin-left: auto;
+   width: 60%;
    background-color: #F1F2F3;
    border-style: solid;
    border-color: #9C824A;

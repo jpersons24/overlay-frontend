@@ -16,7 +16,7 @@ import GameShow from './GameShow'
 import { setCurrentUser } from '../redux/userSlice'
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'
-import { displayGames, displayNhlGames } from '../redux/gameSlice'
+import { displayGames } from '../redux/gameSlice'
 
 function App() {
 
@@ -45,23 +45,23 @@ function App() {
   }
 
   // nhl games
-  useEffect(() => {
-    fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
-    .then(res => res.json())
-    .then(data => {
-      // console.log(data)
-      const action = displayNhlGames(data.data)
-      console.log(action)
-      dispatch(action)
-    })
-  }, [dispatch])
+  // useEffect(() => {
+  //   fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     // console.log(data)
+  //     const action = displayNhlGames(data.data)
+  //     console.log(action)
+  //     dispatch(action)
+  //   })
+  // }, [dispatch])
 
   // stories
   useEffect(() => {
-    fetch("http://localhost:4000/stories")
+    fetch("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=c57acc4703364867840f0f90de339cf3")
     .then(res => res.json())
     .then(data => {
-       const action = displayStories(data)
+       const action = displayStories(data.articles)
        dispatch(action)
        console.log('Setting stories!')
     })

@@ -6,10 +6,37 @@ function StoryCard ({ story }) {
    // get current user
    const currentUser = useSelector((state) => state.user.currentUser)
 
-   // handle favorite click
-   function handleClick(event) {
+   function handleFavoriteClick(event) {
+      console.log(event.target)
+
+      const newStory = {
+         source: story.source.id,
+         author: story.author,
+         title: story.title,
+         description: story.description,
+         url: story.url,
+         urlToImage: story.urlToImage,
+         publishedAt: story.publishedAt,
+         content: story.content
+      }
+
+      console.log(newStory)
+      fetch("http://localhost:4000/stories", {
+         method: 'POST',
+         headers: {'Content-Type': 'application/json'},
+         body: JSON.stringify(newStory)
+      })
+      .then(res => res.json())
+      .then(data => {
+         createFavoriteStory(data.id)
+         console.log("saved story to database!")
+      })
+   }
+
+   
+   function createFavoriteStory(storyId) {
       const favItem = {
-         story_id: story.id,
+         story_id: storyId,
          user_id: currentUser.id
       }
       // pass faveItem into helper function to post to database
@@ -26,22 +53,24 @@ function StoryCard ({ story }) {
       .then(res => res.json())
       .then(data => {
          console.log(data)
+         console.log("Story added to favorties list")
+         alert("Story has been added to your favotires list")
       })
    }
 
    return (
       <Wrapper>
          <h1>{story.title}</h1>
-         <StoryImage src={story.url_to_image} alt={story.description} />
+         <StoryImage src={story.urlToImage} alt={story.description} />
          <p>{story.content}</p>
          <h4>{story.description}</h4>
          {/* { story.author !== null } */}
          <p><strong>Author:</strong> {story.author}</p>
-         <p><strong>Source:</strong> {story.source}</p>
+         <p><strong>Source:</strong> {story.source.id}</p>
          <a href={story.url}>Full story here!</a>
          <br></br>
          <br></br>
-         <button onClick={handleClick}>Add to Favorites</button>
+         <button onClick={handleFavoriteClick}>Add to Favorites</button>
       </Wrapper>
    )
 };

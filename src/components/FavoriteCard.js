@@ -5,7 +5,7 @@ function FavoriteCard({ fav }) {
    return (
       <Wrapper>
          <h1>{fav.story.title}</h1>
-         <StoryImage src={fav.story.url_to_image} alt={fav.story.description} />
+         <StoryImage src={fav.story.urlToImage} alt={fav.story.description} />
          <p>{fav.story.content}</p>
          <h4>{fav.story.description}</h4>
          <p><strong>Author:</strong> {fav.story.author}</p>
