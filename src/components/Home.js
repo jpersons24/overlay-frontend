@@ -7,44 +7,56 @@ function Home () {
 
    // useSelectors
    const homeStories = useSelector((state) => state.story.displayedStories)
-   const homeGames = useSelector((state) => state.game.displayedGames)
-   // const nhlGames = useSelector((state) => state.game.nhlGames)
+   const nbaGames = useSelector((state) => state.game.displayedGames)
+   const nhlGames = useSelector((state) => state.game.nhlGames)
    // console.log(nhlGames)
 
    // map through story objects to display
    const displayHomeStories = homeStories.map((story) => {
       return (
-         <StoryContainer key={story.publishedAt}>
+         <StoryContainer key={story.content}>
             <StoryTitle>{story.title}</StoryTitle>
             <StoryImage src={story.urlToImage} alt="Could not display article image, sorry!"/>
-            <p>Add story url here</p>
+            {/* <a href={story.url}>Full Story</a> */}
+            <br></br>
+            <Link to={`/stories/${story.id}`}>
+               <DetailsButton>Story Details</DetailsButton>
+            </Link>
          </StoryContainer>
       )
    })
 
-   // handle click of game details button
-   function handleClick(event) {
-      console.log(event.target)
-   }
-
    // map through game objects to display
-   const displayGamePreview = homeGames.map((game) => {
+   const displayNbaGamePreview = nbaGames.map((game) => {
 
-      // change date format from ISO -> milli -> standard
-      // const newDate = new Date(Date.parse(game.commence_time))
-      // console.log(newDate)
+      const newDate = new Date (Date.parse(game.commence_time))
+      const displayDate = String(newDate)
 
       return (
          <GameContainer key={game.id}>
             <h4>{game.sport_nice}</h4>
             <p>{game.home_team} <em>(h)</em></p>
             <p>{game.away_team} <em>(a)</em></p>
-            <p>Game time: </p>
-            <Link to={`/games/${game.id}`}>
-               <DetailsButton onClick={handleClick}>Game Details</DetailsButton>
-            </Link>
+            <p><strong>Game time:</strong><br></br>{displayDate}</p>
+            {/* <DetailsButton onClick={handleNbaDetailClick(game)}>Game Details</DetailsButton> */}
+            
          </GameContainer>
-         
+      )
+   })
+
+   const displayNhlGamePreview = nhlGames.map((game) => {
+
+      const awayTeam = game.teams.filter(team => team !== game.home_team)
+      const newDate = new Date (Date.parse(game.commence_time))
+      const displayDate = String(newDate)
+
+      return (
+         <GameContainer key={game.home_team}>
+            <h4>{game.sport_nice}</h4>
+            <p>{game.home_team}</p>
+            <p>{awayTeam[0]}</p>
+            <p><strong>Game time:</strong><br></br>{displayDate}</p>
+         </GameContainer>
       )
    })
 
@@ -57,7 +69,10 @@ function Home () {
          </SubWrapper>
          <SubHeaders>Today's events:</SubHeaders>
          <SubWrapper>
-            {displayGamePreview}
+            {displayNbaGamePreview}
+         </SubWrapper>
+         <SubWrapper>
+            {displayNhlGamePreview}
          </SubWrapper>
       </Wrapper>
    )

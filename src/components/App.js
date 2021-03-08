@@ -11,12 +11,13 @@ import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 import GamesContainer from './GamesContainer'
 import GameShow from './GameShow'
+import StoryShow from './StoryShow'
 
 // import reducer functions from slice's
 import { setCurrentUser } from '../redux/userSlice'
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'
-import { displayGames } from '../redux/gameSlice'
+import { displayGames, displayNhlGames } from '../redux/gameSlice'
 
 function App() {
 
@@ -45,18 +46,18 @@ function App() {
   }
 
   // nhl games
-  // useEffect(() => {
-  //   fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     // console.log(data)
-  //     const action = displayNhlGames(data.data)
-  //     console.log(action)
-  //     dispatch(action)
-  //   })
-  // }, [dispatch])
+  useEffect(() => {
+    fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.data)
+      const action = displayNhlGames(data.data)
+      console.log(action)
+      dispatch(action)
+    })
+  }, [dispatch])
 
-  // stories
+  // stories from news api
   useEffect(() => {
     fetch("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=c57acc4703364867840f0f90de339cf3")
     .then(res => res.json())
@@ -120,6 +121,9 @@ function App() {
         </Route>
         <Route exact path="/games/:id">
           <GameShow />
+        </Route>
+        <Route exact path="/stories/:id">
+          <StoryShow />
         </Route>
       </Switch>
     </Wrapper>
