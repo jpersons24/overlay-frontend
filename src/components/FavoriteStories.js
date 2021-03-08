@@ -55,6 +55,6 @@ const Wrapper = styled.div`
    margin-top: 50px;
 `
 
-const Header = styled.h2`
+const Header = styled.div`
    text-align: center
 `

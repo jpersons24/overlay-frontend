@@ -5,7 +5,7 @@ const linkStyles = {
    width: "100px",
    padding: "12px",
    margin: "0 6px 6px",
-   background: "#033474",
+   background: "#474747",
    textDecoration: "none",
    color: "white",
    borderStyle: "outset",
