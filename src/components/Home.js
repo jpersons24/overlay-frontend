@@ -98,7 +98,7 @@ const SubWrapper = styled.div`
    background-color: #474747;
    padding: 20px;
    overflow: auto;
-   box-shadow: 5px 5px 5px #9C824A;
+   box-shadow: 3px 3px 8px #9C824A;
    content-align: center
 `
 
