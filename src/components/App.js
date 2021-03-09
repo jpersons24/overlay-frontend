@@ -1,8 +1,10 @@
+import '../index.css'
+
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 
 // component imports
 import Home from './Home'
@@ -22,12 +24,12 @@ import { displayGames, displayNhlGames } from '../redux/gameSlice'
 function App() {
 
   // useSelector to set const variable to whatever state it at that time
-  const currentUserBox = useSelector((state) => state.user.currentUser)
+  // const currentUser = useSelector((state) => state.user.currentUser)
 
   // set dispatch to useDispatch function for later use
   const dispatch = useDispatch()
 
-  // andle user logout
+  // handle user logout
   function handleLogout(event) {
     const action = setCurrentUser(null)
     dispatch(action)
@@ -50,9 +52,7 @@ function App() {
     fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
     .then(res => res.json())
     .then(data => {
-      console.log(data.data)
       const action = displayNhlGames(data.data)
-      console.log(action)
       dispatch(action)
     })
   }, [dispatch])
@@ -81,6 +81,7 @@ function App() {
     })
   }, [dispatch])
 
+  // posts
   useEffect(() => {
     fetch("http://localhost:4000/posts")
     .then(res => res.json())
@@ -93,15 +94,14 @@ function App() {
 
 
   return (
-    <Wrapper>
-      <Header>
-        <HeaderName>The Degenerate</HeaderName>
-        <LoginContainer>
-          {currentUserBox ? <WelcomeMess>Welcome, {currentUserBox.username}</WelcomeMess> : null}
+    <div>
+      <div>
+        <div>
+          {/* {currentUser ? <h5>Welcome, {currentUser.username}</h5> : null} */}
           <button onClick={handleLogin}>Log in</button>
           <button onClick={handleLogout}>Log out</button>
-        </LoginContainer>
-      </Header>
+        </div>
+      </div>
       <br></br>
       <br></br>
       <br></br>
@@ -126,7 +126,7 @@ function App() {
           <StoryShow />
         </Route>
       </Switch>
-    </Wrapper>
+    </div>
   );
 }
 
@@ -135,28 +135,28 @@ export default App;
 
 // ******** styled components ********
 
-const Wrapper = styled.div`
-  background-color: #F1F2F3;
-  padding-bottom: 100px;
-`
+// const Wrapper = styled.div`
+//   background-color: #F1F2F3;
+//   padding-bottom: 100px;
+// `
 
-const Header = styled.div`
-  display: inline;
-`
+// const Header = styled.div`
+//   display: inline;
+// `
 
-const HeaderName = styled.h2`
-  display: inline-block;
-  padding-left: 5px;
-  margin-top: 3px;
-`
+// const HeaderName = styled.h2`
+//   display: inline-block;
+//   padding-left: 5px;
+//   margin-top: 3px;
+// `
 
-const LoginContainer = styled.div`
-  display: inline-block;
-  float: right;
-  margin-bottom: 20px;
-`
+// const LoginContainer = styled.div`
+//   display: inline-block;
+//   float: right;
+//   margin-bottom: 20px;
+// `
 
-const WelcomeMess = styled.h5`
-  margin: 0px;
-  padding: 3px;
-`
+// const WelcomeMess = styled.h5`
+//   margin: 0px;
+//   padding: 3px;
+// `
