@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import Accordion from 'react-bootstrap/Accordion'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 
 function Home () {
@@ -9,20 +11,38 @@ function Home () {
    const homeStories = useSelector((state) => state.story.displayedStories)
    const nbaGames = useSelector((state) => state.game.displayedGames)
    const nhlGames = useSelector((state) => state.game.nhlGames)
-   // console.log(nhlGames)
 
-   // map through story objects to display
+   // map through story objects to display accordian feature
    const displayHomeStories = homeStories.map((story) => {
+
+      const newDate = new Date (Date.parse(story.publishedAt))
+      const displayDate = String(newDate)
+      
       return (
-         <StoryContainer key={story.content}>
-            <StoryTitle>{story.title}</StoryTitle>
-            <StoryImage src={story.urlToImage} alt="Could not display article image, sorry!"/>
-            {/* <a href={story.url}>Full Story</a> */}
-            <br></br>
-            <Link to={`/stories/${story.id}`}>
-               <DetailsButton>Story Details</DetailsButton>
-            </Link>
-         </StoryContainer>
+         <Accordion key={story.title}>
+            <Card>
+               <Card.Header>
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                  <strong>{story.title}</strong>
+                  </Accordion.Toggle>
+               </Card.Header>
+               <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                     <em>{story.description}</em>
+                     <br></br>
+                     <br></br>
+                     <StoryImage src={story.urlToImage} alt="Sorry, no image to display!"/>
+                     <br></br>
+                     <p>{story.content}<a href={story.url}>Full Story</a></p>
+                     <ul>
+                        <li><strong>Source:</strong> {story.source.name}</li>
+                        <li><strong>Author:</strong> {story.author}</li>
+                        <li>Published <em>{displayDate}</em></li>
+                     </ul>
+                  </Card.Body>
+               </Accordion.Collapse>
+            </Card>
+         </Accordion>
       )
    })
 
@@ -37,43 +57,68 @@ function Home () {
             <h4>{game.sport_nice}</h4>
             <p>{game.home_team} <em>(h)</em></p>
             <p>{game.away_team} <em>(a)</em></p>
-            <p><strong>Game time:</strong><br></br>{displayDate}</p>
-            {/* <DetailsButton onClick={handleNbaDetailClick(game)}>Game Details</DetailsButton> */}
-            
+            <p><strong>Game time:</strong><br></br>{displayDate}</p>    
          </GameContainer>
       )
    })
 
+   function viewOddsModal(e, game, awayTeam, displayDate) {
+      console.log(awayTeam[0])
+      console.log(game)
+      console.log(displayDate)
+      console.log('return Modal component here!')
+   }
+
    const displayNhlGamePreview = nhlGames.map((game) => {
 
+      // const event = game
       const awayTeam = game.teams.filter(team => team !== game.home_team)
       const newDate = new Date (Date.parse(game.commence_time))
       const displayDate = String(newDate)
 
       return (
-         <GameContainer key={game.home_team}>
-            <h4>{game.sport_nice}</h4>
-            <p>{game.home_team}</p>
-            <p>{awayTeam[0]}</p>
-            <p><strong>Game time:</strong><br></br>{displayDate}</p>
-         </GameContainer>
+         <Card key={game.home_team} style={{ 
+            width: '60rem',
+            margin: '15px 0px',
+            display: 'block',
+            marginRight: 'auto',
+            marginLeft: 'auto',
+         }}>
+            <Card.Header>{game.sport_nice}</Card.Header>
+            <Card.Body style={{ textAlign: 'center' }}>
+               <Card.Text>
+                  {game.home_team} <strong>(h)</strong>
+                  <br></br>
+                  VS 
+                  <br></br>
+                  {awayTeam} <strong>(a)</strong>
+               </Card.Text>
+               <Button onClick={(e) => viewOddsModal(e, game, awayTeam, displayDate)}>View Odds</Button>
+            </Card.Body>
+            <Card.Footer><em>{displayDate}</em></Card.Footer>
+         </Card>
       )
    })
+
+   // function viewOddsModal(event) {
+   //    console.log(event.target)
+   //    console.log(game)
+   // }
 
 
    return (
       <Wrapper>
          <SubHeaders>Top headlines:</SubHeaders>
-         <SubWrapper>
+         <StoryWrapper>
             {displayHomeStories}
-         </SubWrapper>
+         </StoryWrapper>
          <SubHeaders>Today's events:</SubHeaders>
-         <SubWrapper>
+         {/* <SubWrapper>
             {displayNbaGamePreview}
-         </SubWrapper>
-         <SubWrapper>
+         </SubWrapper> */}
+         <EventWrapper>
             {displayNhlGamePreview}
-         </SubWrapper>
+         </EventWrapper>
       </Wrapper>
    )
 }
@@ -87,40 +132,36 @@ const Wrapper = styled.div`
    margin-top: 50px;
 `
 
-const SubWrapper = styled.div`
+const StoryWrapper = styled.div`
    margin: auto;
    margin-top: 25px;
    margin-bottom: 50px;
    width: 80%;
-   height: 375px;
+   height: 500px;
    border-style: ridge;
    border-color: #9C824A;
    background-color: #474747;
-   padding: 20px;
    overflow: auto;
    box-shadow: 5px 5px 5px #9C824A;
    content-align: center
 `
 
-const SubHeaders = styled.div`
-   text-align: center;
-`
-
-const StoryContainer = styled.div`
-   display: block;
-   margin: 10px 0px;
-   margin-right: auto;
-   margin-left: auto;
-   width: 60%;
-   background-color: #F1F2F3;
-   border-style: solid;
+const EventWrapper = styled.div`
+   margin: auto;
+   margin-top: 25px;
+   margin-bottom: 50px;
+   width: 80%;
+   height: 500px;
+   border-style: ridge;
    border-color: #9C824A;
-   border-radius: 15px;
-   padding: 20px;
-   box-shadow: 2px 2px 5px #9C824A;
+   background-color: #474747;
+   padding: 30px;
+   overflow: auto;
+   box-shadow: 5px 5px 5px #9C824A;
+   content-align: center;
 `
 
-const StoryTitle = styled.h3`
+const SubHeaders = styled.h2`
    text-align: center;
 `
 
@@ -128,9 +169,10 @@ const StoryImage = styled.img`
    display: block;   
    margin-right: auto;
    margin-left: auto;
-   height: 200px;
+   height: 250px;
    width: 50%;
 `
+
 const GameContainer = styled.div`
    display: inline-block;
    color: black;
@@ -143,9 +185,4 @@ const GameContainer = styled.div`
    height: 265px;
    width: 200px;
    box-shadow: 2px 2px 5px #9C824A;
-`
-
-const DetailsButton = styled.button`
-   color: white;
-   background: #033474;
 `

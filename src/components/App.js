@@ -11,10 +11,8 @@ import NavBar from './NavBar'
 import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 import GamesContainer from './GamesContainer'
-import GameShow from './GameShow'
-import StoryShow from './StoryShow'
 
-
+// import reducer action items
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'
 import { displayGames, displayNhlGames } from '../redux/gameSlice'
@@ -50,9 +48,7 @@ function App() {
     fetch("http://localhost:4000/games")
     .then(res => res.json())
     .then(data => {
-       // console.log(data)
        const action = displayGames(data)
-       // console.log(action)
        dispatch(action)
        console.log("getting games!")
     })
@@ -86,12 +82,6 @@ function App() {
         <Route exact path="/games">
           <GamesContainer />
         </Route>
-        <Route exact path="/games/:id">
-          <GameShow />
-        </Route>
-        <Route exact path="/stories/:id">
-          <StoryShow />
-        </Route>
       </Switch>
     </div>
   );
@@ -102,28 +92,3 @@ export default App;
 
 // ******** styled components ********
 
-// const Wrapper = styled.div`
-//   background-color: #F1F2F3;
-//   padding-bottom: 100px;
-// `
-
-// const Header = styled.div`
-//   display: inline;
-// `
-
-// const HeaderName = styled.h2`
-//   display: inline-block;
-//   padding-left: 5px;
-//   margin-top: 3px;
-// `
-
-// const LoginContainer = styled.div`
-//   display: inline-block;
-//   float: right;
-//   margin-bottom: 20px;
-// `
-
-// const WelcomeMess = styled.h5`
-//   margin: 0px;
-//   padding: 3px;
-// `
