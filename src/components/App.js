@@ -4,7 +4,6 @@ import '../index.css'
 import { Switch, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-// import styled from 'styled-components'
 
 // component imports
 import Home from './Home'
@@ -15,37 +14,15 @@ import GamesContainer from './GamesContainer'
 import GameShow from './GameShow'
 import StoryShow from './StoryShow'
 
-// import reducer functions from slice's
-import { setCurrentUser } from '../redux/userSlice'
+
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'
 import { displayGames, displayNhlGames } from '../redux/gameSlice'
 
 function App() {
 
-  // useSelector to set const variable to whatever state it at that time
-  // const currentUser = useSelector((state) => state.user.currentUser)
-
   // set dispatch to useDispatch function for later use
   const dispatch = useDispatch()
-
-  // handle user logout
-  function handleLogout(event) {
-    const action = setCurrentUser(null)
-    dispatch(action)
-    console.log("User logged out!")
-  }
-
-  // handle user login
-  function handleLogin(event) {
-    fetch("http://localhost:4000/me")
-    .then(res => res.json())
-    .then(data => {
-      const action = setCurrentUser(data)
-      dispatch(action)
-      console.log("Logging in user!")
-    })
-  }
 
   // nhl games
   useEffect(() => {
@@ -95,16 +72,6 @@ function App() {
 
   return (
     <div>
-      <div>
-        <div>
-          {/* {currentUser ? <h5>Welcome, {currentUser.username}</h5> : null} */}
-          <button onClick={handleLogin}>Log in</button>
-          <button onClick={handleLogout}>Log out</button>
-        </div>
-      </div>
-      <br></br>
-      <br></br>
-      <br></br>
       <NavBar />
       <Switch>
         <Route exact path="/home">
