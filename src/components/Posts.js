@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
+import PostsDisplay from './PostsDisplay'
 
 
 function Posts({ gameObj }) {
@@ -12,11 +13,11 @@ function Posts({ gameObj }) {
    const dispatch = useDispatch()
 
    const currentUser = useSelector((state) => state.user.currentUser)
-   const posts = useSelector((state) => state.post.displayedPosts)
+   // const posts = useSelector((state) => state.post.displayedPosts)
    // console.log(posts)
 
    // const filteredPosts = posts.filter((post) => {
-   //    if (post.game.id === gameObj.id) {
+   //    if (post.game.id === gameID.id) {
    //       return post
    //    } else {
    //       return null
@@ -39,6 +40,55 @@ function Posts({ gameObj }) {
       console.log(event.target.value)
    }
 
+   // function createNewGame(newGame) {
+   //    fetch("http://localhost:4000/games", {
+   //       method: "POST",
+   //       headers: { "Content-Type": "application/json" },
+   //       body: JSON.stringify(newGame)
+   //    })
+   //    .then(res => res.json())
+   //    .then(data => {
+   //       console.log(data)
+   //    })
+   // }
+
+   function handleFormSubmit(event) {
+      event.preventDefault()
+      // console.log(gameObj)
+      if(currentUser !== null) {
+            const newGame = {
+               sport_key: gameObj.game.sport_key,
+               sport_nice: gameObj.game.sport_nice,
+               away_team: gameObj.away_team,
+               home_team: gameObj.game.home_team,
+               commence_time: gameObj.game.commence_time,
+            }
+            // console.log(newGame.sites)
+            console.log(event.target.post.value)
+            // createNewGame(newGame)
+            fetch("http://localhost:4000/games", {
+               method: "POST",
+               headers: { "Content-Type": "application/json" },
+               body: JSON.stringify(newGame)
+            })
+            .then(res => res.json())
+            .then((data) => {
+               console.log("Success:", data)
+               setGameID(data.id)
+               const newPost = {
+                  user_id: currentUser.id,
+                  game_id: data.id,
+                  content: postInput,
+                  likes: 0
+               }
+               createNewPost(newPost)
+            })
+            setPostInput("")
+         } else {
+            alert("You must be signed in to leave a post! No anonymous posting here!")
+         }
+   }
+
    function createNewPost(newPost) {
       console.log(newPost)
       fetch("http://localhost:4000/posts", {
@@ -54,61 +104,12 @@ function Posts({ gameObj }) {
       })
    }
 
-   // function createNewGame(newGame) {
-   //    fetch("http://localhost:4000/games", {
-   //       method: "POST",
-   //       headers: { "Content-Type": "application/json" },
-   //       body: JSON.stringify(newGame)
-   //    })
-   //    .then(res => res.json())
-   //    .then(data => {
-   //       console.log(data)
-   //    })
-   // }
 
-   function handleFormSubmit(event) {
-      event.preventDefault()
-      console.log(gameObj)
-      if(currentUser !== null) {
-            const newGame = {
-               sport_key: gameObj.game.sport_key,
-               sport_nice: gameObj.game.sport_nice,
-               away_team: gameObj.away_team,
-               home_team: gameObj.game.home_team,
-               commence_time: gameObj.game.commence_time,
-               // sites: JSON.stringify(gameObj.game.sites),
-            }
-            // console.log(newGame.sites)
-            console.log(event.target.post.value)
-            // createNewGame(newGame)
-            fetch("http://localhost:4000/games", {
-               method: "POST",
-               headers: { "Content-Type": "application/json" },
-               body: JSON.stringify(newGame)
-            })
-            .then(res => res.json())
-            .then(data => {
-               console.log("Success:", data)
-               setGameID(data.id)
-            })
-
-            const newPost = {
-               user_id: currentUser.id,
-               game_id: gameID,
-               content: event.target.post.value,
-               likes: 0
-            }
-            createNewPost(newPost)
-            setPostInput("")
-         } else {
-            alert("You must be signed in to leave a post! No anonymous posting here!")
-         }
-   }
 
    return (
       <>
          <PreviewWrapper>
-               <h5>Check, Bet or Fold...what are you thinking?</h5>
+               <h5>Over or Under?</h5>
                <PostForm onSubmit={handleFormSubmit}>
                   <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share what's on your mind with other sharks..." wrap="hard"/>
                   <br></br>
@@ -116,6 +117,7 @@ function Posts({ gameObj }) {
                   <input type="submit" value="Post"/>
                </PostForm>
                {/* {postsToDisplay} */}
+               <PostsDisplay gameID={gameID}/>
          </PreviewWrapper>
       </>
    )
