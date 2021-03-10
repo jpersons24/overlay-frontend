@@ -145,7 +145,7 @@ const PreviewWrapper = styled.div`
    height: 450px;
    border-style: ridge;
    border-color: #9C824A;
-   background-color: #474747;
+   background-color: black;
    padding: 20px;
    text-align: center;
    overflow: auto;

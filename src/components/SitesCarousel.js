@@ -5,13 +5,8 @@ import Posts from './Posts'
 
 function SitesCarousel({ sites, gameObj }) {
 
-   console.log(gameObj)
-   // console.log(sites)
-   // debugger
-
    const displaySites = sites.map((site) => {
 
-      // console.log(site)
       const odds = site.odds.totals.odds
       const points = site.odds.totals.points
       const position = site.odds.totals.position
@@ -21,12 +16,12 @@ function SitesCarousel({ sites, gameObj }) {
       return (
          <Carousel.Item style={{textAlign: 'center'}} key={site.site_nice}>
             <h4
-               // style={{
-               //    display: 'block',
-               //    marginRight: 'auto',
-               //    marginLeft: 'auto',
-               //    width: '70%',
-               // }} 
+               style={{
+                  display: 'block',
+                  marginRight: 'auto',
+                  marginLeft: 'auto',
+                  width: '70%',
+               }} 
             >
                {site.site_nice}
             </h4>
@@ -40,9 +35,9 @@ function SitesCarousel({ sites, gameObj }) {
                   listStyle: 'none'
                }}
             >
-               <li>{odds[0]}_____{odds[1]}</li>
-               <li>{points[0]} ~~~~~~ {points[1]}</li>
-               <li>{position[0]}, {position[1]}</li>
+               <li><strong>Odds:</strong> {odds[0]} , {odds[1]}</li>
+               <li><strong>Points Spread:</strong> +{points[0]} ({position[0]}) , -{points[1]} ({position[1]})</li>
+               {/* <li>{position[0]}, {position[1]}</li> */}
             </ul>
             <br></br>
             <br></br>

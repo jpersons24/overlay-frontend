@@ -53,6 +53,7 @@ export default FavoriteStories
 
 const Wrapper = styled.div`
    padding-top: 50px;
+   padding-bottom: 50px;
    background: black;
    color: white;
 `
