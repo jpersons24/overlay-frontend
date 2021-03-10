@@ -5,18 +5,19 @@ import GameCard from './GameCard'
 
 function SitesCarousel({ sites, gameObj }) {
 
+   // console.log(gameObj)
    console.log(sites)
    // debugger
 
    const displaySites = sites.map((site) => {
 
-      console.log(site)
+      // console.log(site)
       const odds = site.odds.totals.odds
       const points = site.odds.totals.points
       const position = site.odds.totals.position
 
       return (
-         <Carousel.Item style={{textAlign: 'center'}}>
+         <Carousel.Item style={{textAlign: 'center'}} key={site.site_nice}>
             <h4
                style={{
                   display: 'block',
@@ -45,8 +46,11 @@ function SitesCarousel({ sites, gameObj }) {
       )
    })
 
+   console.log(displaySites)
+
    return (
       <>
+         {/* {displaySites} */}
          <Carousel
             style={{
                height: '400px',
@@ -57,11 +61,10 @@ function SitesCarousel({ sites, gameObj }) {
                padding: '30px',
             }}
          >
-         {sites.length === 0 ?
+         {sites.length === 0 &&
          <PTag>There are no odds for this game unfortunately. <br></br> Fortunately though, you can put the money you probably would have lost and stuff it in your mattress!</PTag>
-         :
-         {displaySites} 
          }
+         {displaySites}
          </Carousel>
          <GameCard gameObj={gameObj} />
       </>

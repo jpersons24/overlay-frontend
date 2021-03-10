@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 
 function StoryCard ({ story }) {
 
+   console.log(story)
+
    // get current user
    const currentUser = useSelector((state) => state.user.currentUser)
 
@@ -60,13 +62,13 @@ function StoryCard ({ story }) {
 
    return (
       <Wrapper>
-         <h1>{story.title}</h1>
-         <StoryImage src={story.urlToImage} alt={story.description} />
-         <p>{story.content}</p>
+         <StoryTitle>{story.title}</StoryTitle>
+         <StoryImage src={story.urlToImage} alt="Sorry, now image to display!" />
+         <br></br>
+         <p>{story.content}<a href={story.url}>Full Story</a></p>
          <h4>{story.description}</h4>
-         {/* { story.author !== null } */}
          <p><strong>Author:</strong> {story.author}</p>
-         <p><strong>Source:</strong> {story.source.id}</p>
+         <p><strong>Source:</strong> {story.source.name}</p>
          <a href={story.url}>Full story here!</a>
          <br></br>
          <br></br>
@@ -80,11 +82,12 @@ export default StoryCard
 // ****** styled components ******
 
 const Wrapper = styled.div`
-   background: #9C824A;
-   color: white;
-   border-style: solid;
-   border-color: black;
-   border-radius: 10px;
+   background-color: #fff;
+   color: #307BFF;
+   border-style: outset;
+   border-color: #307BFF;
+   border-radius: 15px;
+   border-width: 6px;
    margin: auto;
    width: 75%;
    padding: 15px;
@@ -96,5 +99,14 @@ const StoryImage = styled.img`
    margin-right: auto;
    margin-left: auto;
    width: 70%;
+   height: 400px;
    display: block;
+`
+
+const StoryTitle = styled.h2`
+   text-align: center;
+`
+
+const StoryLink = styled.a`
+
 `

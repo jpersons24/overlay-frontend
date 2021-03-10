@@ -36,9 +36,11 @@ export default Stories
 
 
 const Wrapper = styled.div`
-   margin-top: 50px;
+   background-color: black;
+   color: white;
+   padding-top: 50px;
 `
 
-const Header = styled.div`
+const Header = styled.h2`
    text-align: center;
 `

@@ -79,7 +79,8 @@ const StoryWrapper = styled.div`
    background-color: #474747;
    overflow: auto;
    box-shadow: 5px 5px 5px #9C824A;
-   content-align: center
+   content-align: center;
+   color: black;
 `
 
 const SubHeader1 = styled.h2`

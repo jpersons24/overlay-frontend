@@ -11,7 +11,6 @@ import Home from './Home'
 import NavBar from './NavBar'
 import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
-import GamesContainer from './GamesContainer'
 import GameShow from './GameShow'
 
 // import reducer action items
@@ -80,9 +79,6 @@ function App() {
         </Route>
         <Route exact path="/fav_stories">
           <FavoriteStories />
-        </Route>
-        <Route exact path="/games">
-          <GamesContainer />
         </Route>
         <Route exact path="/game/:details">
           <GameShow />
