@@ -5,6 +5,7 @@ import styled from 'styled-components'
 function GamesContainer() {
 
    const gamesToDisplay = useSelector((state) => state.game.displayedGames)
+   const nhlGames = useSelector((state) => state.game.nhlGames)
 
    const gameDisplay = gamesToDisplay.map((game) => {
       const newTime = new Date(Date.parse(game.commence_time))
