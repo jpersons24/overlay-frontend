@@ -4,6 +4,7 @@ import '../index.css'
 import { Switch, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+// import styled from 'styled-components'
 
 // component imports
 import Home from './Home'

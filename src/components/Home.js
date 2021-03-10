@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+// import { Link } from 'react-router-dom'
+// import GameShow from './GameShow'
 
 
 function Home () {
@@ -62,28 +64,25 @@ function Home () {
       )
    })
 
-   function viewOddsModal(e, game, awayTeam, displayDate) {
-      console.log(awayTeam[0])
-      console.log(game)
-      console.log(displayDate)
-      console.log('return Modal component here!')
-   }
-
    const displayNhlGamePreview = nhlGames.map((game) => {
 
-      // const event = game
       const awayTeam = game.teams.filter(team => team !== game.home_team)
       const newDate = new Date (Date.parse(game.commence_time))
       const displayDate = String(newDate)
 
       return (
-         <Card key={game.home_team} style={{ 
-            width: '60rem',
-            margin: '15px 0px',
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-         }}>
+         <Card 
+            key={game.home_team} 
+            style={{ 
+               width: '60rem',
+               margin: '15px 0px',
+               display: 'block',
+               marginRight: 'auto',
+               marginLeft: 'auto',
+            }}
+            bg='dark'
+            text='white'
+         >
             <Card.Header>{game.sport_nice}</Card.Header>
             <Card.Body style={{ textAlign: 'center' }}>
                <Card.Text>
@@ -93,26 +92,20 @@ function Home () {
                   <br></br>
                   {awayTeam} <strong>(a)</strong>
                </Card.Text>
-               <Button onClick={(e) => viewOddsModal(e, game, awayTeam, displayDate)}>View Odds</Button>
+               <Button>View Odds</Button>
             </Card.Body>
             <Card.Footer><em>{displayDate}</em></Card.Footer>
          </Card>
       )
    })
 
-   // function viewOddsModal(event) {
-   //    console.log(event.target)
-   //    console.log(game)
-   // }
-
-
    return (
       <Wrapper>
-         <SubHeaders>Top headlines:</SubHeaders>
+         <SubHeader1>Top headlines:</SubHeader1>
          <StoryWrapper>
             {displayHomeStories}
          </StoryWrapper>
-         <SubHeaders>Today's events:</SubHeaders>
+         <SubHeader2>Today's events:</SubHeader2>
          {/* <SubWrapper>
             {displayNbaGamePreview}
          </SubWrapper> */}
@@ -129,7 +122,7 @@ export default Home;
 // ****** styling components *******
 
 const Wrapper = styled.div`
-   margin-top: 50px;
+   background-color: yellow;
 `
 
 const StoryWrapper = styled.div`
@@ -154,14 +147,19 @@ const EventWrapper = styled.div`
    height: 500px;
    border-style: ridge;
    border-color: #9C824A;
-   background-color: #474747;
+   background-color: white;
    padding: 30px;
    overflow: auto;
    box-shadow: 5px 5px 5px #9C824A;
    content-align: center;
 `
 
-const SubHeaders = styled.h2`
+const SubHeader1 = styled.h2`
+   padding-top: 50px;
+   text-align: center;
+`
+
+const SubHeader2 = styled.h2`
    text-align: center;
 `
 

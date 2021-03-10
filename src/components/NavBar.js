@@ -4,8 +4,6 @@ import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentUser } from '../redux/userSlice'
 import { Link } from 'react-router-dom'
-// import styled from 'styled-components'
-
 
 
 function NavBar() {
@@ -57,5 +55,3 @@ function NavBar() {
 }
 
 export default NavBar
-
-// ******* styled components *******

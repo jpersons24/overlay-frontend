@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const userSlice = createSlice({
    name: "user",
    initialState: {
-      currentUser: [],
+      currentUser: null,
    },
    reducers: {
       setCurrentUser(state, action) {
@@ -15,13 +15,3 @@ const userSlice = createSlice({
 
 export const { setCurrentUser } = userSlice.actions;
 export default userSlice.reducer;
-
-
-// creating a slice function:
-// 1. import { createSlice } from toolkit
-// 2. set constant equal to createSlice function
-// 3. setup name, initialState and reducer function
-// 4. export action type functions
-   // export const { actionFunction } = userSlice.actions
-// 5. export reducer functions
-   // export default userSlice.reducer
