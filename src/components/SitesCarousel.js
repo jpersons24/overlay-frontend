@@ -1,12 +1,12 @@
 import Carousel from 'react-bootstrap/Carousel'
 import styled from 'styled-components'
-import GameCard from './GameCard'
+import Posts from './Posts'
 
 
 function SitesCarousel({ sites, gameObj }) {
 
-   // console.log(gameObj)
-   console.log(sites)
+   console.log(gameObj)
+   // console.log(sites)
    // debugger
 
    const displaySites = sites.map((site) => {
@@ -15,16 +15,18 @@ function SitesCarousel({ sites, gameObj }) {
       const odds = site.odds.totals.odds
       const points = site.odds.totals.points
       const position = site.odds.totals.position
+      const lastUpdate = site.last_update
+      const displayLastUpdate = new Date (Date.parse(lastUpdate))
 
       return (
          <Carousel.Item style={{textAlign: 'center'}} key={site.site_nice}>
             <h4
-               style={{
-                  display: 'block',
-                  marginRight: 'auto',
-                  marginLeft: 'auto',
-                  width: '70%',
-               }} 
+               // style={{
+               //    display: 'block',
+               //    marginRight: 'auto',
+               //    marginLeft: 'auto',
+               //    width: '70%',
+               // }} 
             >
                {site.site_nice}
             </h4>
@@ -42,11 +44,14 @@ function SitesCarousel({ sites, gameObj }) {
                <li>{points[0]} ~~~~~~ {points[1]}</li>
                <li>{position[0]}, {position[1]}</li>
             </ul>
+            <br></br>
+            <br></br>
+            <p><strong>Last Update:</strong> {String(displayLastUpdate)}</p>
+            <p><strong>Event Time:</strong> {gameObj.display_date}</p>
          </Carousel.Item>
       )
    })
 
-   console.log(displaySites)
 
    return (
       <>
@@ -66,7 +71,7 @@ function SitesCarousel({ sites, gameObj }) {
          }
          {displaySites}
          </Carousel>
-         <GameCard gameObj={gameObj} />
+         <Posts gameObj={gameObj} />
       </>
    )
 }

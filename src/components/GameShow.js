@@ -27,7 +27,7 @@ function GameShow() {
                width: '35%',
             }}
          >
-         {gameObj.display_date}
+         {/* {gameObj.display_date} */}
          </p>
       </Wrapper>
    )
