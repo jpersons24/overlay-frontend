@@ -74,11 +74,9 @@ const StoryWrapper = styled.div`
    margin-bottom: 50px;
    width: 80%;
    height: 500px;
-   border-style: ridge;
-   border-color: #9C824A;
-   background-color: #474747;
    overflow: auto;
-   box-shadow: 5px 5px 5px #9C824A;
+   border-radius: 15px;
+   box-shadow: 5px 10px 30px #fff;
    content-align: center;
    color: black;
 `

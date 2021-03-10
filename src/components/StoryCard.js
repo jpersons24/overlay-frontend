@@ -84,10 +84,7 @@ export default StoryCard
 const Wrapper = styled.div`
    background-color: #fff;
    color: #307BFF;
-   border-style: outset;
-   border-color: #307BFF;
    border-radius: 15px;
-   border-width: 6px;
    margin: auto;
    width: 75%;
    padding: 15px;

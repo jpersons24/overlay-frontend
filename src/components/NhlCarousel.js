@@ -52,7 +52,6 @@ function NhlCarousel({ nhlGames }) {
                width: '60%',
                contentAlign: 'center',
                padding: '30px',
-               backgroundColor: 'white',
             }}
          >
             {displayNhlGames}
