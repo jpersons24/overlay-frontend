@@ -52,9 +52,11 @@ export default FavoriteStories
 
 
 const Wrapper = styled.div`
-   margin-top: 50px;
+   padding-top: 50px;
+   background: black;
+   color: white;
 `
 
-const Header = styled.div`
+const Header = styled.h2`
    text-align: center
 `

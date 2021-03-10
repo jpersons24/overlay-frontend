@@ -3,11 +3,9 @@ import styled from 'styled-components'
 
 function PostsDisplay({ gameID }) {
 
-   console.log(gameID)
    const posts = useSelector((state) => state.post.displayedPosts)
 
    const filteredPosts = posts.filter((post) => {
-      // console.log(post)
       if (post.game.id === gameID) {
          return post
       } else {
@@ -25,8 +23,6 @@ function PostsDisplay({ gameID }) {
          </PostWrapper>
       )
    })
-
-   // console.log(postsToDisplay)
 
    return(
       <div>

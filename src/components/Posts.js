@@ -137,11 +137,6 @@ const PostTextField = styled.textarea`
    height: 100px;
 `
 
-const PostBody = styled.p`
-   margin-top: 0px;
-   margin-bottom: 3px;
-`
-
 const PreviewWrapper = styled.div` 
    margin: auto;
    margin-top: 25px;
@@ -155,16 +150,4 @@ const PreviewWrapper = styled.div`
    text-align: center;
    overflow: auto;
    box-shadow: 5px 5px 5px #9C824A;
-`
-
-const PostWrapper = styled.div`
-   color: white;
-   border-style: outset;
-   border-color: black;
-   border-width: 2px;
-   border-radius: 5px;
-   background-color: #474747;
-   margin: 1.5px 5px;
-   padding: 10px;
-   text-align: left;
 `

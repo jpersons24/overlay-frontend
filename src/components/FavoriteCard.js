@@ -2,15 +2,15 @@ import styled from 'styled-components'
 
 function FavoriteCard({ fav }) {
 
+   console.log(fav.story)
+
    return (
       <Wrapper>
-         <h1>{fav.story.title}</h1>
+         <StoryTitle>{fav.story.title}</StoryTitle>
+         <StoryDescription>{fav.story.description}</StoryDescription>
          <StoryImage src={fav.story.urlToImage} alt={fav.story.description} />
-         <p>{fav.story.content}</p>
-         <h4>{fav.story.description}</h4>
-         <p><strong>Author:</strong> {fav.story.author}</p>
-         <p><strong>Source:</strong> {fav.story.source}</p>
-         <a href={fav.story.url}>Full story here!</a>
+         <br></br>
+         <p>{fav.story.content}<a href={fav.url}>Full Story</a></p>
       </Wrapper>
    )
 }
@@ -18,11 +18,9 @@ function FavoriteCard({ fav }) {
 export default FavoriteCard
 
 const Wrapper = styled.div`
-   background: #9C824A;
-   color: white;
-   border-style: solid;
-   border-color: black;
-   border-radius: 10px;
+   background-color: #fff;
+   color: #5c5c5c;
+   border-radius: 15px;
    margin: auto;
    width: 75%;
    padding: 15px;
@@ -31,8 +29,18 @@ const Wrapper = styled.div`
 `
 
 const StoryImage = styled.img`
-margin-right: auto;
-margin-left: auto;
-width: 70%;
-display: block;
+   margin-right: auto;
+   margin-left: auto;
+   width: 70%;
+   height: 400px;
+   display: block;
+`
+
+const StoryTitle = styled.h2`
+   text-align: center;
+`
+
+const StoryDescription = styled.p`
+   font-size: 12px;
+   text-align: center;
 `

@@ -12,7 +12,7 @@ function Stories() {
    const storyCardComponents = storiesToDisplay.map(story => {
       return(
          <StoryCard 
-            key={story.id} 
+            key={story.url} 
             story={story}
          /> 
       )

@@ -1,5 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 
 function NhlCarousel({ nhlGames }) {
@@ -20,6 +21,7 @@ function NhlCarousel({ nhlGames }) {
       return (
          <Carousel.Item key={game.home_team} style={{textAlign: 'center',}}>
             <h3>{game.sport_nice}</h3>
+            <br></br>
             <h5
                style={{
                   display: 'block',
@@ -29,7 +31,8 @@ function NhlCarousel({ nhlGames }) {
                }}
             >{game.home_team} <em>(h)</em> VS {awayTeam} <em>(a)</em>
             </h5>
-            <p>{displayDate}</p>
+            <br></br>
+            <GameTime>{displayDate}</GameTime>
             <Link to={`/game/${details}`}>View Game Details</Link>
          </Carousel.Item>
       )
@@ -39,9 +42,6 @@ function NhlCarousel({ nhlGames }) {
 
    return (
       <>
-         <div>
-            <em>Click the 'Events' tab in the Navigation bar to see betting odds and chat with other degenerates!</em>
-         </div>
          <br></br>
          <br></br>
          <Carousel
@@ -62,3 +62,8 @@ function NhlCarousel({ nhlGames }) {
 
 
 export default NhlCarousel
+
+
+const GameTime = styled.p`
+   font-size: 12px;
+`

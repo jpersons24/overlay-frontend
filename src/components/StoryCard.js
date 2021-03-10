@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 function StoryCard ({ story }) {
 
-   console.log(story)
+   // console.log(story)
 
    // get current user
    const currentUser = useSelector((state) => state.user.currentUser)
@@ -63,13 +63,12 @@ function StoryCard ({ story }) {
    return (
       <Wrapper>
          <StoryTitle>{story.title}</StoryTitle>
-         <StoryImage src={story.urlToImage} alt="Sorry, now image to display!" />
+         <StoryDescription>{story.description}</StoryDescription>
+         <StoryImage src={story.urlToImage} alt="Sorry, no image to display!" />
          <br></br>
-         <p>{story.content}<a href={story.url}>Full Story</a></p>
-         <h4>{story.description}</h4>
+         <p>{story.content}<StoryLink href={story.url}>Full Story</StoryLink></p>
          <p><strong>Author:</strong> {story.author}</p>
          <p><strong>Source:</strong> {story.source.name}</p>
-         <a href={story.url}>Full story here!</a>
          <br></br>
          <br></br>
          <button onClick={handleFavoriteClick}>Add to Favorites</button>
@@ -83,7 +82,7 @@ export default StoryCard
 
 const Wrapper = styled.div`
    background-color: #fff;
-   color: #307BFF;
+   color: #5c5c5c;
    border-radius: 15px;
    margin: auto;
    width: 75%;
@@ -105,5 +104,10 @@ const StoryTitle = styled.h2`
 `
 
 const StoryLink = styled.a`
+   color: #307BFF;
+`
 
+const StoryDescription = styled.p`
+   font-size: 12px;
+   text-align: center;
 `
