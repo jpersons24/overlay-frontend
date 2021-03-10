@@ -2,13 +2,11 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
-import { Modal } from './modal/GameModal'
 
 
-function GameCard({ game, odds }) {
+function GameCard({ gameObj }) {
 
    const [postInput, setPostInput] = useState("")
-   const [show, setShow] = useState(false)
 
    const dispatch = useDispatch()
 
@@ -16,7 +14,7 @@ function GameCard({ game, odds }) {
    const posts = useSelector((state) => state.post.displayedPosts)
 
    const filteredPosts = posts.filter((post) => {
-      if (post.game.id === game.id) {
+      if (post.game.id === gameObj.id) {
          return post
       } else {
          return null
@@ -36,6 +34,7 @@ function GameCard({ game, odds }) {
 
    function getFormInput(event){
       setPostInput(event.target.value)
+      console.log(event.target.value)
    }
 
    function createNewPost(newPost) {
@@ -54,56 +53,35 @@ function GameCard({ game, odds }) {
 
    function handleFormSubmit(event) {
       event.preventDefault()
-      if(currentUser !== null) {
-         const newPost = {
-            user_id: currentUser.id,
-            game_id: game.id,
-            content: event.target.post.value,
-            likes: 0
-         }
-
-         createNewPost(newPost)
-         setPostInput("")
-      } else {
-         alert("You must be signed in to leave a post! No anonymous posting here!")
-      }
+      console.log(gameObj)
+      // if(currentUser !== null) {
+            const newGame = {
+               
+            }
+      //    const newPost = {
+      //       user_id: currentUser.id,
+      //       game_id: gameObj.game.id,
+      //       content: event.target.post.value,
+      //       likes: 0
+      //    }
+      //    createNewPost(newPost)
+      //    setPostInput("")
+      // } else {
+      //    alert("You must be signed in to leave a post! No anonymous posting here!")
+      // }
    }
-
-   function handleOddsClick(event) {
-      setShow(true)
-   }
-
-   function close() {
-      setShow(false)
-   }
-
 
    return (
       <>
          <PreviewWrapper>
-            <GameInfo>
-               <h3>{game.sport_nice}</h3>
-               <p>{game.home_team} (h)</p>  
-               <p>VS</p>  
-               <p>{game.away_team} (a)</p>  
-            <SeeOddsButton onClick={handleOddsClick}>See odds</SeeOddsButton>
-            {show ? 
-               <Modal close={close} odds={odds}/> 
-               : 
-               null
-            }
-            </GameInfo> 
-            <PostContainerWrapper>
                <h3>Degenerate Revelations</h3>
                {postsToDisplay}
                <PostForm onSubmit={handleFormSubmit}>
-                  {/* <label htmlFor="post" style={{color: "white"}}>What's up? </label> */}
                   <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Say what you have to say..." wrap="hard"/>
                   <br></br>
                   <br></br>
                   <input type="submit" value="Post"/>
                </PostForm>
-            </PostContainerWrapper>
          </PreviewWrapper>
       </>
    )
@@ -141,27 +119,6 @@ const PreviewWrapper = styled.div`
    box-shadow: 5px 5px 5px #9C824A;
 `
 
-const GameInfo = styled.div`
-   display: block;
-   float: left;
-   margin-right: auto;
-   width: 50%;
-   color: white;
-`
-
-const PostContainerWrapper = styled.div`
-   border-style: outset;
-   border-color: black;
-   background-color: #9C824A;
-   margin-bottom: 5px;
-   margin-right: auto;
-   width: 45%;
-   height: 800px;
-   display: inline-block;
-   float: right;
-   overflow: auto;
-`
-
 const PostWrapper = styled.div`
    color: white;
    border-style: outset;
@@ -172,11 +129,4 @@ const PostWrapper = styled.div`
    margin: 1.5px 5px;
    padding: 10px;
    text-align: left;
-`
-
-const SeeOddsButton = styled.button`
-   margin-right: auto;
-   margin-left: auto;
-   width: 20%;
-   margin-bottom: 13px;
 `

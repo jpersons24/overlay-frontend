@@ -1,4 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel'
+import { Link } from 'react-router-dom'
 
 
 function NhlCarousel({ nhlGames }) {
@@ -9,6 +10,12 @@ function NhlCarousel({ nhlGames }) {
       const awayTeam = game.teams.filter(team => team !== game.home_team)
       const newDate = new Date (Date.parse(game.commence_time))
       const displayDate = String(newDate)
+      const gameDetails = {
+         game: game,
+         away_team: awayTeam[0],
+         display_date: displayDate
+      }
+      const details = JSON.stringify(gameDetails)
 
       return (
          <Carousel.Item key={game.home_team} style={{textAlign: 'center',}}>
@@ -23,6 +30,7 @@ function NhlCarousel({ nhlGames }) {
             >{game.home_team} <em>(h)</em> VS {awayTeam} <em>(a)</em>
             </h5>
             <p>{displayDate}</p>
+            <Link to={`/game/${details}`}>View Game Details</Link>
          </Carousel.Item>
       )
    })

@@ -18,7 +18,7 @@ function GamesContainer() {
    return (
       <>
          <Wrapper1>
-            {gameDisplay}
+            {/* {gameDisplay} */}
          </Wrapper1>
       </>
    )

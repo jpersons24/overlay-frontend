@@ -12,6 +12,7 @@ import NavBar from './NavBar'
 import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 import GamesContainer from './GamesContainer'
+import GameShow from './GameShow'
 
 // import reducer action items
 import { displayPosts } from '../redux/postSlice'
@@ -82,6 +83,9 @@ function App() {
         </Route>
         <Route exact path="/games">
           <GamesContainer />
+        </Route>
+        <Route exact path="/game/:details">
+          <GameShow />
         </Route>
       </Switch>
     </div>
