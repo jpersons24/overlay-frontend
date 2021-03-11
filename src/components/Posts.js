@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert'
 // import { singleGame } from '../redux/gameSlice'
 
 
-function Posts({ gameObj }) {
+function Posts() {
 
    const [postInput, setPostInput] = useState("")
    const [show, setShow] = useState(false)
@@ -37,7 +37,6 @@ function Posts({ gameObj }) {
             createNewPost(newPost)
             setPostInput("")
       } else {
-         // alert("You must be signed in to leave a post! No anonymous posting here!")
          setShow(true)
       }
    }
@@ -60,7 +59,7 @@ function Posts({ gameObj }) {
    return (
       <>
          <PreviewWrapper>
-            <PostHeader>What's the good word?</PostHeader>
+            <PostHeader>What's on your mind?</PostHeader>
             {!show ?
             null
             :
