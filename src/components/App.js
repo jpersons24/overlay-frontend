@@ -38,8 +38,10 @@ function App() {
     fetch("http://localhost:4000/games")
     .then(res => res.json())
     .then(data => {
+      console.log(data)
       const action = displayGames(data)
       dispatch(action)
+      console.log('setting games')
     })
   }, [dispatch])
 

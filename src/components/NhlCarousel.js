@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 
 
-function NhlCarousel({ nhlGames }) {
+function NhlCarousel() {
 
    const games = useSelector((state) => state.game.displayedGames)
    console.log(games)

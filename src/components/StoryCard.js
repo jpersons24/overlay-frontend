@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
+import Alert from 'react-bootstrap/Alert'
+import { useState } from 'react'
 
 function StoryCard ({ story }) {
 
    const currentUser = useSelector((state) => state.user.currentUser)
+   const [show, setShow] = useState(false)
 
    function handleFavoriteClick(event) {
       console.log(event.target)
@@ -48,10 +51,7 @@ function StoryCard ({ story }) {
          headers: {'Content-Type': 'application/json'},
          body: JSON.stringify(favItem)
       })
-      .then(res => res.json())
-      .then(data => {
-         alert("Story has been added to your favorites list")
-      })
+      setShow(true)
    }
 
    return (
@@ -70,6 +70,24 @@ function StoryCard ({ story }) {
             <li><strong>Source:</strong> {story.source.name}</li>
          </StoryList>
          <FavoritesButton onClick={handleFavoriteClick}>Add to Favorites</FavoritesButton>
+         {!show ?
+         null
+         :
+         <Alert 
+            variant='success' 
+            dismissible 
+            onClose={() => setShow(false)}
+            style={{
+               margin: '15px auto',
+               // marginBottom: '15px',
+               display: 'block',
+               textAlign: 'center',
+               width: '50%',
+            }}
+         >
+            This story has been added to your favorites list. Enjoy!!!
+         </Alert>
+         }
       </Wrapper>
    )
 };

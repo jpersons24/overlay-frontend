@@ -3,12 +3,14 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
 import PostsDisplay from './PostsDisplay'
-import { singleGame } from '../redux/gameSlice'
+import Alert from 'react-bootstrap/Alert'
+// import { singleGame } from '../redux/gameSlice'
 
 
 function Posts({ gameObj }) {
 
    const [postInput, setPostInput] = useState("")
+   const [show, setShow] = useState(false)
 
    const dispatch = useDispatch()
 
@@ -35,7 +37,8 @@ function Posts({ gameObj }) {
             createNewPost(newPost)
             setPostInput("")
       } else {
-         alert("You must be signed in to leave a post! No anonymous posting here!")
+         // alert("You must be signed in to leave a post! No anonymous posting here!")
+         setShow(true)
       }
    }
 
@@ -54,12 +57,28 @@ function Posts({ gameObj }) {
       })
    }
 
-
-
    return (
       <>
          <PreviewWrapper>
             <PostHeader>What's the good word?</PostHeader>
+            {!show ?
+            null
+            :
+            <Alert 
+               variant='warning' 
+               dismissible 
+               onClose={() => setShow(false)}
+               style={{
+                  margin: '15px auto',
+                  // marginBottom: '15px',
+                  display: 'block',
+                  textAlign: 'center',
+                  width: '50%',
+               }}
+            >
+               You have to be logged in to leave a post!
+            </Alert>
+            }
                <PostsDisplay game={game}/>
                <PostForm onSubmit={handleFormSubmit}>
                   <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share betting wisdom here..." wrap="hard"/>

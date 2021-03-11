@@ -8,7 +8,12 @@ const favoriteSlice = createSlice({
    reducers: {
       displayFavorites(state, action) {
          state.displayedFavorites = action.payload
-      }
+      },
+      // deleteFavoriteStory(state, action) {
+      //    state.displayedFavorites.filter((fav) => 
+      //       displayedFavorites !== fav
+      //    )
+      // }
    }
 });
 

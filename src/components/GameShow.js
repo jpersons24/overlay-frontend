@@ -11,6 +11,7 @@ function GameShow() {
    const dispatch = useDispatch()
    const game = useSelector((state) => state.game.singleGame)
    console.log(game)
+   console.log(game.sites)
    
    useEffect(() => {
       fetch(`http://localhost:4000/games/${id}`)
@@ -20,7 +21,7 @@ function GameShow() {
          const action = singleGame(data)
          dispatch(action)
       })
-   }, [dispatch])
+   }, [dispatch, id])
 
    return (
       <Wrapper>
@@ -29,7 +30,11 @@ function GameShow() {
          <br></br>
          <br></br>
          <br></br>
+         {game.sites ?
          <SitesCarousel sites={game.sites} game={game} />
+         :
+         "Loading game odds, just a second!"
+         }
          <br></br>
          <br></br>
          <br></br>
