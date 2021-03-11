@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 function NhlCarousel({ nhlGames }) {
 
-   const displayNhlGames = nhlGames.map((game) => {
+   const displayNhlGames = nhlGames.map((game, idx) => {
 
       const awayTeam = game.teams.filter(team => team !== game.home_team)
       const newDate = new Date (Date.parse(game.commence_time))
@@ -18,7 +18,7 @@ function NhlCarousel({ nhlGames }) {
       const details = JSON.stringify(gameDetails)
 
       return (
-         <Carousel.Item style={{textAlign: 'center',}}>
+         <Carousel.Item key={idx} style={{textAlign: 'center',}}>
             <h3>{game.sport_nice}</h3>
             <br></br>
             <h5

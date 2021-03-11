@@ -6,7 +6,6 @@ function GameShow() {
 
    const { details } = useParams()
    const gameObj = JSON.parse(details)
-   console.log(gameObj)
 
    return (
       <Wrapper>

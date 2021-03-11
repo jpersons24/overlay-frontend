@@ -4,7 +4,7 @@ const gameSlice = createSlice({
    name: "game",
    initialState: {
       displayedGames: [],
-      displayedSingleGame: [],
+      singleGame: [],
       nhlGames: [],
    },
    reducers: {
@@ -12,7 +12,7 @@ const gameSlice = createSlice({
          state.displayedGames = action.payload
       },
       singleGame(state, action) {
-         state.displayedSingleGame = action.payload
+         state.singleGame = action.payload
       },
       displayNhlGames(state, action) {
          state.nhlGames = action.payload

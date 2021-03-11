@@ -3,22 +3,21 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
 import PostsDisplay from './PostsDisplay'
+import { singleGame } from '../redux/gameSlice'
 
 
 function Posts({ gameObj }) {
 
    const [postInput, setPostInput] = useState("")
-   const [gameID, setGameID] = useState("")
 
    const dispatch = useDispatch()
 
    const currentUser = useSelector((state) => state.user.currentUser)
-   const games = useSelector((state) => state.game.displayedGames)
-   console.log(games)
+   // const games = useSelector((state) => state.game.displayedGames)
+   const game = useSelector((state) => state.game.singleGame)
 
    function getFormInput(event){
       setPostInput(event.target.value)
-      console.log(event.target.value)
    }
 
    function handleFormSubmit(event) {
@@ -40,7 +39,8 @@ function Posts({ gameObj }) {
             .then(res => res.json())
             .then((data) => {
                console.log("Success:", data)
-               setGameID(data.id)
+               const action = singleGame(data)
+               dispatch(action)
                const newPost = {
                   user_id: currentUser.id,
                   game_id: data.id,
@@ -75,15 +75,13 @@ function Posts({ gameObj }) {
    return (
       <>
          <PreviewWrapper>
-               <h5></h5>
                <PostForm onSubmit={handleFormSubmit}>
                   <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share betting wisdom here..." wrap="hard"/>
                   <br></br>
                   <br></br>
                   <SubmitButton type="submit" value="Post"/>
                </PostForm>
-               {/* {postsToDisplay} */}
-               <PostsDisplay gameID={gameID}/>
+               <PostsDisplay game={game}/>
          </PreviewWrapper>
       </>
    )

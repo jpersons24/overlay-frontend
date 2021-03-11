@@ -1,20 +1,17 @@
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-function PostsDisplay({ gameID }) {
+function PostsDisplay({ game }) {
 
    const posts = useSelector((state) => state.post.displayedPosts)
-   const games = useSelector((state) => state.game.displayedGames)
-   console.log(games)
+   // const games = useSelector((state) => state.game.displayedGames)
 
-   const gameIds = games.map((game) => {
-      return game.id
-   })
-
-   console.log(gameIds)
+   // const gameIds = games.map((game) => {
+   //    return game.id
+   // })
 
    const filteredPosts = posts.filter((post) => {
-      if (post.game.id === gameID) {
+      if (post.game.id === game.id) {
          return post
       } else {
          return null
@@ -34,7 +31,6 @@ function PostsDisplay({ gameID }) {
 
    return(
       <div>
-         display posts here
          {postsToDisplay}
       </div>
    )
