@@ -1,21 +1,25 @@
 import Carousel from 'react-bootstrap/Carousel'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 
 function NhlCarousel({ nhlGames }) {
 
-   const displayNhlGames = nhlGames.map((game, idx) => {
+   const games = useSelector((state) => state.game.displayedGames)
+   console.log(games)
 
-      const awayTeam = game.teams.filter(team => team !== game.home_team)
+   const displayNhlGames = games.map((game, idx) => {
+
+      // const awayTeam = game.teams.filter(team => team !== game.home_team)
       const newDate = new Date (Date.parse(game.commence_time))
       const displayDate = String(newDate)
-      const gameDetails = {
-         game: game,
-         away_team: awayTeam[0],
-         display_date: displayDate
-      }
-      const details = JSON.stringify(gameDetails)
+      // const gameDetails = {
+      //    game: game,
+      //    away_team: ,
+      //    display_date: displayDate
+      // }
+      // const details = JSON.stringify(gameDetails)
 
       return (
          <Carousel.Item key={idx} style={{textAlign: 'center',}}>
@@ -28,11 +32,11 @@ function NhlCarousel({ nhlGames }) {
                   marginLeft: 'auto',
                   width: '70%',
                }}
-            >{game.home_team} <em>(h)</em> VS {awayTeam} <em>(a)</em>
+            >{game.home_team} <em>(h)</em> VS {game.away_team} <em>(a)</em>
             </h5>
             <br></br>
             <GameTime>{displayDate}</GameTime>
-            <Link to={`/game/${details}`}>View Game Details</Link>
+            <Link to={`/game/${game.id}`}>View Game Details</Link>
          </Carousel.Item>
       )
    })

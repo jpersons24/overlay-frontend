@@ -13,8 +13,8 @@ function Posts({ gameObj }) {
    const dispatch = useDispatch()
 
    const currentUser = useSelector((state) => state.user.currentUser)
-   // const games = useSelector((state) => state.game.displayedGames)
    const game = useSelector((state) => state.game.singleGame)
+   console.log(game)
 
    function getFormInput(event){
       setPostInput(event.target.value)
@@ -23,32 +23,16 @@ function Posts({ gameObj }) {
    function handleFormSubmit(event) {
       event.preventDefault()
       if(currentUser !== null) {
-            const newGame = {
-               sport_key: gameObj.game.sport_key,
-               sport_nice: gameObj.game.sport_nice,
-               away_team: gameObj.away_team,
-               home_team: gameObj.game.home_team,
-               commence_time: gameObj.game.commence_time,
-            }
             
-            fetch("http://localhost:4000/games", {
-               method: "POST",
-               headers: { "Content-Type": "application/json" },
-               body: JSON.stringify(newGame)
-            })
-            .then(res => res.json())
-            .then((data) => {
-               console.log("Success:", data)
-               const action = singleGame(data)
-               dispatch(action)
-               const newPost = {
-                  user_id: currentUser.id,
-                  game_id: data.id,
-                  content: postInput,
-                  likes: 0
-               }
-               createNewPost(newPost)
-            })
+            const newPost = {
+               user_id: currentUser.id,
+               game_id: game.id,
+               content: postInput,
+               likes: 0
+            }
+
+            console.log(newPost)
+            createNewPost(newPost)
             setPostInput("")
       } else {
          alert("You must be signed in to leave a post! No anonymous posting here!")
@@ -75,13 +59,14 @@ function Posts({ gameObj }) {
    return (
       <>
          <PreviewWrapper>
+            <PostHeader>What's the good word?</PostHeader>
+               <PostsDisplay game={game}/>
                <PostForm onSubmit={handleFormSubmit}>
                   <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share betting wisdom here..." wrap="hard"/>
                   <br></br>
                   <br></br>
                   <SubmitButton type="submit" value="Post"/>
                </PostForm>
-               <PostsDisplay game={game}/>
          </PreviewWrapper>
       </>
    )
@@ -94,6 +79,15 @@ export default Posts;
 
 const PostForm = styled.form`
    margin: 5px;
+   margin-right: auto;
+   margin-left: auto;
+   margin-top: 30px;
+   display: block;
+   width: 75%;
+`
+
+const PostHeader = styled.h3`
+   margin-bottom: 20px;
 `
 
 const PostTextField = styled.textarea`
@@ -106,7 +100,6 @@ const PreviewWrapper = styled.div`
    margin-top: 25px;
    margin-bottom: 50px;
    width: 80%;
-   height: 450px;
    background-color: black;
    padding: 20px;
    text-align: center;

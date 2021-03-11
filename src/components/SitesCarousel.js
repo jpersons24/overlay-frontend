@@ -3,15 +3,19 @@ import styled from 'styled-components'
 import Posts from './Posts'
 
 
-function SitesCarousel({ sites, gameObj }) {
+function SitesCarousel({ sites, game }) {
 
    const displaySites = sites.map((site) => {
 
-      const odds = site.odds.totals.odds
-      const points = site.odds.totals.points
-      const position = site.odds.totals.position
+      const odds = site.odds.split(', ')
+      const homeOdd = odds[0]
+      const awayOdd = odds[1]
+
+      
       const lastUpdate = site.last_update
       const displayLastUpdate = new Date (Date.parse(lastUpdate))
+      const convertDate = new Date (Date.parse(game.commence_time))
+      const gameDate = String(convertDate)
 
       return (
          <Carousel.Item style={{textAlign: 'center'}} key={site.site_nice}>
@@ -36,13 +40,14 @@ function SitesCarousel({ sites, gameObj }) {
                   paddingLeft: '0px',
                }}
             >
-               <li><strong>Odds:</strong> {odds[0]} , {odds[1]}</li>
-               <li><strong>Points Spread:</strong> +{points[0]} ({position[0]}) , -{points[1]} ({position[1]})</li>
+               <li><strong>Head 2 Head Odds:</strong></li> 
+               <li>{homeOdd}(h) , {awayOdd}(a)</li>
+               {odds.length === 3 ? <li>{odds[2]}(moneyline)</li> : null}
             </ul>
             <br></br>
             <br></br>
             <p><strong>Last Update:</strong> {String(displayLastUpdate)}</p>
-            <p><strong>Event Time:</strong> {gameObj.display_date}</p>
+            <p><strong>Event Time:</strong> {gameDate}</p>
          </Carousel.Item>
       )
    })
@@ -65,7 +70,7 @@ function SitesCarousel({ sites, gameObj }) {
          }
          {displaySites}
          </Carousel>
-         <Posts gameObj={gameObj} />
+         <Posts />
       </>
    )
 }

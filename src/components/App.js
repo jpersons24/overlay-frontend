@@ -16,11 +16,10 @@ import GameShow from './GameShow'
 // import reducer action items
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'
-import { displayNhlGames } from '../redux/gameSlice'
+import { displayGames} from '../redux/gameSlice'
 
 function App() {
 
-  // set dispatch to useDispatch function for later use
   const dispatch = useDispatch()
 
   // nhl games
@@ -33,6 +32,16 @@ function App() {
   //     dispatch(action)
   //   })
   // }, [dispatch])
+
+  //  games
+  useEffect(() => {
+    fetch("http://localhost:4000/games")
+    .then(res => res.json())
+    .then(data => {
+      const action = displayGames(data)
+      dispatch(action)
+    })
+  }, [dispatch])
 
   // stories from news api
   useEffect(() => {
@@ -70,7 +79,7 @@ function App() {
         <Route exact path="/fav_stories">
           <FavoriteStories />
         </Route>
-        <Route exact path="/game/:details">
+        <Route exact path="/game/:id">
           <GameShow />
         </Route>
       </Switch>

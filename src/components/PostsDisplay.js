@@ -4,11 +4,6 @@ import styled from 'styled-components'
 function PostsDisplay({ game }) {
 
    const posts = useSelector((state) => state.post.displayedPosts)
-   // const games = useSelector((state) => state.game.displayedGames)
-
-   // const gameIds = games.map((game) => {
-   //    return game.id
-   // })
 
    const filteredPosts = posts.filter((post) => {
       if (post.game.id === game.id) {
@@ -21,8 +16,7 @@ function PostsDisplay({ game }) {
    const postsToDisplay = filteredPosts.map((post) => {
       return (
          <PostWrapper key={post.id}>
-            <strong>{post.user.username}</strong>
-            <br></br>
+            <PostUser><strong>{post.user.username}</strong></PostUser>
             <br></br>
             <PostBody>{post.content}</PostBody>
          </PostWrapper>
@@ -41,18 +35,27 @@ export default PostsDisplay
 
 const PostBody = styled.p`
    margin-top: 0px;
-   margin-bottom: 3px;
+   padding-bottom: 5px;
+   text-align: center;
 `
 
+const PostUser = styled.h4`
+   padding-left: 7px;
+   display: inline-block;
+`
 
 const PostWrapper = styled.div`
-   color: white;
+   color: black;
    border-style: outset;
-   border-color: black;
-   border-width: 2px;
+   border-color: white;
+   border-width: 5px;
    border-radius: 5px;
-   background-color: #474747;
-   margin: 1.5px 5px;
+   background-color: #CCE5FF;
+   margin-bottom: 15px;
    padding: 10px;
    text-align: left;
+   margin-right: auto;
+   margin-left: auto;
+   display: block;
+   width: 55%;
 `

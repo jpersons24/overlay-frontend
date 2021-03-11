@@ -9,8 +9,8 @@ import NhlCarousel from './NhlCarousel'
 function Home () {
 
    const homeStories = useSelector((state) => state.story.displayedStories)
-   // const nbaGames = useSelector((state) => state.game.displayedGames)
-   const nhlGames = useSelector((state) => state.game.nhlGames)
+   // const games = useSelector((state) => state.game.displayedGames)
+   // console.log(games)
 
    const displayHomeStories = homeStories.map((story) => {
 
@@ -52,7 +52,7 @@ function Home () {
    return (
       <Wrapper>
          <SubHeader2>Upcoming events:</SubHeader2>
-         <NhlCarousel nhlGames={nhlGames} />
+         <NhlCarousel />
          <SubHeader1>Top headlines:</SubHeader1>
          <StoryWrapper>
             {displayHomeStories}

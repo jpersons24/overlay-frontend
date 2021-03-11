@@ -1,20 +1,35 @@
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import SitesCarousel from './SitesCarousel'
+import { singleGame } from '../redux/gameSlice'
 
 function GameShow() {
 
-   const { details } = useParams()
-   const gameObj = JSON.parse(details)
+   const { id } = useParams()
+   const dispatch = useDispatch()
+   const game = useSelector((state) => state.game.singleGame)
+   console.log(game)
+   
+   useEffect(() => {
+      fetch(`http://localhost:4000/games/${id}`)
+      .then(res => res.json())
+      .then(data => {
+         console.log(data)
+         const action = singleGame(data)
+         dispatch(action)
+      })
+   }, [dispatch])
 
    return (
       <Wrapper>
-         <HomeTeam>{gameObj.game.home_team} (h)</HomeTeam>
-         <AwayTeam>{gameObj.away_team} (a)</AwayTeam>
+         <HomeTeam>{game.home_team} (h)</HomeTeam>
+         <AwayTeam>{game.away_team} (a)</AwayTeam>
          <br></br>
          <br></br>
          <br></br>
-         <SitesCarousel sites={gameObj.game.sites} gameObj={gameObj} />
+         <SitesCarousel sites={game.sites} game={game} />
          <br></br>
          <br></br>
          <br></br>
@@ -26,7 +41,6 @@ function GameShow() {
                width: '35%',
             }}
          >
-         {/* {gameObj.display_date} */}
          </p>
       </Wrapper>
    )
