@@ -30,14 +30,18 @@ function Home () {
                      <em>{story.description}</em>
                      <br></br>
                      <br></br>
-                     <StoryImage src={story.urlToImage} alt="Sorry, no image to display!"/>
+                     {story.urlToImage !== null ?
+                     <StoryImage src={story.urlToImage} alt="Article Picture"/>
+                     :
+                     null
+                     }
                      <br></br>
                      <p>{story.content}<a href={story.url}>Full Story</a></p>
-                     <ul>
+                     <StoryList>
                         <li><strong>Source:</strong> {story.source.name}</li>
                         <li><strong>Author:</strong> {story.author}</li>
-                        <li>Published <em>{displayDate}</em></li>
-                     </ul>
+                        <li><em>Published {displayDate}</em></li>
+                     </StoryList>
                   </Card.Body>
                </Accordion.Collapse>
             </Card>
@@ -76,7 +80,6 @@ const StoryWrapper = styled.div`
    height: 500px;
    overflow: auto;
    border-radius: 15px;
-   box-shadow: 5px 10px 30px #fff;
    content-align: center;
    color: black;
 `
@@ -84,12 +87,14 @@ const StoryWrapper = styled.div`
 const SubHeader1 = styled.h2`
    padding-top: 50px;
    text-align: center;
+   text-shadow: 10px 0px 20px #fff;
 `
 
 const SubHeader2 = styled.h2`
    padding-top: 50px;
    text-align: center;
    margin-bottom: 30px;
+   text-shadow: 10px 0px 20px #fff;
 `
 
 const StoryImage = styled.img`
@@ -98,4 +103,8 @@ const StoryImage = styled.img`
    margin-left: auto;
    height: 250px;
    width: 50%;
+`
+
+const StoryList = styled.ul`
+   list-style: none;
 `

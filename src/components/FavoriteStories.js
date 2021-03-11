@@ -47,7 +47,6 @@ function FavoriteStories() {
 export default FavoriteStories
 
 
-
 // ****** styled components *******
 
 
@@ -59,5 +58,6 @@ const Wrapper = styled.div`
 `
 
 const Header = styled.h2`
-   text-align: center
+   text-align: center;
+   text-shadow: 10px 0px 20px #fff;
 `

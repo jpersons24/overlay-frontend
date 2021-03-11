@@ -32,12 +32,12 @@ function SitesCarousel({ sites, gameObj }) {
                   marginLeft: 'auto',
                   width: '70%',
                   marginTop: '50px',
-                  listStyle: 'none'
+                  listStyle: 'none',
+                  paddingLeft: '0px',
                }}
             >
                <li><strong>Odds:</strong> {odds[0]} , {odds[1]}</li>
                <li><strong>Points Spread:</strong> +{points[0]} ({position[0]}) , -{points[1]} ({position[1]})</li>
-               {/* <li>{position[0]}, {position[1]}</li> */}
             </ul>
             <br></br>
             <br></br>
@@ -50,7 +50,6 @@ function SitesCarousel({ sites, gameObj }) {
 
    return (
       <>
-         {/* {displaySites} */}
          <Carousel
             style={{
                height: '400px',

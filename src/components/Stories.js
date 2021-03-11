@@ -43,4 +43,5 @@ const Wrapper = styled.div`
 
 const Header = styled.h2`
    text-align: center;
+   text-shadow: 10px 0px 20px #fff;
 `

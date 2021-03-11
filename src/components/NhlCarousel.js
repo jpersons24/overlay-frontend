@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 function NhlCarousel({ nhlGames }) {
 
-   // console.log(nhlGames)
    const displayNhlGames = nhlGames.map((game) => {
 
       const awayTeam = game.teams.filter(team => team !== game.home_team)
@@ -19,7 +18,7 @@ function NhlCarousel({ nhlGames }) {
       const details = JSON.stringify(gameDetails)
 
       return (
-         <Carousel.Item key={game.home_team} style={{textAlign: 'center',}}>
+         <Carousel.Item style={{textAlign: 'center',}}>
             <h3>{game.sport_nice}</h3>
             <br></br>
             <h5
@@ -37,8 +36,6 @@ function NhlCarousel({ nhlGames }) {
          </Carousel.Item>
       )
    })
-
-   // console.log(displayNhlGames)
 
    return (
       <>

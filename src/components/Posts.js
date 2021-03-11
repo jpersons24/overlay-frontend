@@ -13,48 +13,16 @@ function Posts({ gameObj }) {
    const dispatch = useDispatch()
 
    const currentUser = useSelector((state) => state.user.currentUser)
-   // const posts = useSelector((state) => state.post.displayedPosts)
-   // console.log(posts)
-
-   // const filteredPosts = posts.filter((post) => {
-   //    if (post.game.id === gameID.id) {
-   //       return post
-   //    } else {
-   //       return null
-   //    }
-   // })
-
-   // const postsToDisplay = filteredPosts.map((post) => {
-   //    return (
-   //       <PostWrapper key={post.id}>
-   //          <strong>{post.user.username}</strong>
-   //          <br></br>
-   //          <br></br>
-   //          <PostBody>{post.content}</PostBody>
-   //       </PostWrapper>
-   //    )
-   // })
+   const games = useSelector((state) => state.game.displayedGames)
+   console.log(games)
 
    function getFormInput(event){
       setPostInput(event.target.value)
       console.log(event.target.value)
    }
 
-   // function createNewGame(newGame) {
-   //    fetch("http://localhost:4000/games", {
-   //       method: "POST",
-   //       headers: { "Content-Type": "application/json" },
-   //       body: JSON.stringify(newGame)
-   //    })
-   //    .then(res => res.json())
-   //    .then(data => {
-   //       console.log(data)
-   //    })
-   // }
-
    function handleFormSubmit(event) {
       event.preventDefault()
-      // console.log(gameObj)
       if(currentUser !== null) {
             const newGame = {
                sport_key: gameObj.game.sport_key,
@@ -63,9 +31,7 @@ function Posts({ gameObj }) {
                home_team: gameObj.game.home_team,
                commence_time: gameObj.game.commence_time,
             }
-            // console.log(newGame.sites)
-            console.log(event.target.post.value)
-            // createNewGame(newGame)
+            
             fetch("http://localhost:4000/games", {
                method: "POST",
                headers: { "Content-Type": "application/json" },
@@ -84,9 +50,9 @@ function Posts({ gameObj }) {
                createNewPost(newPost)
             })
             setPostInput("")
-         } else {
-            alert("You must be signed in to leave a post! No anonymous posting here!")
-         }
+      } else {
+         alert("You must be signed in to leave a post! No anonymous posting here!")
+      }
    }
 
    function createNewPost(newPost) {
@@ -109,12 +75,12 @@ function Posts({ gameObj }) {
    return (
       <>
          <PreviewWrapper>
-               <h5>Over or Under?</h5>
+               <h5></h5>
                <PostForm onSubmit={handleFormSubmit}>
-                  <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share what's on your mind with other sharks..." wrap="hard"/>
+                  <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share betting wisdom here..." wrap="hard"/>
                   <br></br>
                   <br></br>
-                  <input type="submit" value="Post"/>
+                  <SubmitButton type="submit" value="Post"/>
                </PostForm>
                {/* {postsToDisplay} */}
                <PostsDisplay gameID={gameID}/>
@@ -133,7 +99,7 @@ const PostForm = styled.form`
 `
 
 const PostTextField = styled.textarea`
-   width: 75%;
+   width: 60%;
    height: 100px;
 `
 
@@ -143,11 +109,22 @@ const PreviewWrapper = styled.div`
    margin-bottom: 50px;
    width: 80%;
    height: 450px;
-   border-style: ridge;
-   border-color: #9C824A;
    background-color: black;
    padding: 20px;
    text-align: center;
    overflow: auto;
-   box-shadow: 5px 5px 5px #9C824A;
+`
+
+const SubmitButton = styled.input`
+   margin-right: auto;
+   margin-left: auto;
+   display: block;
+   color: white;
+   background-color: #307BFF;
+   padding: 3px 7px;
+   border-radius: 5px;
+   &:hover {
+      transform: scale(1.1);
+      transition: 0.5s;
+   }
 `

@@ -3,9 +3,6 @@ import { useSelector } from 'react-redux'
 
 function StoryCard ({ story }) {
 
-   // console.log(story)
-
-   // get current user
    const currentUser = useSelector((state) => state.user.currentUser)
 
    function handleFavoriteClick(event) {
@@ -41,7 +38,6 @@ function StoryCard ({ story }) {
          story_id: storyId,
          user_id: currentUser.id
       }
-      // pass faveItem into helper function to post to database
       addToFavoritesList(favItem)
    }
 
@@ -54,9 +50,7 @@ function StoryCard ({ story }) {
       })
       .then(res => res.json())
       .then(data => {
-         console.log(data)
-         console.log("Story added to favorties list")
-         alert("Story has been added to your favotires list")
+         alert("Story has been added to your favorites list")
       })
    }
 
@@ -64,14 +58,18 @@ function StoryCard ({ story }) {
       <Wrapper>
          <StoryTitle>{story.title}</StoryTitle>
          <StoryDescription>{story.description}</StoryDescription>
-         <StoryImage src={story.urlToImage} alt="Sorry, no image to display!" />
+         {story.urlToImage !== null ?
+         <StoryImage src={story.urlToImage} alt="Article Picture" />
+         :
+         null
+         }
          <br></br>
          <p>{story.content}<StoryLink href={story.url}>Full Story</StoryLink></p>
-         <p><strong>Author:</strong> {story.author}</p>
-         <p><strong>Source:</strong> {story.source.name}</p>
-         <br></br>
-         <br></br>
-         <button onClick={handleFavoriteClick}>Add to Favorites</button>
+         <StoryList>
+            <li><strong>Author:</strong> {story.author}</li>
+            <li><strong>Source:</strong> {story.source.name}</li>
+         </StoryList>
+         <FavoritesButton onClick={handleFavoriteClick}>Add to Favorites</FavoritesButton>
       </Wrapper>
    )
 };
@@ -110,4 +108,22 @@ const StoryLink = styled.a`
 const StoryDescription = styled.p`
    font-size: 12px;
    text-align: center;
+`
+
+const StoryList = styled.ul`
+   list-style: none;
+`
+
+const FavoritesButton = styled.button`
+   margin-right: auto;
+   margin-left: auto;
+   display: block;
+   color: white;
+   background-color: #307BFF;
+   padding: 3px;
+   border-radius: 5px;
+   &:hover {
+      transform: scale(1.1);
+      transition: 0.5s;
+   }
 `
