@@ -50,6 +50,7 @@ function App() {
     fetch("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=c57acc4703364867840f0f90de339cf3")
     .then(res => res.json())
     .then(data => {
+      console.log(data)
       const action = displayStories(data.articles)
       dispatch(action)
       console.log('Setting stories!')
