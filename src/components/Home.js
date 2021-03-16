@@ -10,8 +10,6 @@ import NhlCarousel from './NhlCarousel'
 function Home () {
 
    const homeStories = useSelector((state) => state.story.displayedStories)
-   // const games = useSelector((state) => state.game.displayedGames)
-   // console.log(games)
 
    const displayHomeStories = homeStories.map((story) => {
 

@@ -9,7 +9,6 @@ function StoryCard ({ story }) {
    const [show, setShow] = useState(false)
 
    function handleFavoriteClick(event) {
-      console.log(event.target)
 
       const newStory = {
          source: story.source.id,
@@ -79,7 +78,6 @@ function StoryCard ({ story }) {
             onClose={() => setShow(false)}
             style={{
                margin: '15px auto',
-               // marginBottom: '15px',
                display: 'block',
                textAlign: 'center',
                width: '50%',

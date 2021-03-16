@@ -8,7 +8,6 @@ import styled from 'styled-components'
 function FavoriteStories() {
 
    const favsToDisplay = useSelector((state) => state.favorite.displayedFavorites)
-   console.log(favsToDisplay)
    const currentUser = useSelector((state) => state.user.currentUser)
 
    const dispatch = useDispatch()
@@ -23,7 +22,6 @@ function FavoriteStories() {
    }, [dispatch])
 
    function updateFavStories(fav) {
-      // filter through favsToDisplay
       const updatedFavsArray = favsToDisplay.filter((f) => 
          (fav.id !== f.id)
       )

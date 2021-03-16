@@ -7,19 +7,11 @@ import { useSelector } from 'react-redux'
 function NhlCarousel() {
 
    const games = useSelector((state) => state.game.displayedGames)
-   console.log(games)
 
    const displayNhlGames = games.map((game, idx) => {
 
-      // const awayTeam = game.teams.filter(team => team !== game.home_team)
       const newDate = new Date (Date.parse(game.commence_time))
       const displayDate = String(newDate)
-      // const gameDetails = {
-      //    game: game,
-      //    away_team: ,
-      //    display_date: displayDate
-      // }
-      // const details = JSON.stringify(gameDetails)
 
       return (
          <Carousel.Item key={idx} style={{textAlign: 'center',}}>

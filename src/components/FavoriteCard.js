@@ -4,7 +4,6 @@ import styled from 'styled-components'
 function FavoriteCard({ fav, updateFavStories }) {
 
    function handleRemoveClick(event) {
-      console.log(fav.id)
       const id = fav.id
       updateFavStories(fav)
       removeFavoriteStory(id)
@@ -16,9 +15,6 @@ function FavoriteCard({ fav, updateFavStories }) {
          method: 'DELETE'
       })
    }
-   
-   // const favesToDisplay = useSelector((state) => state.favorite.displayedFavorites)
-   // console.log(favesToDisplay)
 
    return (
       <Wrapper>

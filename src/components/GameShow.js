@@ -10,14 +10,11 @@ function GameShow() {
    const { id } = useParams()
    const dispatch = useDispatch()
    const game = useSelector((state) => state.game.singleGame)
-   console.log(game)
-   console.log(game.sites)
    
    useEffect(() => {
       fetch(`http://localhost:4000/games/${id}`)
       .then(res => res.json())
       .then(data => {
-         console.log(data)
          const action = singleGame(data)
          dispatch(action)
       })

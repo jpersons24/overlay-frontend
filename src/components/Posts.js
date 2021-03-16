@@ -16,7 +16,6 @@ function Posts() {
 
    const currentUser = useSelector((state) => state.user.currentUser)
    const game = useSelector((state) => state.game.singleGame)
-   console.log(game)
 
    function getFormInput(event){
       setPostInput(event.target.value)
@@ -24,7 +23,7 @@ function Posts() {
 
    function handleFormSubmit(event) {
       event.preventDefault()
-      if(currentUser !== null) {
+      if (currentUser !== null) {
             
             const newPost = {
                user_id: currentUser.id,
@@ -33,7 +32,6 @@ function Posts() {
                likes: 0
             }
 
-            console.log(newPost)
             createNewPost(newPost)
             setPostInput("")
       } else {
@@ -42,7 +40,6 @@ function Posts() {
    }
 
    function createNewPost(newPost) {
-      console.log(newPost)
       fetch("http://localhost:4000/posts", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
@@ -69,7 +66,6 @@ function Posts() {
                onClose={() => setShow(false)}
                style={{
                   margin: '15px auto',
-                  // marginBottom: '15px',
                   display: 'block',
                   textAlign: 'center',
                   width: '50%',

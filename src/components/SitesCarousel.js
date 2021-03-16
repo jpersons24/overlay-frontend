@@ -11,11 +11,8 @@ function SitesCarousel({ sites, game }) {
       const homeOdd = odds[0]
       const awayOdd = odds[1]
 
-      
-      const lastUpdate = site.last_update
-      const displayLastUpdate = new Date (Date.parse(lastUpdate))
-      const convertDate = new Date (Date.parse(game.commence_time))
-      const gameDate = String(convertDate)
+      const convertedUpdateDate = new Date (Date.parse(site.last_update))
+      const convertedGameDate = new Date (Date.parse(game.commence_time))
 
       return (
          <Carousel.Item style={{textAlign: 'center'}} key={site.site_nice}>
@@ -46,8 +43,8 @@ function SitesCarousel({ sites, game }) {
             </ul>
             <br></br>
             <br></br>
-            <p><strong>Last Update:</strong> {String(displayLastUpdate)}</p>
-            <p><strong>Event Time:</strong> {gameDate}</p>
+            <p><strong>Last Update:</strong> {String(convertedUpdateDate)}</p>
+            <p><strong>Event Time:</strong> {String(convertedGameDate)}</p>
          </Carousel.Item>
       )
    })
