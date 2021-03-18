@@ -8,22 +8,46 @@ import { singleGame } from '../redux/gameSlice'
 function GameShow() {
 
    const { id } = useParams()
+   // console.log(id)
    const dispatch = useDispatch()
    const game = useSelector((state) => state.game.singleGame)
-   
+   console.log(game)
+   const apiNhlGames = useSelector((state) => state.game.nhlGames)
+   // console.log(apiNhlGames)
+   const gameToDisplay = apiNhlGames.filter(game => game.id === id)
+   // console.log(gameToDisplay)
+   const action = singleGame(gameToDisplay)
+   // console.log(action)
+   // dispatch(action)
+
    useEffect(() => {
-      fetch(`http://localhost:4000/games/${id}`)
-      .then(res => res.json())
-      .then(data => {
-         const action = singleGame(data)
-         dispatch(action)
-      })
-   }, [dispatch, id])
+      dispatch(action)
+   }, [dispatch])
+
+
+      const newDate = new Date (Date.parse(game.commence_time))
+      const displayDate = String(newDate)
+      console.log(displayDate)
+      const away_team = game.teams.filter(team => team !== game.home_team)
+      console.log(away_team)
+
+   
+   // **** get saved games from database ****
+   // useEffect(() => {
+   //    fetch(`http://localhost:4000/games/${id}`)
+   //    .then(res => res.json())
+   //    .then(data => {
+   //       const action = singleGame(data)
+   //       dispatch(action)
+   //    })
+   // }, [dispatch, id])
+
+
 
    return (
       <Wrapper>
          <HomeTeam>{game.home_team} (h)</HomeTeam>
-         <AwayTeam>{game.away_team} (a)</AwayTeam>
+         <AwayTeam>{away_team} (a)</AwayTeam>
          <br></br>
          <br></br>
          <br></br>
