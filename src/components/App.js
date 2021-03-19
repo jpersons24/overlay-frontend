@@ -2,7 +2,7 @@ import '../index.css'
 
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 // import styled from 'styled-components'
 
@@ -17,21 +17,23 @@ import GameShow from './GameShow'
 import { displayPosts } from '../redux/postSlice'
 import { displayStories } from '../redux/storySlice'
 import { displayGames} from '../redux/gameSlice'
+import { displayNhlGames } from '../redux/gameSlice.js'
 
 function App() {
 
+  const apiNhlGames = useSelector((state) => state.game.nhlGames)
+  console.log(apiNhlGames)
   const dispatch = useDispatch()
 
-  // nhl games
-  // useEffect(() => {
-  //   fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data.data)
-  //     const action = displayNhlGames(data.data)
-  //     dispatch(action)
-  //   })
-  // }, [dispatch])
+  // **** NHL GAMES ****
+  useEffect(() => {
+    fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
+    .then(res => res.json())
+    .then(data => {
+      const action = displayNhlGames(data.data)
+      dispatch(action)
+    })
+  }, [dispatch])
 
   //  games
   useEffect(() => {
@@ -83,7 +85,7 @@ function App() {
           <FavoriteStories />
         </Route>
         <Route exact path="/game/:id">
-          <GameShow />
+          <GameShow apiNhlGames={apiNhlGames} />
         </Route>
       </Switch>
     </div>

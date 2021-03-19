@@ -5,34 +5,58 @@ import styled from 'styled-components'
 import SitesCarousel from './SitesCarousel'
 import { singleGame } from '../redux/gameSlice'
 
-function GameShow() {
+function GameShow({ apiNhlGames }) {
 
    const { id } = useParams()
-   // console.log(id)
    const dispatch = useDispatch()
    const game = useSelector((state) => state.game.singleGame)
    console.log(game)
-   const apiNhlGames = useSelector((state) => state.game.nhlGames)
-   // console.log(apiNhlGames)
-   const gameToDisplay = apiNhlGames.filter(game => game.id === id)
-   // console.log(gameToDisplay)
+
+   // ***** FILTER THROUGH GAMES TO FIND ONE WITH MATCHING ID *****
+   const gameToDisplay = apiNhlGames.filter((game) => {
+      return game.id === id 
+   })
+   console.log(gameToDisplay)
    const action = singleGame(gameToDisplay)
-   // console.log(action)
+   console.log(action)
    // dispatch(action)
 
    useEffect(() => {
       dispatch(action)
-   }, [dispatch])
+   }, [])
 
+   const displaySingleGame = game.map((game) => {
 
-      const newDate = new Date (Date.parse(game.commence_time))
-      const displayDate = String(newDate)
-      console.log(displayDate)
       const away_team = game.teams.filter(team => team !== game.home_team)
-      console.log(away_team)
+      console.log(sites)
+
+      return (
+         <>
+            <HomeTeam>{game.home_team} (h)</HomeTeam>
+            <AwayTeam>{away_team[0]} (a)</AwayTeam>
+            <br></br>
+            <br></br>
+            <br></br>
+            {game.sites ?
+            <SitesCarousel sites={game.sites} game={game} />
+            :
+            "Loading game odds, just a second!"
+            }
+            <p 
+               style={{
+                  marginRight: 'auto',
+                  marginLeft: 'auto',
+                  display: 'block',
+                  width: '35%',
+               }}
+            >
+            </p>
+         </>
+      )
+   })
 
    
-   // **** get saved games from database ****
+   // **** FETCH SAVED GAMES FROM DATABASE ****
    // useEffect(() => {
    //    fetch(`http://localhost:4000/games/${id}`)
    //    .then(res => res.json())
@@ -46,8 +70,9 @@ function GameShow() {
 
    return (
       <Wrapper>
-         <HomeTeam>{game.home_team} (h)</HomeTeam>
-         <AwayTeam>{away_team} (a)</AwayTeam>
+         {displaySingleGame}
+         {/* <HomeTeam>{game.home_team} (h)</HomeTeam>
+         <AwayTeam>{} (a)</AwayTeam>
          <br></br>
          <br></br>
          <br></br>
@@ -67,7 +92,7 @@ function GameShow() {
                width: '35%',
             }}
          >
-         </p>
+         </p> */}
       </Wrapper>
    )
 }

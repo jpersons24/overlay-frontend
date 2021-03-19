@@ -5,27 +5,23 @@ import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import NhlCarousel from './NhlCarousel'
-import { displayNhlGames } from '../redux/gameSlice.js'
+// import { displayNhlGames } from '../redux/gameSlice.js'
 
 
 
 function Home () {
 
    const homeStories = useSelector((state) => state.story.displayedStories)
-   const apiNhlGames = useSelector((state) => state.game.nhlGames)
-   console.log(apiNhlGames)
    const dispatch = useDispatch()
 
-   useEffect(() => {
-     fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
-     .then(res => res.json())
-     .then(data => {
-      //  console.log(data.data)
-       const action = displayNhlGames(data.data)
-      //  console.log(action)
-       dispatch(action)
-     })
-   }, [dispatch])
+   // useEffect(() => {
+   //   fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
+   //   .then(res => res.json())
+   //   .then(data => {
+   //     const action = displayNhlGames(data.data)
+   //     dispatch(action)
+   //   })
+   // }, [dispatch])
 
    const displayHomeStories = homeStories.map((story) => {
 
