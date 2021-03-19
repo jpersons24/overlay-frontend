@@ -16,6 +16,7 @@ function Posts() {
 
    const currentUser = useSelector((state) => state.user.currentUser)
    const game = useSelector((state) => state.game.singleGame)
+   console.log(game)
 
    function getFormInput(event){
       setPostInput(event.target.value)
@@ -23,27 +24,40 @@ function Posts() {
 
    // Another function to create game instance called from handleFormSubmit
       // where is the best place for that function?
+   // function createGame() {
+   //    // console.log(game)
+   //    const newGameObj = {
+   //       sport_key: ,
+   //       sport_nice: ,
+   //       away_team: ,
+   //       home_team: ,
+   //       commence_time: ,
+   //    }
+   // }
 
    function handleFormSubmit(event) {
       event.preventDefault()
       if (currentUser !== null) {
 
+
          // call function here that creates new Game instance in database
             
          // MOVE CREATION ON NEWPOST OBJECT AND 'createNewPost' call outside of this function and into another which is called here
-            const newPost = {
-               user_id: currentUser.id,
-               game_id: game.id,
-               content: postInput,
-               likes: 0
-            }
+            // const newPost = {
+            //    user_id: currentUser.id,
+            //    game_id: game.id,
+            //    content: postInput,
+            //    likes: 0
+            // }
 
-            createNewPost(newPost)
-            setPostInput("")
+            // createNewPost(newPost)
+            // setPostInput("")
       } else {
          setShow(true)
       }
    }
+
+
 
    function createNewPost(newPost) {
       fetch("http://localhost:4000/posts", {
