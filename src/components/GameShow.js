@@ -28,10 +28,9 @@ function GameShow({ apiNhlGames }) {
    const displaySingleGame = game.map((game) => {
 
       const away_team = game.teams.filter(team => team !== game.home_team)
-      console.log(sites)
 
       return (
-         <>
+         <div key={game.id}>
             <HomeTeam>{game.home_team} (h)</HomeTeam>
             <AwayTeam>{away_team[0]} (a)</AwayTeam>
             <br></br>
@@ -51,7 +50,7 @@ function GameShow({ apiNhlGames }) {
                }}
             >
             </p>
-         </>
+         </div>
       )
    })
 

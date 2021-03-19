@@ -5,9 +5,11 @@ import Posts from './Posts'
 
 function SitesCarousel({ sites, game }) {
 
-   const displaySites = sites.map((site) => {
+   
 
-      const odds = site.odds.split(', ')
+   const displaySites = sites.map((site) => {
+      // debugger
+      const odds = site.odds.totals.odds
       const homeOdd = odds[0]
       const awayOdd = odds[1]
 
@@ -16,16 +18,7 @@ function SitesCarousel({ sites, game }) {
 
       return (
          <Carousel.Item style={{textAlign: 'center'}} key={site.site_nice}>
-            <h4
-               style={{
-                  display: 'block',
-                  marginRight: 'auto',
-                  marginLeft: 'auto',
-                  width: '70%',
-               }} 
-            >
-               {site.site_nice}
-            </h4>
+            <h4>{site.site_nice}</h4>
             <ul
                style={{
                   display: 'block',
@@ -35,14 +28,13 @@ function SitesCarousel({ sites, game }) {
                   marginTop: '50px',
                   listStyle: 'none',
                   paddingLeft: '0px',
+                  paddingBottom: '50px'
                }}
             >
                <li><strong>Head 2 Head Odds:</strong></li> 
                <li>{homeOdd}(h) , {awayOdd}(a)</li>
                {odds.length === 3 ? <li>{odds[2]}(moneyline)</li> : null}
             </ul>
-            <br></br>
-            <br></br>
             <p><strong>Last Update:</strong> {String(convertedUpdateDate)}</p>
             <p><strong>Event Time:</strong> {String(convertedGameDate)}</p>
          </Carousel.Item>

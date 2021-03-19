@@ -76,7 +76,7 @@ function NhlCarousel() {
                marginRight: 'auto',
                marginLeft: 'auto',
                width: '60%',
-               contentAlign: 'center',
+               textAlign: 'center',
                padding: '30px',
             }}
          >

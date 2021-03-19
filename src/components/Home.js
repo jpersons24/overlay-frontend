@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+// import { useEffect } from 'react'
 import styled from 'styled-components'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
@@ -12,7 +12,7 @@ import NhlCarousel from './NhlCarousel'
 function Home () {
 
    const homeStories = useSelector((state) => state.story.displayedStories)
-   const dispatch = useDispatch()
+   // const dispatch = useDispatch()
 
    // useEffect(() => {
    //   fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")

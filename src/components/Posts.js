@@ -21,10 +21,16 @@ function Posts() {
       setPostInput(event.target.value)
    }
 
+   // Another function to create game instance called from handleFormSubmit
+      // where is the best place for that function?
+
    function handleFormSubmit(event) {
       event.preventDefault()
       if (currentUser !== null) {
+
+         // call function here that creates new Game instance in database
             
+         // MOVE CREATION ON NEWPOST OBJECT AND 'createNewPost' call outside of this function and into another which is called here
             const newPost = {
                user_id: currentUser.id,
                game_id: game.id,
