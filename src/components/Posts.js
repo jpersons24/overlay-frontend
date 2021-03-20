@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
 import PostsDisplay from './PostsDisplay'
 import Alert from 'react-bootstrap/Alert'
-// import { singleGame } from '../redux/gameSlice'
+import { singleGame } from '../redux/gameSlice'
+import { useEffect } from 'react'
 
 
 function Posts() {
@@ -17,6 +18,12 @@ function Posts() {
    const currentUser = useSelector((state) => state.user.currentUser)
    const game = useSelector((state) => state.game.singleGame)
    console.log(game)
+   const savedGames = useSelector((state) => state.game.savedGames)
+   console.log(savedGames)
+   
+   useEffect(() => {
+      console.log(savedGames)
+   })
 
    function getFormInput(event){
       setPostInput(event.target.value)
@@ -24,40 +31,79 @@ function Posts() {
 
    // Another function to create game instance called from handleFormSubmit
       // where is the best place for that function?
-   // function createGame() {
-   //    // console.log(game)
-   //    const newGameObj = {
-   //       sport_key: ,
-   //       sport_nice: ,
-   //       away_team: ,
-   //       home_team: ,
-   //       commence_time: ,
-   //    }
-   // }
+   function createGame() {
+      console.log(game)
+      
+      // const createGameObj = game.map((game) => {
+      //    const away_team = game.teams.filter(team => team !== game.home_team)
+      //    debugger
+      //    return (
+      //       {
+      //          sport_key: game.sport_key,
+      //          sport_nice: game.sport_nice,
+      //          away_team: away_team[0],
+      //          home_team: game.home_team,
+      //          commence_time: game.commence_time,
+      //       }
+      //    )
+      // })
+      // const newGameObj = createGameObj[0]
+      // // console.log(newGameObj)
+      // // console.log(savedGames)
+      // const savedGame = savedGames.filter((game) => {
+      //    return (game.home_team === newGameObj.home_team) && (game.away_team === newGameObj.away_team)
+      // })
+      // console.log(savedGame)
+      // if (savedGame.length > 0) {
+      //    newPostObj(savedGame)
+      // } else {
+      //    fetch("http://localhost:4000/games", {
+      //       method: "POST",
+      //       headers: {"Content-Type": "application/json"},
+      //       body: JSON.stringify(newGameObj)
+      //    })
+      //    .then(res => res.json())
+      //    .then(data => {
+      //       const action = singleGame(data)
+      //       console.log(action)
+      //       dispatch(action)
+      //       const gameObj = data
+      //       newPostObj(gameObj)
+      //    })
+      // }
+   }
+
+   function newPostObj(gameObj) {
+      if (gameObj.length === 1) {
+         const newPost = {
+            user_id: currentUser.id,
+            game_id: gameObj[0].id,
+            content: postInput,
+            likes: 0
+         }
+         console.log(newPost)
+         createNewPost(newPost)
+      } else {
+         const newPost ={
+            user_id: currentUser.id,
+            game_id: gameObj.id,
+            content: postInput,
+            likes: 0
+         }
+         console.log(newPost)
+         createNewPost(newPost)
+      }
+   }
 
    function handleFormSubmit(event) {
       event.preventDefault()
       if (currentUser !== null) {
-
-
-         // call function here that creates new Game instance in database
-            
-         // MOVE CREATION ON NEWPOST OBJECT AND 'createNewPost' call outside of this function and into another which is called here
-            // const newPost = {
-            //    user_id: currentUser.id,
-            //    game_id: game.id,
-            //    content: postInput,
-            //    likes: 0
-            // }
-
-            // createNewPost(newPost)
-            // setPostInput("")
+         createGame()
+         setPostInput("")
       } else {
          setShow(true)
       }
    }
-
-
 
    function createNewPost(newPost) {
       fetch("http://localhost:4000/posts", {
@@ -94,7 +140,7 @@ function Posts() {
                You have to be logged in to leave a post!
             </Alert>
             }
-               <PostsDisplay game={game}/>
+               <PostsDisplay />
                <PostForm onSubmit={handleFormSubmit}>
                   <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share betting wisdom here..." wrap="hard"/>
                   <br></br>

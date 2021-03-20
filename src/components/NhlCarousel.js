@@ -1,7 +1,8 @@
 import Carousel from 'react-bootstrap/Carousel'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { singleGame } from '../redux/gameSlice'
 
 
 function NhlCarousel() {
@@ -32,7 +33,7 @@ function NhlCarousel() {
                </h5>
                <br></br>
                <GameTime>{displayDate}</GameTime>
-               <Link to={`/game/${game.id}`}>View Game Details</Link>
+               <Link to={`/game/${game.id}`} onClick={setSingleGame}>View Game Details</Link>
             </Carousel.Item>
          )
       })

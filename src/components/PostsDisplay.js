@@ -1,9 +1,12 @@
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-function PostsDisplay({ game }) {
+function PostsDisplay() {
 
+   // console.log(game)
    const posts = useSelector((state) => state.post.displayedPosts)
+   const game = useSelector((state) => state.game.singleGame)
+   console.log(game)
 
    const filteredPosts = posts.filter((post) => {
       if (post.game.id === game.id) {

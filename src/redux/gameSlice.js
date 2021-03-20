@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 const gameSlice = createSlice({
    name: "game",
    initialState: {
-      displayedGames: [],
+      savedGames: [],
       singleGame: [],
       nhlGames: [],
    },
    reducers: {
       displayGames(state, action) {
-         state.displayedGames = action.payload
+         state.savedGames = action.payload
       },
       singleGame(state, action) {
          state.singleGame = action.payload
