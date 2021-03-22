@@ -1,159 +1,67 @@
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-// import { useEffect } from 'react'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import Posts from './Posts'
 import styled from 'styled-components'
 import SitesCarousel from './SitesCarousel'
-import { singleGame } from '../redux/gameSlice'
 
-function GameShow({ apiNhlGames }) {
 
+function GameShow() {
+
+   // ID of game, gotten from params
    const { id } = useParams()
-   // const dispatch = useDispatch()
-   const game = useSelector((state) => state.game.singleGame)
-   console.log(game)
-
-   let displaySingleGame
-   if (game.away_team) {
-      console.log("this game is already saved")
-      console.log(game)
-         return (
-            <div key={game.id}>
-               <HomeTeam>{game.home_team} (h)</HomeTeam>
-               <AwayTeam>{game.away_team} (a)</AwayTeam>
-               <br></br>
-               <br></br>
-               <br></br>
-               {game.sites ?
-               <SitesCarousel sites={game.sites} game={game} />
-               :
-               "Loading game odds, just a second!"
-               }
-               <p 
-                  style={{
-                     marginRight: 'auto',
-                     marginLeft: 'auto',
-                     display: 'block',
-                     width: '35%',
-                  }}
-               >
-               </p>
-            </div>
-         )
-   } else {
-      const gameToDisplay = apiNhlGames.filter((game) => {
-         return game.id === id 
-      })
-      console.log(gameToDisplay)
-
-      displaySingleGame = gameToDisplay.map((game) => {
-
-         const away_team = game.teams.filter(team => team !== game.home_team)
-
-         return (
-            <div key={game.id}>
-               <HomeTeam>{game.home_team} (h)</HomeTeam>
-               <AwayTeam>{away_team[0]} (a)</AwayTeam>
-               <br></br>
-               <br></br>
-               <br></br>
-               {game.sites ?
-               <SitesCarousel sites={game.sites} game={game} />
-               :
-               "Loading game odds, just a second!"
-               }
-               <p 
-                  style={{
-                     marginRight: 'auto',
-                     marginLeft: 'auto',
-                     display: 'block',
-                     width: '35%',
-                  }}
-               >
-               </p>
-            </div>
-         )
-      })
-   }
-
-   // ***** FILTER THROUGH GAMES TO FIND ONE WITH MATCHING ID *****
-   // const gameToDisplay = apiNhlGames.filter((game) => {
-   //    return game.id === id 
-   // })
-   // console.log(gameToDisplay)
-   // const action = singleGame(gameToDisplay)
-   // console.log(action)
-
-   // useEffect(() => {
-   //    dispatch(action)
-   // }, [])
-
-   // const displaySingleGame = game.map((game) => {
-
-   //    const away_team = game.teams.filter(team => team !== game.home_team)
-
-   //    return (
-   //       <div key={game.id}>
-   //          <HomeTeam>{game.home_team} (h)</HomeTeam>
-   //          <AwayTeam>{away_team[0]} (a)</AwayTeam>
-   //          <br></br>
-   //          <br></br>
-   //          <br></br>
-   //          {game.sites ?
-   //          <SitesCarousel sites={game.sites} game={game} />
-   //          :
-   //          "Loading game odds, just a second!"
-   //          }
-   //          <p 
-   //             style={{
-   //                marginRight: 'auto',
-   //                marginLeft: 'auto',
-   //                display: 'block',
-   //                width: '35%',
-   //             }}
-   //          >
-   //          </p>
-   //       </div>
-   //    )
-   // })
-
+   const [gameSaved, setGameSaved] = useState(false)
+   const apiNhlGames = useSelector((state) => state.game.nhlGames)
+   console.log(apiNhlGames)
+   const savedGames = useSelector((state) => state.game.savedGames)
+   console.log(savedGames)
    
-   // **** FETCH SAVED GAMES FROM DATABASE ****
-   // useEffect(() => {
-   //    fetch(`http://localhost:4000/games/${id}`)
-   //    .then(res => res.json())
-   //    .then(data => {
-   //       const action = singleGame(data)
-   //       dispatch(action)
-   //    })
-   // }, [dispatch, id])
+   // set constant equal to function
+      // function findGameToDisplay
+         // filter through savedGames, filter through apiNhlGames
+         // is savedGames or apiNhlGames returns length > 0 
+         // then display that game using the displaySingleGame constant
 
 
+   // filter through all nhl games retreived from API and set to const
+   const gameToDisplay = apiNhlGames.filter((game) => {
+      return game.id === id 
+   })
+   console.log(gameToDisplay)
 
+   // map through gameToDisplay (array with length of 1) and return information to render in carousel
+   const displaySingleGame = gameToDisplay.map((game) => {
+      // filter through teams array to create away_team variable
+      const away_team = game.teams.filter(team => team !== game.home_team)
+      return (
+         <div key={game.id}>
+            <HomeTeam>{game.home_team} (h)</HomeTeam>
+            <AwayTeam>{away_team[0]} (a)</AwayTeam>
+            <br></br>
+            <br></br>
+            <br></br>
+            {game.sites ?
+            <SitesCarousel sites={game.sites} game={game} />
+            :
+            "Loading game odds, just a second!"
+            }
+            <p 
+               style={{
+                  marginRight: 'auto',
+                  marginLeft: 'auto',
+                  display: 'block',
+                  width: '35%',
+               }}
+            >
+            </p>
+            <Posts game={game} gameSaved={gameSaved} setGameSaved={setGameSaved} />
+         </div>
+      )
+   })
+   
    return (
       <Wrapper>
          {displaySingleGame}
-         {/* <HomeTeam>{game.home_team} (h)</HomeTeam>
-         <AwayTeam>{} (a)</AwayTeam>
-         <br></br>
-         <br></br>
-         <br></br>
-         {game.sites ?
-         <SitesCarousel sites={game.sites} game={game} />
-         :
-         "Loading game odds, just a second!"
-         }
-         <br></br>
-         <br></br>
-         <br></br>
-         <p 
-            style={{
-               marginRight: 'auto',
-               marginLeft: 'auto',
-               display: 'block',
-               width: '35%',
-            }}
-         >
-         </p> */}
       </Wrapper>
    )
 }

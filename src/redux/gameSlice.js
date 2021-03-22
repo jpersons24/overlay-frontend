@@ -16,10 +16,13 @@ const gameSlice = createSlice({
       },
       displayNhlGames(state, action) {
          state.nhlGames = action.payload
-      }
+      },
+      addGame(state, action) {
+         state.savedGames.push(action.payload)
+      },
    }
 });
 
 
-export const { displayGames, singleGame, displayNhlGames } = gameSlice.actions;
+export const { displayGames, singleGame, displayNhlGames, addGame } = gameSlice.actions;
 export default gameSlice.reducer;

@@ -2,7 +2,7 @@ import '../index.css'
 
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 // import styled from 'styled-components'
 
@@ -21,8 +21,6 @@ import { displayNhlGames } from '../redux/gameSlice.js'
 
 function App() {
 
-  const apiNhlGames = useSelector((state) => state.game.nhlGames)
-  console.log(apiNhlGames)
   const dispatch = useDispatch()
 
   // **** NHL GAMES ****
@@ -40,7 +38,6 @@ function App() {
     fetch("http://localhost:4000/games")
     .then(res => res.json())
     .then(data => {
-      console.log(data)
       const action = displayGames(data)
       dispatch(action)
       console.log('setting games')
@@ -85,7 +82,7 @@ function App() {
           <FavoriteStories />
         </Route>
         <Route exact path="/game/:id">
-          <GameShow apiNhlGames={apiNhlGames} />
+          <GameShow />
         </Route>
       </Switch>
     </div>

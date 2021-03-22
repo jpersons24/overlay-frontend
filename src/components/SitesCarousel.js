@@ -8,7 +8,6 @@ function SitesCarousel({ sites, game }) {
    
 
    const displaySites = sites.map((site) => {
-      // debugger
       const odds = site.odds.totals.odds
       const homeOdd = odds[0]
       const awayOdd = odds[1]
@@ -59,7 +58,6 @@ function SitesCarousel({ sites, game }) {
          }
          {displaySites}
          </Carousel>
-         <Posts />
       </>
    )
 }

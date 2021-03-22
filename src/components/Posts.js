@@ -4,11 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
 import PostsDisplay from './PostsDisplay'
 import Alert from 'react-bootstrap/Alert'
-import { singleGame } from '../redux/gameSlice'
-import { useEffect } from 'react'
+import { addGame } from '../redux/gameSlice'
 
 
-function Posts() {
+function Posts({ game, gameSaved, setGameSaved }) {
 
    const [postInput, setPostInput] = useState("")
    const [show, setShow] = useState(false)
@@ -16,17 +15,34 @@ function Posts() {
    const dispatch = useDispatch()
 
    const currentUser = useSelector((state) => state.user.currentUser)
-   const game = useSelector((state) => state.game.singleGame)
-   console.log(game)
    const savedGames = useSelector((state) => state.game.savedGames)
    console.log(savedGames)
-   
-   useEffect(() => {
-      console.log(savedGames)
-   })
 
+   const checkIfSaved = savedGames.filter((savedGame) => {
+      return (savedGame.id === game.id)
+   })
+   console.log(checkIfSaved)
+
+   if (checkIfSaved.length > 0) {
+      setGameSaved(true)
+   }
+   
    function getFormInput(event){
       setPostInput(event.target.value)
+   }
+
+   function handleFormSubmit(event) {
+      event.preventDefault()
+      if ((currentUser !== null) && (gameSaved === false)) {
+         console.log("user is logged in, game has not been saved yet")
+         createGame()
+         setPostInput("")
+      } else if ((currentUser !== null) && (gameSaved === true)) {
+         console.log("user is logged in, game has been saved")
+         newPostObj(game)
+      } else {
+         setShow(true)
+      }
    }
 
    // Another function to create game instance called from handleFormSubmit
@@ -34,44 +50,32 @@ function Posts() {
    function createGame() {
       console.log(game)
       
-      // const createGameObj = game.map((game) => {
-      //    const away_team = game.teams.filter(team => team !== game.home_team)
-      //    debugger
-      //    return (
-      //       {
-      //          sport_key: game.sport_key,
-      //          sport_nice: game.sport_nice,
-      //          away_team: away_team[0],
-      //          home_team: game.home_team,
-      //          commence_time: game.commence_time,
-      //       }
-      //    )
-      // })
-      // const newGameObj = createGameObj[0]
-      // // console.log(newGameObj)
-      // // console.log(savedGames)
-      // const savedGame = savedGames.filter((game) => {
-      //    return (game.home_team === newGameObj.home_team) && (game.away_team === newGameObj.away_team)
-      // })
-      // console.log(savedGame)
-      // if (savedGame.length > 0) {
-      //    newPostObj(savedGame)
-      // } else {
-      //    fetch("http://localhost:4000/games", {
-      //       method: "POST",
-      //       headers: {"Content-Type": "application/json"},
-      //       body: JSON.stringify(newGameObj)
-      //    })
-      //    .then(res => res.json())
-      //    .then(data => {
-      //       const action = singleGame(data)
-      //       console.log(action)
-      //       dispatch(action)
-      //       const gameObj = data
-      //       newPostObj(gameObj)
-      //    })
-      // }
+      const away_team = game.teams.filter(team => team !== game.home_team)
+      const newGameObj = {
+         sport_key: game.sport_key,
+         sport_nice: game.sport_nice,
+         away_team: away_team[0],
+         home_team: game.home_team,
+         commence_time: game.commence_time,
+      }
+      console.log(newGameObj)
+   
+      fetch("http://localhost:4000/games", {
+         method: "POST",
+         headers: {"Content-Type": "application/json"},
+         body: JSON.stringify(newGameObj)
+      })
+      .then(res => res.json())
+      .then(data => {
+         console.log(data)
+         const action = addGame(data)
+         console.log(action)
+         dispatch(action)
+         const gameObj = data
+         newPostObj(gameObj)
+      })
    }
+   
 
    function newPostObj(gameObj) {
       if (gameObj.length === 1) {
@@ -91,19 +95,10 @@ function Posts() {
             likes: 0
          }
          console.log(newPost)
-         createNewPost(newPost)
+         // createNewPost(newPost)
       }
    }
 
-   function handleFormSubmit(event) {
-      event.preventDefault()
-      if (currentUser !== null) {
-         createGame()
-         setPostInput("")
-      } else {
-         setShow(true)
-      }
-   }
 
    function createNewPost(newPost) {
       fetch("http://localhost:4000/posts", {
