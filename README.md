@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Overlay
+
+ See README in parent repository [Overlay](https://github.com/jpersons24/overlay) for further details and installation/use instructions.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,15 +72,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
-
-
-SportsCenter is being built using a Ruby on Rails backend and a React-Redux front end. The aim of the app is to give users access to the most up to date and upcoming live sports news, score and betting odds. Additionally, SportsCenter gives users a place to share any information they may have, thoughts on games or opinions on given odds!
-
-Users can also find the latest in sports headlines. Plus you can save stories for another time if your busy, by adding them to your favorites list.
-
-As of right now, SportsCenter is being built with static info but is currently being developed to handle live data.
-
-Running the App:
-
-1. Start by opening 'sports-center-frontend' and running 'npm-install'. Then running 'npm start' to open the app in your broswer
-2. Open 'sports-center'. After running 'bundle install' to install any Gems. You can run 'rails s -p 4000' to start the database in your browser at 'localhost:4000'
