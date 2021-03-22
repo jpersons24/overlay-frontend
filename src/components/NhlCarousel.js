@@ -10,6 +10,7 @@ function NhlCarousel() {
    // const games = useSelector((state) => state.game.displayedGames)
    const apiNhlGames = useSelector((state) => state.game.nhlGames)
    console.log(apiNhlGames)
+   const dispatch = useDispatch()
 
       const gamesToDisplay = apiNhlGames.map((game) => {
          const newDate = new Date (Date.parse(game.commence_time))
@@ -33,7 +34,7 @@ function NhlCarousel() {
                </h5>
                <br></br>
                <GameTime>{displayDate}</GameTime>
-               <Link to={`/game/${game.id}`} onClick={setSingleGame}>View Game Details</Link>
+               <Link to={`/game/${game.id}`}>View Game Details</Link>
             </Carousel.Item>
          )
       })
