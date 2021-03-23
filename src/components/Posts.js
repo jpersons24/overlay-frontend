@@ -52,6 +52,7 @@ function Posts({ game, gameSaved, setGameSaved }) {
       
       const away_team = game.teams.filter(team => team !== game.home_team)
       const newGameObj = {
+         id: game.id,
          sport_key: game.sport_key,
          sport_nice: game.sport_nice,
          away_team: away_team[0],
@@ -68,11 +69,11 @@ function Posts({ game, gameSaved, setGameSaved }) {
       .then(res => res.json())
       .then(data => {
          console.log(data)
-         const action = addGame(data)
-         console.log(action)
-         dispatch(action)
-         const gameObj = data
-         newPostObj(gameObj)
+         // const action = addGame(data)
+         // console.log(action)
+         // dispatch(action)
+         // const gameObj = data
+         // newPostObj(gameObj)
       })
    }
    
