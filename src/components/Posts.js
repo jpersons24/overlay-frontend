@@ -2,30 +2,18 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
+import { addGame } from '../redux/gameSlice'
 import PostsDisplay from './PostsDisplay'
 import Alert from 'react-bootstrap/Alert'
-import { addGame } from '../redux/gameSlice'
 
 
 function Posts({ game, gameSaved, setGameSaved }) {
 
    const [postInput, setPostInput] = useState("")
    const [show, setShow] = useState(false)
-
-   const dispatch = useDispatch()
-
+   
    const currentUser = useSelector((state) => state.user.currentUser)
-   const savedGames = useSelector((state) => state.game.savedGames)
-   console.log(savedGames)
-
-   const checkIfSaved = savedGames.filter((savedGame) => {
-      return (savedGame.id === game.id)
-   })
-   console.log(checkIfSaved)
-
-   if (checkIfSaved.length > 0) {
-      setGameSaved(true)
-   }
+   const dispatch = useDispatch()
    
    function getFormInput(event){
       setPostInput(event.target.value)
@@ -33,20 +21,18 @@ function Posts({ game, gameSaved, setGameSaved }) {
 
    function handleFormSubmit(event) {
       event.preventDefault()
-      if ((currentUser !== null) && (gameSaved === false)) {
+      if (currentUser == null) {
+         setShow(true)
+      } else if ((currentUser !== null) && (gameSaved === false)) {
          console.log("user is logged in, game has not been saved yet")
          createGame()
          setPostInput("")
       } else if ((currentUser !== null) && (gameSaved === true)) {
          console.log("user is logged in, game has been saved")
          newPostObj(game)
-      } else {
-         setShow(true)
       }
    }
 
-   // Another function to create game instance called from handleFormSubmit
-      // where is the best place for that function?
    function createGame() {
       console.log(game)
       
@@ -69,11 +55,11 @@ function Posts({ game, gameSaved, setGameSaved }) {
       .then(res => res.json())
       .then(data => {
          console.log(data)
-         // const action = addGame(data)
-         // console.log(action)
-         // dispatch(action)
-         // const gameObj = data
-         // newPostObj(gameObj)
+         const action = addGame(data)
+         console.log(action)
+         debugger
+         dispatch(action)
+         newPostObj(data)
       })
    }
    
@@ -88,6 +74,7 @@ function Posts({ game, gameSaved, setGameSaved }) {
          }
          console.log(newPost)
          createNewPost(newPost)
+         debugger
       } else {
          const newPost ={
             user_id: currentUser.id,
@@ -96,7 +83,8 @@ function Posts({ game, gameSaved, setGameSaved }) {
             likes: 0
          }
          console.log(newPost)
-         // createNewPost(newPost)
+         createNewPost(newPost)
+         debugger
       }
    }
 
@@ -136,7 +124,7 @@ function Posts({ game, gameSaved, setGameSaved }) {
                You have to be logged in to leave a post!
             </Alert>
             }
-               <PostsDisplay />
+               <PostsDisplay game={game} />
                <PostForm onSubmit={handleFormSubmit}>
                   <PostTextField name="post" value={postInput} onChange={getFormInput} placeholder="Share betting wisdom here..." wrap="hard"/>
                   <br></br>

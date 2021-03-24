@@ -19,7 +19,7 @@ const gameSlice = createSlice({
       },
       addGame(state, action) {
          state.savedGames.push(action.payload)
-      },
+      }
    }
 });
 

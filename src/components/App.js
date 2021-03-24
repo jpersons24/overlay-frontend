@@ -25,7 +25,7 @@ function App() {
 
   // **** NHL GAMES ****
   useEffect(() => {
-    fetch("https://api.the-odds-api.com/v3/odds/?apiKey=e9f576a0a8b58da82e7708ac0b19346e&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
+    fetch("https://api.the-odds-api.com/v3/odds/?apiKey=498de9c70c9381a76bfe6924b64f4fea&sport=icehockey_nhl&region=us&mkt=totals&dateFormat=iso")
     .then(res => res.json())
     .then(data => {
       const action = displayNhlGames(data.data)
@@ -49,7 +49,6 @@ function App() {
     fetch("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=c57acc4703364867840f0f90de339cf3")
     .then(res => res.json())
     .then(data => {
-      console.log(data)
       const action = displayStories(data.articles)
       dispatch(action)
       console.log('Setting stories!')

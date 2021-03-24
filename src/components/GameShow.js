@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Posts from './Posts'
 import styled from 'styled-components'
@@ -15,28 +15,42 @@ function GameShow() {
    console.log(apiNhlGames)
    const savedGames = useSelector((state) => state.game.savedGames)
    console.log(savedGames)
+
+   // debugger
+
+   // check each saved game against id pased in from params
+   const gameToDisplay = function getGameToDisplay(savedGames, apiNhlGames) {
+         const savedGame = savedGames.filter(game => game.id === id)
+         console.log(savedGame)
+         if (savedGame.length < 1) {
+            const apiGame = apiNhlGames.filter(game => game.id === id)
+            console.log(apiGame)
+            return apiGame
+         } else {
+            console.log(savedGame)
+            setGameSaved(true)
+            return savedGame
+         }
+   }
+   console.log(gameSaved)
    
-   // set constant equal to function
-      // function findGameToDisplay
-         // filter through savedGames, filter through apiNhlGames
-         // is savedGames or apiNhlGames returns length > 0 
-         // then display that game using the displaySingleGame constant
+   console.log(gameToDisplay(savedGames, apiNhlGames))
+   
+   const displaySingleGame = gameToDisplay(savedGames, apiNhlGames).map((game) => {
 
+      const away_team = function getAwayTeam() {
+         if (game.away_team) {
+            return game.away_team
+         } else {
+            const filteredTeam = game.teams.filter(team => team !== game.home_team)
+            return filteredTeam[0]
+         }
+      }
 
-   // filter through all nhl games retreived from API and set to const
-   const gameToDisplay = apiNhlGames.filter((game) => {
-      return game.id === id 
-   })
-   console.log(gameToDisplay)
-
-   // map through gameToDisplay (array with length of 1) and return information to render in carousel
-   const displaySingleGame = gameToDisplay.map((game) => {
-      // filter through teams array to create away_team variable
-      const away_team = game.teams.filter(team => team !== game.home_team)
       return (
          <div key={game.id}>
             <HomeTeam>{game.home_team} (h)</HomeTeam>
-            <AwayTeam>{away_team[0]} (a)</AwayTeam>
+            <AwayTeam>{away_team} (a)</AwayTeam>
             <br></br>
             <br></br>
             <br></br>
