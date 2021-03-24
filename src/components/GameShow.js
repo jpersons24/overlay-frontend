@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Posts from './Posts'
 import styled from 'styled-components'
@@ -10,47 +10,26 @@ function GameShow() {
 
    // ID of game, gotten from params
    const { id } = useParams()
-   const [gameSaved, setGameSaved] = useState(false)
+   // const [gameSaved, setGameSaved] = useState(false)
    const apiNhlGames = useSelector((state) => state.game.nhlGames)
-   console.log(apiNhlGames)
    const savedGames = useSelector((state) => state.game.savedGames)
-   console.log(savedGames)
+   const allGames = apiNhlGames.concat(savedGames)
+   console.log(allGames)
 
-   // debugger
-
-   // check each saved game against id pased in from params
-   const gameToDisplay = function getGameToDisplay(savedGames, apiNhlGames) {
-         const savedGame = savedGames.filter(game => game.id === id)
-         console.log(savedGame)
-         if (savedGame.length < 1) {
-            const apiGame = apiNhlGames.filter(game => game.id === id)
-            console.log(apiGame)
-            return apiGame
-         } else {
-            console.log(savedGame)
-            setGameSaved(true)
-            return savedGame
-         }
-   }
-   console.log(gameSaved)
+   const gameToDisplay = allGames.filter(game => (game.id === id) && (game.sites.length > 0))
    
-   console.log(gameToDisplay(savedGames, apiNhlGames))
-   
-   const displaySingleGame = gameToDisplay(savedGames, apiNhlGames).map((game) => {
-
-      const away_team = function getAwayTeam() {
-         if (game.away_team) {
-            return game.away_team
-         } else {
-            const filteredTeam = game.teams.filter(team => team !== game.home_team)
-            return filteredTeam[0]
-         }
-      }
+   const displaySingleGame = gameToDisplay.map((game) => {
 
       return (
          <div key={game.id}>
             <HomeTeam>{game.home_team} (h)</HomeTeam>
-            <AwayTeam>{away_team} (a)</AwayTeam>
+            <AwayTeam>
+               {game.teams ?
+                  game.teams.filter(team => team !== game.home_team)
+                  :
+                  game.away_team
+               } (a)
+            </AwayTeam>
             <br></br>
             <br></br>
             <br></br>
@@ -68,7 +47,7 @@ function GameShow() {
                }}
             >
             </p>
-            <Posts game={game} gameSaved={gameSaved} setGameSaved={setGameSaved} />
+            <Posts game={game} />
          </div>
       )
    })

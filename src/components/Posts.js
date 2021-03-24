@@ -7,13 +7,22 @@ import PostsDisplay from './PostsDisplay'
 import Alert from 'react-bootstrap/Alert'
 
 
-function Posts({ game, gameSaved, setGameSaved }) {
+function Posts({ game }) {
 
    const [postInput, setPostInput] = useState("")
    const [show, setShow] = useState(false)
+   const [gameSaved, setGameSaved] = useState(false)
+   console.log(game)
+   console.log(gameSaved)
    
    const currentUser = useSelector((state) => state.user.currentUser)
    const dispatch = useDispatch()
+
+   function isGameSaved() {
+      if (game.site_count) {
+         setGameSaved(true)
+      }
+   }
    
    function getFormInput(event){
       setPostInput(event.target.value)
@@ -21,6 +30,7 @@ function Posts({ game, gameSaved, setGameSaved }) {
 
    function handleFormSubmit(event) {
       event.preventDefault()
+      isGameSaved()
       if (currentUser == null) {
          setShow(true)
       } else if ((currentUser !== null) && (gameSaved === false)) {
@@ -34,7 +44,8 @@ function Posts({ game, gameSaved, setGameSaved }) {
    }
 
    function createGame() {
-      console.log(game)
+      // debugger
+      const games_sites = game.sites
       
       const away_team = game.teams.filter(team => team !== game.home_team)
       const newGameObj = {
@@ -57,9 +68,9 @@ function Posts({ game, gameSaved, setGameSaved }) {
          console.log(data)
          const action = addGame(data)
          console.log(action)
-         debugger
          dispatch(action)
          newPostObj(data)
+         setGameSaved(true)
       })
    }
    
@@ -74,7 +85,7 @@ function Posts({ game, gameSaved, setGameSaved }) {
          }
          console.log(newPost)
          createNewPost(newPost)
-         debugger
+         // debugger
       } else {
          const newPost ={
             user_id: currentUser.id,
@@ -84,7 +95,7 @@ function Posts({ game, gameSaved, setGameSaved }) {
          }
          console.log(newPost)
          createNewPost(newPost)
-         debugger
+         // debugger
       }
    }
 

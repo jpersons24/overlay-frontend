@@ -1,11 +1,10 @@
 import Carousel from 'react-bootstrap/Carousel'
 import styled from 'styled-components'
-import Posts from './Posts'
 
 
 function SitesCarousel({ sites, game }) {
 
-   
+   console.log(sites)
 
    const displaySites = sites.map((site) => {
       const odds = site.odds.totals.odds
