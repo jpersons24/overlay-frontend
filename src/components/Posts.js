@@ -16,12 +16,17 @@ function Posts({ game }) {
    console.log(gameSaved)
    
    const currentUser = useSelector((state) => state.user.currentUser)
+   const savedGames = useSelector((state) => state.game.savedGames)
    const dispatch = useDispatch()
 
-   function isGameSaved() {
-      if (game.site_count) {
-         setGameSaved(true)
-      }
+   function isGameSaved(savedGames) {
+      savedGames.forEach((g) => {
+         if (g.id === game.id) {
+            setGameSaved(true)
+         } else {
+            setGameSaved(false)
+         }
+      })
    }
    
    function getFormInput(event){
@@ -30,7 +35,7 @@ function Posts({ game }) {
 
    function handleFormSubmit(event) {
       event.preventDefault()
-      isGameSaved()
+      isGameSaved(savedGames)
       if (currentUser == null) {
          setShow(true)
       } else if ((currentUser !== null) && (gameSaved === false)) {
@@ -45,7 +50,6 @@ function Posts({ game }) {
 
    function createGame() {
       // debugger
-      const games_sites = game.sites
       
       const away_team = game.teams.filter(team => team !== game.home_team)
       const newGameObj = {
