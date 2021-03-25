@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPost } from '../redux/postSlice'
 import { addGame } from '../redux/gameSlice'
@@ -28,6 +28,11 @@ function Posts({ game }) {
          }
       })
    }
+
+   useEffect(() => {
+      isGameSaved(savedGames) 
+   }, [getFormInput])
+   
    
    function getFormInput(event){
       setPostInput(event.target.value)
@@ -35,7 +40,8 @@ function Posts({ game }) {
 
    function handleFormSubmit(event) {
       event.preventDefault()
-      isGameSaved(savedGames)
+      // isGameSaved(savedGames)
+      // performAction()
       if (currentUser == null) {
          setShow(true)
       } else if ((currentUser !== null) && (gameSaved === false)) {
@@ -45,11 +51,11 @@ function Posts({ game }) {
       } else if ((currentUser !== null) && (gameSaved === true)) {
          console.log("user is logged in, game has been saved")
          newPostObj(game)
+         setPostInput("")
       }
    }
 
    function createGame() {
-      // debugger
       
       const away_team = game.teams.filter(team => team !== game.home_team)
       const newGameObj = {
