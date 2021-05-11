@@ -3,13 +3,14 @@ import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentUser } from '../redux/userSlice'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 
 function NavBar() {
 
-   const currentUser = useSelector((state) => state.user.currentUser)
-   const dispatch = useDispatch()
+   const currentUser = useSelector((state) => state.user.currentUser);
+   const dispatch = useDispatch();
+   const history = useHistory();
 
    function handleLogout(event) {
       const action = setCurrentUser(null)
@@ -18,13 +19,7 @@ function NavBar() {
    }
 
    function handleLogin(event) {
-      fetch("http://localhost:4000/me")
-      .then(res => res.json())
-      .then(data => {
-         const action = setCurrentUser(data)
-         dispatch(action)
-         console.log("User logged in!")
-      })
+      history.push("/login");
    }
 
    return(

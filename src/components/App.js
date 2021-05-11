@@ -2,7 +2,7 @@ import '../index.css'
 
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 // import styled from 'styled-components'
 
@@ -12,6 +12,7 @@ import NavBar from './NavBar'
 import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 import GameShow from './GameShow'
+import Login from './Login';
 
 // import reducer action items
 import { displayPosts } from '../redux/postSlice'
@@ -21,7 +22,9 @@ import { displayNhlGames } from '../redux/gameSlice.js'
 
 function App() {
 
+  
   const dispatch = useDispatch()
+
 
   // **** NHL GAMES ****
   useEffect(() => {
@@ -82,6 +85,9 @@ function App() {
         </Route>
         <Route exact path="/game/:id">
           <GameShow />
+        </Route>
+        <Route exact path="/login">
+          <Login />
         </Route>
       </Switch>
     </div>
