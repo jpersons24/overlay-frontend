@@ -16,6 +16,7 @@ function NavBar() {
       const action = setCurrentUser(null)
       dispatch(action)
       console.log("User logged out!")
+      history.push("/login")
    }
 
    function handleLogin(event) {

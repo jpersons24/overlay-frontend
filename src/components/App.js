@@ -1,4 +1,5 @@
-import '../index.css'
+import '../index.css';
+import '../App.css';
 
 // tool and library imports
 import { Switch, Route } from 'react-router-dom'
@@ -13,6 +14,7 @@ import Stories from './Stories'
 import FavoriteStories from './FavoriteStories'
 import GameShow from './GameShow'
 import Login from './Login';
+import Signup from './Signup';
 
 // import reducer action items
 import { displayPosts } from '../redux/postSlice'
@@ -71,25 +73,28 @@ function App() {
 
 
   return (
-    <div>
+    <div className="app">
       <NavBar />
-      <Switch>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/news">
-          <Stories />
-        </Route>
-        <Route exact path="/fav_stories">
-          <FavoriteStories />
-        </Route>
-        <Route exact path="/game/:id">
-          <GameShow />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/news">
+            <Stories />
+          </Route>
+          <Route exact path="/fav_stories">
+            <FavoriteStories />
+          </Route>
+          <Route exact path="/game/:id">
+            <GameShow />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+        </Switch>
     </div>
   );
 }
